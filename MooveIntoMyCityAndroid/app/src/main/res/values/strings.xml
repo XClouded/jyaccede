@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Moove Into My City</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="unknownLocationLabel">Unknown location</string>
+
+</resources>
