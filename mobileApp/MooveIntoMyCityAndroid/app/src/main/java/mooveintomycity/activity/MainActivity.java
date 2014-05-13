@@ -9,14 +9,21 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import org.apache.http.client.methods.HttpRequestBase;
+
 import java.io.IOException;
+import java.net.URI;
 import java.util.List;
 import java.util.Locale;
+
+import javax.crypto.Mac;
+import javax.crypto.spec.SecretKeySpec;
 
 
 public class MainActivity extends Activity {
@@ -100,5 +107,52 @@ public class MainActivity extends Activity {
 
         TextView longitudeLabel = (TextView)findViewById(R.id.positionLabel);
         longitudeLabel .setText(locationDisplay);
+    }
+
+    private static final String ACCESS_KEY_ID = "test-jispapi-access-key-id";
+    private static final String SECRET_ACCESS_KEY = "test-jispapi-secret-access-key";
+    private static final String HEADER_NAME_TIMESTAMP = "x-jispapi-timestamp";
+    private static final String HEADER_NAME_AUTH = "Authorization";
+    private static final String HEADER_PART_JISPAPI = "JISPAPI";
+
+    private static final String computeStringToSign(HttpRequestBase request, long now) {
+
+        URI uri = request.getURI();
+        String method = request.getMethod().toUpperCase(java.util.Locale.getDefault());
+        String path = uri.getPath();
+
+        StringBuilder buff = new StringBuilder();
+        buff.append(method);
+        buff.append("\n");
+        buff.append("x-jispapi-timestamp:").append(now);
+        buff.append("\n");
+        buff.append(path);
+
+        return buff.toString();
+    }
+
+    public static final void setAuthHeaders(HttpRequestBase request) {
+
+        try {
+
+            Mac mac = Mac.getInstance("HmacSHA1");
+            SecretKeySpec keySpec = new SecretKeySpec(SECRET_ACCESS_KEY.getBytes("UTF-8"), mac.getAlgorithm());
+            mac.init(keySpec);
+
+            long now = System.currentTimeMillis();
+            byte[] signed = mac.doFinal(computeStringToSign(request, now).getBytes());
+
+            String signature = Base64.encodeToString(HexUtils.encodeHexString(signed).getBytes("UTF-8"), Base64.NO_WRAP);
+
+            StringBuilder buff = new StringBuilder(HEADER_PART_JISPAPI);
+            buff.append(" ").append(ACCESS_KEY_ID).append(":").append(signature);
+            String auth = buff.toString();
+
+            request.setHeader(HEADER_NAME_TIMESTAMP, String.valueOf(now));
+            request.setHeader(HEADER_NAME_AUTH, auth);
+
+        } catch (Exception e) {
+            Log.e(TAG, "computeAuthHeader(error computing auth header: " + e.getMessage() + ")");
+        }
     }
 }
