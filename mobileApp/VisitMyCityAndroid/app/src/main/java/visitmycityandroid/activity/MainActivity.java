@@ -1,4 +1,4 @@
-package mooveintomycity.activity;
+package visitmycityandroid.activity;
 
 import android.app.Activity;
 import android.content.Context;
@@ -24,6 +24,8 @@ import java.util.Locale;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
+
+import visitmycityandroid.app.R;
 
 
 public class MainActivity extends Activity {
@@ -132,7 +134,6 @@ public class MainActivity extends Activity {
     }
 
     public static final void setAuthHeaders(HttpRequestBase request) {
-
         try {
 
             Mac mac = Mac.getInstance("HmacSHA1");
