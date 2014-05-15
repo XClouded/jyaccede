@@ -1,42 +1,44 @@
 package visitmycityandroid.activity;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.KeyEvent;
-import android.view.Menu;
-import android.view.MenuItem;
-import visitmycityandroid.app.R;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 
-public class AddLocationActivity extends Activity {
+import visitmycityandroid.app.R;
+import visitmycityandroid.asyncTask.PostLocationTask;
+import visitmycityandroid.model.LocationModel;
+
+public class AddLocationActivity extends VisitMyCityActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_location);
-    }
 
+        //event handler
+        Button sendMessageButton = (Button)findViewById(R.id.addLocationButton);
+        sendMessageButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                EditText inputName = (EditText) findViewById(R.id.inputName);
+                EditText inputLatitude = (EditText) findViewById(R.id.inputLatitude);
+                EditText inputLongitude = (EditText) findViewById(R.id.inputLongitude);
+                EditText inputRemark = (EditText) findViewById(R.id.inputRemarque);
+                LocationModel l = new LocationModel();
+                l.setName(inputName.getText().toString());
+                l.setLatitude(Double.parseDouble(inputLatitude.getText().toString()));
+                l.setLongitude(Double.parseDouble(inputLongitude.getText().toString()));
+                l.setRemark(inputRemark.getText().toString());
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.add_location, menu);
-        return true;
-    }
+                PostLocationTask plt = new PostLocationTask(getApplicationContext());
+                plt.execute(l);
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        switch (id){
-            case R.id.action_addLocation :
-                Intent intentAdd = new Intent(this, AddLocationActivity.class);
-                startActivity(intentAdd);
-            case R.id.action_searchLocation :
-                Intent intentSearch = new Intent(this, SearchLocationActivity.class);
-                startActivity(intentSearch);
-            default:
-                return super.onOptionsItemSelected(item);
-        }
+                inputName.setText("");
+                inputLatitude.setText("");
+                inputLongitude.setText("");
+                inputRemark.setText("");
+            }
+        });
     }
 
     @Override

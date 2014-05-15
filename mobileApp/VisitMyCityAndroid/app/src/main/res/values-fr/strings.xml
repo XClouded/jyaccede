@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Moove Into My City</string>
+    <string name="app_name">Visit My City</string>
     <string name="addLocation">Ajouter un lieu</string>
     <string name="searchLocation">Rechercher un lieu</string>
 
     <string name="unknownLocationLabel">Position inconnue</string>
+    <string name="error">Erreur</string>
+    <string name="noConnectionError">Une connection internet est requise !</string>
+    <string name="settings">Paramètres</string>
+    <string name="cancel">Annuler</string>
 
     <string name="title_activity_add_location">Ajouter un lieu</string>
     <string name="name">Nom</string>
@@ -13,6 +17,7 @@
     <string name="latitude">Latitude</string>
     <string name="remark">Remarque</string>
     <string name="add">Ajouter</string>
+    <string name="locationPost">Lieu ajouté</string>
 
     <string name="title_activity_search_location">Rechercher un lieu</string>
     <string name="search">Rechercher</string>

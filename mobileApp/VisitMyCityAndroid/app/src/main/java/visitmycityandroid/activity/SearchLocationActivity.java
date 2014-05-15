@@ -23,7 +23,7 @@ import java.util.Locale;
 
 import visitmycityandroid.app.R;
 
-public class SearchLocationActivity extends Activity {
+public class SearchLocationActivity extends VisitMyCityActivity {
     private final LocationListener mLocationListener = new LocationListener() {
         @Override
         public void onLocationChanged(Location location) {
@@ -45,7 +45,7 @@ public class SearchLocationActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_location);
 
-        //Location init and settings
+        //LocationModel init and settings
         try {
             LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
             Criteria criteria = new Criteria();
@@ -69,28 +69,6 @@ public class SearchLocationActivity extends Activity {
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.category_location, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.search_location, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        switch (id){
-            case R.id.action_addLocation :
-                Intent intentAdd = new Intent(this, AddLocationActivity.class);
-                startActivity(intentAdd);
-            case R.id.action_searchLocation :
-                Intent intentSearch = new Intent(this, SearchLocationActivity.class);
-                startActivity(intentSearch);
-            default:
-                return super.onOptionsItemSelected(item);
-        }
     }
 
     @Override

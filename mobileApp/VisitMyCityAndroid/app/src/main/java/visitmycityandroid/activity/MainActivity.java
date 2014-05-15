@@ -1,40 +1,44 @@
 package visitmycityandroid.activity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import visitmycityandroid.app.R;
 
-public class MainActivity extends Activity {
+public class MainActivity extends VisitMyCityActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-    }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        switch (id){
-            case R.id.action_addLocation :
-                Intent intentAdd = new Intent(this, AddLocationActivity.class);
-                startActivity(intentAdd);
-            case R.id.action_searchLocation :
-                Intent intentSearch = new Intent(this, SearchLocationActivity.class);
-                startActivity(intentSearch);
-            default:
-                return super.onOptionsItemSelected(item);
+        //Connectivity init and settings
+        ConnectivityManager cm = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo network = cm.getActiveNetworkInfo();
+        boolean isConnected = (network != null && network.isConnectedOrConnecting());
+        if(!isConnected) {
+            AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+            alertDialog.setTitle(R.string.error);
+            alertDialog.setMessage(R.string.noConnectionError);
+            alertDialog.setPositiveButton(R.string.settings, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog,int which) {
+                    startActivityForResult(new Intent(android.provider.Settings.ACTION_SETTINGS), 0);
+                }
+            });
+            alertDialog.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    finish();
+                }
+            });
+            alertDialog.show();
         }
     }
 }
