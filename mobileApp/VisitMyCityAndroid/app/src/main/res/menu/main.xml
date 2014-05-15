@@ -2,8 +2,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="visitmycityandroid.activity.MainActivity" >
-    <item android:id="@+id/action_settings"
-        android:title="@string/action_settings"
+
+    <item android:id="@+id/action_searchLocation"
+        android:title="@string/searchLocation"
         android:orderInCategory="100"
         app:showAsAction="never" />
+
+    <item android:id="@+id/action_addLocation"
+        android:title="@string/addLocation"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+
 </menu>

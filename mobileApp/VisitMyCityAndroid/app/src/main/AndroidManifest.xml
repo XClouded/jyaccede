@@ -16,6 +16,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="visitmycityandroid.activity.AddLocationActivity"
+            android:label="@string/title_activity_add_location" >
+        </activity>
+        <activity
+            android:name="visitmycityandroid.activity.SearchLocationActivity"
+            android:label="@string/title_activity_search_location" >
+        </activity>
     </application>
+
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

@@ -2,8 +2,23 @@
 <resources>
 
     <string name="app_name">Moove Into My City</string>
-    <string name="action_settings">Paramètres</string>
+    <string name="addLocation">Ajouter un lieu</string>
+    <string name="searchLocation">Rechercher un lieu</string>
 
     <string name="unknownLocationLabel">Position inconnue</string>
+
+    <string name="title_activity_add_location">Ajouter un lieu</string>
+    <string name="name">Nom</string>
+    <string name="longitude">Longitude</string>
+    <string name="latitude">Latitude</string>
+    <string name="remark">Remarque</string>
+    <string name="add">Ajouter</string>
+
+    <string name="title_activity_search_location">Rechercher un lieu</string>
+    <string name="search">Rechercher</string>
+    <string-array name="category_location">
+        <item>Bar</item>
+        <item>Restaurant</item>
+    </string-array>
 
 </resources>
