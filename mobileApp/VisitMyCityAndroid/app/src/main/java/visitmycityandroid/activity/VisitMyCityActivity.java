@@ -26,6 +26,9 @@ public abstract class VisitMyCityActivity extends Activity{
             case R.id.action_searchLocation :
                 Intent intentSearch = new Intent(this, SearchLocationActivity.class);
                 startActivity(intentSearch);
+            case R.id.action_closerLocation :
+                Intent intentCloser = new Intent(this, CloserLocationActivity.class);
+                startActivity(intentCloser);
             default:
                 return super.onOptionsItemSelected(item);
         }

@@ -20,7 +20,7 @@ public class AddLocationActivity extends VisitMyCityActivity {
         Button sendMessageButton = (Button)findViewById(R.id.addLocationButton);
         sendMessageButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                EditText inputName = (EditText) findViewById(R.id.inputName);
+                EditText inputName = (EditText) findViewById(R.id.inputAddress);
                 EditText inputLatitude = (EditText) findViewById(R.id.inputLatitude);
                 EditText inputLongitude = (EditText) findViewById(R.id.inputLongitude);
                 EditText inputRemark = (EditText) findViewById(R.id.inputRemarque);

@@ -4,6 +4,8 @@ public class LocationModel {
 
     public String name;
 
+    public String address;
+
     public double latitude;
 
     public double longitude;
@@ -13,8 +15,9 @@ public class LocationModel {
     public LocationModel() {
     }
 
-    public LocationModel(String name, double latitude, double longitude, String remark) {
+    public LocationModel(String name, String address, double latitude, double longitude, String remark) {
         this.name = name;
+        this.address = address;
         this.latitude = latitude;
         this.longitude = longitude;
         this.remark = remark;
@@ -26,6 +29,14 @@ public class LocationModel {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public double getLatitude() {

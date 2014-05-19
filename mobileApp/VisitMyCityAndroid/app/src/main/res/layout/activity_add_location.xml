@@ -8,14 +8,14 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/name"
+        android:text="@string/address"
         android:layout_column="0"
         android:layout_row="0" />
 
     <EditText
         android:layout_width="292dp"
         android:layout_height="wrap_content"
-        android:id="@+id/inputName"
+        android:id="@+id/inputAddress"
         android:layout_column="1"
         android:layout_row="0" />
 
