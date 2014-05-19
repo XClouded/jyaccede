@@ -23,6 +23,18 @@ public class MapsActivity extends VisitMyCityActivity {
         String longitude = intent.getStringExtra("longitude");
 
         GoogleMap map = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
-        map.addMarker(new MarkerOptions().position(new LatLng(Double.parseDouble(latitude), Double.parseDouble(longitude))).title(address));
+
+        if(address != null){
+
+        }
+        else if(latitude != null && longitude != null){
+
+        }
+
+        //Init marker and add it to map
+        MarkerOptions mo = new MarkerOptions();
+        mo.position(new LatLng(Double.parseDouble(latitude), Double.parseDouble(longitude)));
+        mo.title(address);
+        map.addMarker(mo);
     }
 }
