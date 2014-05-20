@@ -26,9 +26,15 @@
     <!-- Closer location activity -->
     <string name="title_activity_search_location">Chercher un lieu</string>
     <string name="search">Rechercher</string>
+    <string name="withPmr">Avec place handicapée</string>
     <string-array name="category_location">
+        <item>Tous</item>
         <item>Bar</item>
         <item>Restaurant</item>
     </string-array>
+
+    <!-- Maps Activity -->
+    <string name="title_activity_maps">Maps</string>
+    <string name="here">Je suis ici !</string>
 
 </resources>

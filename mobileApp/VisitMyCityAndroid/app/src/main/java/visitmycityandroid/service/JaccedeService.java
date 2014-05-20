@@ -1,19 +1,26 @@
 package visitmycityandroid.service;
 
+import android.content.Context;
+import android.location.Address;
+import android.os.AsyncTask;
 import android.util.Base64;
 import android.util.Log;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpRequestBase;
+import org.apache.http.impl.client.DefaultHttpClient;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.URI;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 
-/**
- * Created by ruiza_000 on 15/05/2014.
- */
-public class JaccedeService {
+public class JaccedeService extends AsyncTask<Void, Void, String> {
 
     private static final String ACCESS_KEY_ID = "test-jispapi-access-key-id";
     private static final String SECRET_ACCESS_KEY = "test-jispapi-secret-access-key";
@@ -61,4 +68,26 @@ public class JaccedeService {
         }
     }
 
+    @Override
+    protected String doInBackground(Void... voids) {
+        String result = "";
+        try {
+            HttpClient httpclient = new DefaultHttpClient();
+            HttpResponse httpResponse = httpclient.execute(new HttpGet("http://dev.jaccede.com/api/v2/places/search/"));
+            InputStream inputStream = httpResponse.getEntity().getContent();
+            BufferedReader bufferedReader = new BufferedReader( new InputStreamReader(inputStream));
+            String line;
+            while((line = bufferedReader.readLine()) != null){
+                result += line;
+            }
+
+            inputStream.close();
+        }
+        catch (Exception e) {
+            Log.v("JaccedeService", e.getMessage());
+            result = "ERROR";
+        }
+
+        return result;
+    }
 }

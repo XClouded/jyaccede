@@ -26,12 +26,15 @@
     <!-- Closer location activity -->
     <string name="title_activity_search_location">Search location</string>
     <string name="search">Search</string>
+    <string name="withPmr">With up disabled</string>
     <string-array name="category_location">
+        <item>All</item>
         <item>Bar</item>
         <item>Restaurant</item>
     </string-array>
 
     <!-- Map activity -->
     <string name="title_activity_maps">Maps</string>
+    <string name="here">I am here !</string>
 
 </resources>
