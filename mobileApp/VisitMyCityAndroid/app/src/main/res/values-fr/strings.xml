@@ -2,7 +2,7 @@
 <resources>
 
     <!-- App & Menu -->
-    <string name="app_name">Visit Into My City</string>
+    <string name="app_name">Visit My City</string>
     <string name="addLocation">Ajouter un lieu</string>
     <string name="searchLocation">Rechercher un lieu</string>
     <string name="closerLocation">Lieu à proximiter</string>

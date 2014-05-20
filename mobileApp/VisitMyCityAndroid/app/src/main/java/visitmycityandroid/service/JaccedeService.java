@@ -1,7 +1,5 @@
 package visitmycityandroid.service;
 
-import android.content.Context;
-import android.location.Address;
 import android.os.AsyncTask;
 import android.util.Base64;
 import android.util.Log;
@@ -28,7 +26,7 @@ public class JaccedeService extends AsyncTask<Void, Void, String> {
     private static final String HEADER_NAME_AUTH = "Authorization";
     private static final String HEADER_PART_JISPAPI = "JISPAPI";
 
-    private static final String computeStringToSign(HttpRequestBase request, long now) {
+    private static String computeStringToSign(HttpRequestBase request, long now) {
 
         URI uri = request.getURI();
         String method = request.getMethod().toUpperCase(java.util.Locale.getDefault());
@@ -44,7 +42,7 @@ public class JaccedeService extends AsyncTask<Void, Void, String> {
         return buff.toString();
     }
 
-    public static final void setAuthHeaders(HttpRequestBase request) {
+    public static void setAuthHeaders(HttpRequestBase request) {
         try {
 
             Mac mac = Mac.getInstance("HmacSHA1");
@@ -54,7 +52,7 @@ public class JaccedeService extends AsyncTask<Void, Void, String> {
             long now = System.currentTimeMillis();
             byte[] signed = mac.doFinal(computeStringToSign(request, now).getBytes());
 
-            String signature = "";//Base64.encodeToString(Hex.encodeHex(signed).getBytes("UTF-8"), Base64.NO_WRAP);
+            String signature = Base64.encodeToString(Hex.encodeHex(signed).getBytes("UTF-8"), Base64.NO_WRAP);
 
             StringBuilder buff = new StringBuilder(HEADER_PART_JISPAPI);
             buff.append(" ").append(ACCESS_KEY_ID).append(":").append(signature);
@@ -73,7 +71,9 @@ public class JaccedeService extends AsyncTask<Void, Void, String> {
         String result = "";
         try {
             HttpClient httpclient = new DefaultHttpClient();
-            HttpResponse httpResponse = httpclient.execute(new HttpGet("http://dev.jaccede.com/api/v2/places/search/"));
+            HttpGet get = new HttpGet("http://dev.jaccede.com/api/v2/places/search/");
+            setAuthHeaders(get);
+            HttpResponse httpResponse = httpclient.execute(get);
             InputStream inputStream = httpResponse.getEntity().getContent();
             BufferedReader bufferedReader = new BufferedReader( new InputStreamReader(inputStream));
             String line;
