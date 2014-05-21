@@ -50,7 +50,7 @@ $app->get('/', function () use ($app, $database){
 	
 //Access to the login form
 $app->get('/login', function() use ($app){
-    return $app->render('login.php');
+    return $app->render('login.php', array(), 'layout.php');
 });
 	
 //Access to the login form
