@@ -15,7 +15,7 @@ import visitmycityandroid.service.JaccedeService;
 
 public class MapsActivity extends VisitMyCityActivity {
 
-    GoogleMap map;
+    private GoogleMap map;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
