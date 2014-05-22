@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
     <head>
-        <title>VisitMyCity, Welcome !</title>
+        <title>VisitMyCity, Administration !</title>
 
         <!-- BOOTSTRAP -->
         <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
@@ -13,7 +13,7 @@
     </head>
 	
     <body>
-        <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="navbar navbar-default navbar-static-top navbar-inverse" role="navigation">
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -22,8 +22,15 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">Visit my city</a>
+                  <a class="navbar-brand" href="#">Visit my city</a>
                 </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="/visitmycity/admin">Admin</a></li>
+                        <li ><a href="/visitmycity/admin/articles">Articles</a></li>
+                        <li ><a href="/visitmycity">Home</a></li>
+                    </ul>
+                </div><!--/.nav-collapse -->
             </div>
         </div>
 

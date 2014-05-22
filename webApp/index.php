@@ -8,10 +8,10 @@ use Http\Request;
 $request = Request::createFromGlobals();
 
 if(!stristr($request->getUri(), '/admin')){
-	$app = require __DIR__ . '/app/frontend/app.php';
+    $app = require __DIR__ . '/app/frontend/app.php';
 }
 else{
-	$app = require __DIR__ . '/app/backend/app.php';
+    $app = require __DIR__ . '/app/backend/app.php';
 }
 
 $app->run();
