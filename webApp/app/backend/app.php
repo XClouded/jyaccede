@@ -42,7 +42,7 @@ $app->addListener('process.before', function(Request $req) use ($urlRoot) {
 
 //Index
 $app->get('/admin', function () use ($app){
-    return $app->render('index.php');
+    return $app->render('index.php', array(), 'layout.php');
 });
 
 // Get article list
@@ -50,7 +50,7 @@ $app->get('/admin/articles', function() use ($app, $database){
     $mapper = new ArticleDataMapper($database);
     $art = $mapper->findAll();
 
-    return $app->render('articles.php', array("articles" => $art));
+    return $app->render('articles.php', array("articles" => $art), 'layout.php');
 });
 	
 //Get one article with its id
@@ -62,7 +62,7 @@ $app->get('/admin/articles/(\d+)', function(Request $request, $id) use ($app, $d
         throw new HttpException(404, "Article not found");
     }
 
-    return $app->render('article.php', array("id" => $id, "article" => $art));
+    return $app->render('article.php', array("id" => $id, "article" => $art), 'layout.php');
 });
 	
 //Add an article
@@ -114,11 +114,6 @@ $app->put('/admin/articles/(\d+)', function(Request $request, $id) use ($app){
     $mapper->persist($art);
 
     return $app->render('backend/article.php', array("id" => $id, "article" => $art));
-});
-	
-//Access to the administration
-$app->get('/admin', function() use ($app){
-    return $app->render('admin.php', array());
 });
 
 return $app;

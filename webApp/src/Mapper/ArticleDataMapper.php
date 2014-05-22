@@ -84,7 +84,7 @@ class ArticleDataMapper implements PersistenceInterface, FinderInterface
     */
     public function persist($article){
         if($article->isNew()){
-                return $this->insert($article);
+            return $this->insert($article);
         }
 
         return $this->update($article);
@@ -101,7 +101,7 @@ class ArticleDataMapper implements PersistenceInterface, FinderInterface
 
         return $this->database->executeQuery($query, array(
                 'tableName' => $this->tableName,
-				'id' => $article->getId()));
+                'id' => $article->getId()));
     }
 
     /** Insert an article in the database.
@@ -116,7 +116,7 @@ class ArticleDataMapper implements PersistenceInterface, FinderInterface
 
         return $this->database->executeQuery($query, array(
                 'tableName' => $this->tableName,
-				'name' => $article->getName(),
+                'name' => $article->getName(),
                 'description' => $article->getDescription()));
     }
 
@@ -133,8 +133,8 @@ class ArticleDataMapper implements PersistenceInterface, FinderInterface
 
         return $this->database->executeQuery($query, array(
                 'tableName' => $this->tableName,
-				'id' => $article->getId(),
+                'id' => $article->getId(),
                 'name' => $article->getName(),
                 'descrption' => $article->getDescription()));
-    } 
+    }
 }
