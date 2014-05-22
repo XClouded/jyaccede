@@ -50,7 +50,7 @@ class ArticleDataMapper implements PersistenceInterface, FinderInterface
         $results = $this->database->executeQuery($query, array('tableName' => $this->tableName));
         
         foreach($results as $article){
-            $articles[] = new Article($article->id, $article->name, $article->descrption);
+            $articles[] = new Article($article->id, $article->name, $article->description);
         }
 
         return $articles;
@@ -73,7 +73,7 @@ class ArticleDataMapper implements PersistenceInterface, FinderInterface
             $article = $result[0];
         }
         
-        return new Article($article->id, $article->name, $article->descrption);
+        return new Article($article->id, $article->name, $article->description);
     }
 
     /** Render an article peristante
