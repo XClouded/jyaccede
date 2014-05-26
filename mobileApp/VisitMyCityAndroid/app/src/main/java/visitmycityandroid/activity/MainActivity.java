@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.crashlytics.android.Crashlytics;
 import visitmycityandroid.app.R;
 
 public class MainActivity extends VisitMyCityActivity {
@@ -18,6 +19,8 @@ public class MainActivity extends VisitMyCityActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Crashlytics.start(this);
+
         setContentView(R.layout.activity_main);
 
         //Connectivity init and settings

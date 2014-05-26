@@ -34,6 +34,7 @@
 
         <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
         <meta-data android:name="com.google.android.maps.v2.API_KEY" android:value="AIzaSyDsGVqmUU8__aMjhHLThN8Libiy9cGGXbg" />
+        <meta-data android:name="com.crashlytics.ApiKey" android:value="6f269a93b65d5d3d899a0dc93440e0526db40937"/>
     </application>
 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
