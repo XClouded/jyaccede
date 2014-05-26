@@ -1,6 +1,5 @@
 package visitmycityandroid.activity;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -8,8 +7,6 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 
 import com.crashlytics.android.Crashlytics;
 import visitmycityandroid.app.R;
@@ -34,6 +31,7 @@ public class MainActivity extends VisitMyCityActivity {
             alertDialog.setPositiveButton(R.string.settings, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog,int which) {
                     startActivityForResult(new Intent(android.provider.Settings.ACTION_SETTINGS), 0);
+                    finish();
                 }
             });
             alertDialog.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {

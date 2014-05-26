@@ -1,4 +1,4 @@
-package visitmycityandroid.service;
+package visitmycityandroid.asyncTask;
 
 import android.os.AsyncTask;
 import android.util.Base64;
@@ -18,7 +18,7 @@ import java.net.URI;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 
-public class JaccedeService extends AsyncTask<Void, Void, String> {
+public class JaccedeTask extends AsyncTask<Void, Void, String> {
 
     private static final String ACCESS_KEY_ID = "test-jispapi-access-key-id";
     private static final String SECRET_ACCESS_KEY = "test-jispapi-secret-access-key";
@@ -62,7 +62,6 @@ public class JaccedeService extends AsyncTask<Void, Void, String> {
             request.setHeader(HEADER_NAME_AUTH, auth);
 
         } catch (Exception e) {
-            Log.e("SetAuthHeaders", "computeAuthHeader(error computing auth header: " + e.getMessage() + ")");
         }
     }
 
@@ -84,7 +83,6 @@ public class JaccedeService extends AsyncTask<Void, Void, String> {
             inputStream.close();
         }
         catch (Exception e) {
-            Log.v("JaccedeService", e.getMessage());
             result = "ERROR";
         }
 
