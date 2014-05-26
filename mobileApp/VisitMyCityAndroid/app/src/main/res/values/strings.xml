@@ -13,6 +13,7 @@
     <string name="error">Error</string>
     <string name="unknownLocationError">Unknown location</string>
     <string name="noConnectionError">An internet connection is required !</string>
+    <string name="noCityError">City not found !</string>
 
     <!-- Add location activity -->
     <string name="title_activity_add_location">Add location</string>
@@ -36,5 +37,6 @@
     <!-- Map activity -->
     <string name="title_activity_maps">Maps</string>
     <string name="here">I am here !</string>
+    <string name="go">Go !</string>
 
 </resources>
