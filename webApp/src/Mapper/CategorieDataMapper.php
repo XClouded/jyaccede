@@ -29,8 +29,8 @@ class CategorieDataMapper implements PersistenceInterface, FinderInterface
      * @return array
      */
     public function findAll($criterias = null) {
-        $articles = array();       
-        $query = 'SELECT * FROM :categorie';
+        $categorie = array();       
+        $query = 'SELECT * FROM :tableName';
         
         if($criterias !== null){
              if(!empty($criterias['where'])){

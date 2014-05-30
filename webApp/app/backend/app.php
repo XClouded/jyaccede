@@ -3,12 +3,14 @@
 //Use
 use Http\Request;
 use Mapper\ArticleDataMapper;
+use Mapper\CategorieDataMapper;
+use Mapper\LocationDataMapper;
 use Exception\HttpException;
 use DAL\DataBase;
 
 // Config
 $debug = true;
-$urlRoot = '/visitmycity'; //Define root of THIS website
+$urlRoot = '/jyaccede'; //Define root of THIS website
 $app = new \App(new \View\TemplateEngine(__DIR__ . '/templates/'), $urlRoot, $debug);
 $database = new DataBase(Conf::_DB_DSN_, Conf::_DB_USER_, Conf::_DB_PWD_, $options);
 
@@ -49,8 +51,11 @@ $app->get('/admin', function () use ($app){
 $app->get('/admin/articles', function() use ($app, $database){
     $mapper = new ArticleDataMapper($database);
     $art = $mapper->findAll();
+    
+    $mapperCategorie = new CategorieDataMapper($database);
+    $cat = $mapperCategorie->findAll();
 
-    return $app->render('articles.php', array("articles" => $art), 'layout.php');
+    return $app->render('articles.php', array("articles" => $art, "categories" => $cat), 'layout.php');
 });
 	
 //Get one article with its id
@@ -114,6 +119,76 @@ $app->put('/admin/articles/(\d+)', function(Request $request, $id) use ($app){
     $mapper->persist($art);
 
     return $app->render('backend/article.php', array("id" => $id, "article" => $art));
+});
+
+// Get location list
+$app->get('/admin/locations', function() use ($app, $database){
+    $mapper = new LocationDataMapper($database);
+    $loc = $mapper->findAll();
+
+    return $app->render('locations.php', array("locations" => $loc), 'layout.php');
+});
+	
+//Get one location with its id
+$app->get('/admin/locations/(\d+)', function(Request $request, $id) use ($app, $database){
+    $model = new LocationDataMapper($database);
+    $loc = $model->findOneById($id);
+
+    if(null === $art){
+        throw new HttpException(404, "Location not found");
+    }
+
+    return $app->render('location.php', array("id" => $id, "location" => $loc), 'layout.php');
+});
+	
+//Add an location
+$app->post('/admin/locations', function(Request $request) use ($app, $database){
+    $locationName = $request->getParameter('name', null);
+    $latitude = $request->getParameter('latitude', null);
+    $longitude = $request->getParameter('longitude', null);
+    $mark = $request->getParameter('name', 0);
+    $idCategory = $request->getParameter('idCategory', null);
+    $disableAccess = $request->getParameter('disableAccess', false);
+
+    if(null === $locationName){
+        throw new HttpException(400, "Name parameter is mandatory !");
+    }
+
+    $mapper = new LocationDataMapper($database);
+    $mapper->persist(new Location(null, $locationName, $latitude, $longitude, $mark, $idCategory, $disableAccess));
+
+    $app->redirect('/admin/locations');
+});
+	
+//Delete an location
+$app->delete('/admin/locations/(\d+)', function(Request $request, $id) use ($app, $database){
+    $model = new LocationDataMapper($database);
+    $art = $model->findOneById($id);
+
+    if(null === $art){
+        throw new HttpException(404, "Location not found");
+    }
+
+    $model->remove($id);
+
+    $app->redirect('/admin/locations');
+});
+	
+//Update an location
+$app->put('/admin/locations/(\d+)', function(Request $request, $id) use ($app){
+    $mapper = new LocationDataMapper($database);
+    $art = $mapper->findOneById($id);
+
+    if(null === $art){
+        throw new HttpException(404, "Location not found");
+    }
+
+    $art->setName($request->getParameter('locationName', $art->getName()));
+    $art->setDescription($request->getParameter('locationContent', $art->getDescription()));
+
+    $mapper->persist($art);
+
+    return $app->render('backend/location.php', array("id" => $id, "location" => $art));
 });
 
 return $app;

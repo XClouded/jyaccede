@@ -2,7 +2,6 @@ package visitmycityandroid.asyncTask;
 
 import android.os.AsyncTask;
 import android.util.Base64;
-import android.util.Log;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -17,6 +16,8 @@ import java.net.URI;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
+
+import visitmycityandroid.tools.Hex;
 
 public class JaccedeTask extends AsyncTask<Void, Void, String> {
 
@@ -52,7 +53,7 @@ public class JaccedeTask extends AsyncTask<Void, Void, String> {
             long now = System.currentTimeMillis();
             byte[] signed = mac.doFinal(computeStringToSign(request, now).getBytes());
 
-            String signature = "";//Base64.encodeToString(Hex.encodeHex(signed).getBytes("UTF-8"), Base64.NO_WRAP);
+            String signature = Base64.encodeToString(new String(Hex.encodeHex(signed)).getBytes("UTF-8"), Base64.NO_WRAP);
 
             StringBuilder buff = new StringBuilder(HEADER_PART_JISPAPI);
             buff.append(" ").append(ACCESS_KEY_ID).append(":").append(signature);

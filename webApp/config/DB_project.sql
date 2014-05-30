@@ -26,7 +26,8 @@ CREATE TABLE IF NOT EXISTS `location` (
 	`latitude` double NOT NULL,
 	`longitude` double NOT NULL,
 	`mark` float NOT NULL,
-	`idCategory` int(11) NOT NULL FOREIGN KEY (idCategory) REFERENCES categorie(id),
+	`idCategory` int(11) NOT NULL,
+        FOREIGN KEY (idCategory) REFERENCES categorie(id),
 	`disabledAccess` tinyint(1) NOT NULL,
 	PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;

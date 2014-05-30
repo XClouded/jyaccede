@@ -1,26 +1,24 @@
 <?php
 
-
 /** 
 * @file Location.php
 */
 namespace Model;
 
-class Location
-{
+class Location{
     protected $id;
 
     protected $name;
 
     protected $latitude;
 		
-	protected $longitude;
-		
-	protected $mark;
-		
-	protected $idCategory;
-		
-	protected $disabledAccess;
+    protected $longitude;
+
+    protected $mark;
+
+    protected $idCategory;
+
+    protected $disabledAccess;
 
     /** Construct
     *
@@ -32,10 +30,10 @@ class Location
         $this->id = $id;
         $this->name = $name;
         $this->latitude = $latitude;
-		$this->longitude = $longitude;
-		$this->mark = $mark;
-		$this->idCategory = $idCategory;
-		$this->disabledAccess = $disabledAccess;
+        $this->longitude = $longitude;
+        $this->mark = $mark;
+        $this->idCategory = $idCategory;
+        $this->disabledAccess = $disabledAccess;
     }
 
     /** To get the id.

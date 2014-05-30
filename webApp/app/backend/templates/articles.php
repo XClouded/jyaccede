@@ -10,10 +10,15 @@
             </li><br/>
         <?php } ?>
     </ul>
-
-    <form action="/admin/articles" method="POST">
-        <input type="text" name="name" /><br /><br />
-        <textarea name="description"></textarea><br /><br />
-        <input type="submit" value="Update">
+    
+    <form method="/jyaccede/admin/articles" method="post">
+        <legend style="width:500px;">Entrez une nouvelle actualitée</legend>
+        <table>
+            <tr><td><label for="title" >Titre: </label></td><td><input id="title" name="title" type="text" class="form-control" /></td></tr>
+            <tr><td><label for="content" >Contenu: </label></td><td><textarea cols="30" rows="5" id="name" name="name" class="form-control" ></textarea></td></tr>
+        </table>
+        <input type="submit" id="send" name="send" value="Envoyez" class="form-control" />
     </form>
+
+    
 </body>
