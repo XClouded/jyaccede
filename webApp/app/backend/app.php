@@ -47,15 +47,14 @@ $app->get('/admin', function () use ($app){
     return $app->render('index.php', array(), 'layout.php');
 });
 
+/** ARTICLE **/
+
 // Get article list
 $app->get('/admin/articles', function() use ($app, $database){
     $mapper = new ArticleDataMapper($database);
     $art = $mapper->findAll();
-    
-    $mapperCategorie = new CategorieDataMapper($database);
-    $cat = $mapperCategorie->findAll();
 
-    return $app->render('articles.php', array("articles" => $art, "categories" => $cat), 'layout.php');
+    return $app->render('articles.php', array("articles" => $art), 'layout.php');
 });
 	
 //Get one article with its id
@@ -121,12 +120,17 @@ $app->put('/admin/articles/(\d+)', function(Request $request, $id) use ($app){
     return $app->render('backend/article.php', array("id" => $id, "article" => $art));
 });
 
+/** LOCATION **/
+
 // Get location list
 $app->get('/admin/locations', function() use ($app, $database){
     $mapper = new LocationDataMapper($database);
     $loc = $mapper->findAll();
+    
+    $mapperCategorie = new CategorieDataMapper($database);
+    $cat = $mapperCategorie->findAll();
 
-    return $app->render('locations.php', array("locations" => $loc), 'layout.php');
+    return $app->render('locations.php', array("locations" => $loc, "categories" => $cat), 'layout.php');
 });
 	
 //Get one location with its id
@@ -175,7 +179,7 @@ $app->delete('/admin/locations/(\d+)', function(Request $request, $id) use ($app
 });
 	
 //Update an location
-$app->put('/admin/locations/(\d+)', function(Request $request, $id) use ($app){
+$app->put('/admin/locations/(\d+)', function(Request $request, $id) use ($app){    
     $mapper = new LocationDataMapper($database);
     $art = $mapper->findOneById($id);
 
@@ -183,12 +187,18 @@ $app->put('/admin/locations/(\d+)', function(Request $request, $id) use ($app){
         throw new HttpException(404, "Location not found");
     }
 
-    $art->setName($request->getParameter('locationName', $art->getName()));
-    $art->setDescription($request->getParameter('locationContent', $art->getDescription()));
+    $art->setName($request->getParameter('name', $art->getName()));
+    $art->setLatitude($request->getParameter('latitude', $art->getLatitude()));
+    $art->setLongitude($request->getParameter('longitude', $art->getLongitude()));
+    $art->setMark($request->getParameter('mark', $art->getMark()));
+    $art->setIdCategory($request->getParameter('idCategory', $art->getIdCategory()));
+    $art->setDisabledAccess($request->getParameter('disableAccess', $art->getDisabledAccess()));
 
     $mapper->persist($art);
 
     return $app->render('backend/location.php', array("id" => $id, "location" => $art));
 });
+
+/** CATEGORIE **/
 
 return $app;

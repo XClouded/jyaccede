@@ -4,7 +4,7 @@
 </head>
 
 <div class="container">
-    <form class="form-signin" role="form" action="/visitmycity/accessAdmin">
+    <form class="form-signin" role="form" action="/jyaccede/accessAdmin">
         <h2 class="form-signin-heading">Please sign in</h2>
         <input type="text" class="form-control" placeholder="Login" required autofocus name="login">
         <input type="password" class="form-control" placeholder="Password" required name="password">
