@@ -4,6 +4,8 @@
 * @file Database.php
 */
 
+use Exception\SqlException;
+
 namespace DAL;
 
 class DataBase extends \PDO
@@ -20,7 +22,7 @@ class DataBase extends \PDO
             $stmt = $this->prepare($query);
 
             foreach ($parameters as $name => $value){
-                    $stmt->bindValue(':'.$name, $value);
+                $stmt->bindValue(':'.$name, $value);
             }
 
             $stmt->execute();

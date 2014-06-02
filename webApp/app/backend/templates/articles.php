@@ -2,8 +2,8 @@
     <ul>
         <?php foreach($articles as $id => $article){ ?>
             <li>
-                <a href="/admin/articles/<?= $article->getId() ?>"><?= $article->getName() ?></a>
-                <form action="/admin/articles/<?= $article->getId(); ?>" method="POST">
+                <a href="/jyaccede/admin/articles/<?= $article->getId() ?>"><?= $article->getName() ?></a>
+                <form action="/jyaccede/admin/articles/<?= $article->getId(); ?>" method="POST">
                     <input type="hidden" name="_method" value="DELETE" />
                     <input type="submit" value="Delete">
                 </form>

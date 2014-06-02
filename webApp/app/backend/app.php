@@ -84,8 +84,9 @@ $app->post('/admin/articles', function(Request $request) use ($app, $database){
         throw new HttpException(400, "Content parameter is mandatory !");
     }
 
+    $art = new Article(null, $articleName, $articleDescription);
     $mapper = new ArticleDataMapper($database);
-    $mapper->persist(new Article(null, $articleName, $articleDescription));
+    $mapper->persist($art);
 
     $app->redirect('/admin/articles');
 });
@@ -99,13 +100,13 @@ $app->delete('/admin/articles/(\d+)', function(Request $request, $id) use ($app,
         throw new HttpException(404, "Article not found");
     }
 
-    $model->remove($id);
+    $model->remove($art);
 
     $app->redirect('/admin/articles');
 });
 	
 //Update an article
-$app->put('/admin/articles/(\d+)', function(Request $request, $id) use ($app){
+$app->put('/admin/articles/(\d+)', function(Request $request, $id) use ($app, $database){
     $mapper = new ArticleDataMapper($database);
     $art = $mapper->findOneById($id);
 
@@ -113,12 +114,12 @@ $app->put('/admin/articles/(\d+)', function(Request $request, $id) use ($app){
         throw new HttpException(404, "Article not found");
     }
 
-    $art->setName($request->getParameter('articleName', $art->getName()));
-    $art->setDescription($request->getParameter('articleContent', $art->getDescription()));
+    $art->setName($request->getParameter('name', $art->getName()));
+    $art->setDescription($request->getParameter('description', $art->getDescription()));
 
     $mapper->persist($art);
 
-    return $app->render('backend/article.php', array("id" => $id, "article" => $art));
+    $app->redirect('/admin/articles/'.$id);
 });
 
 /** LOCATION **/
@@ -174,13 +175,13 @@ $app->delete('/admin/locations/(\d+)', function(Request $request, $id) use ($app
         throw new HttpException(404, "Location not found");
     }
 
-    $model->remove($id);
+    $model->remove($art);
 
     $app->redirect('/admin/locations');
 });
 	
 //Update an location
-$app->put('/admin/locations/(\d+)', function(Request $request, $id) use ($app){    
+$app->put('/admin/locations/(\d+)', function(Request $request, $id) use ($app, $database){    
     $mapper = new LocationDataMapper($database);
     $art = $mapper->findOneById($id);
 
@@ -197,7 +198,7 @@ $app->put('/admin/locations/(\d+)', function(Request $request, $id) use ($app){
 
     $mapper->persist($art);
 
-    return $app->render('backend/location.php', array("id" => $id, "location" => $art));
+    $app->redirect('/admin/locations/'.$id);
 });
 
 /** JACCEDE API **/

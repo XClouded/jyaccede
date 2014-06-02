@@ -31,7 +31,7 @@ class ArticleDataMapper implements PersistenceInterface, FinderInterface
      */
     public function findAll($criterias = null) {
         $articles = array();       
-        $query = 'SELECT * FROM :tableName';
+        $query = 'SELECT * FROM '.$this->tableName.'';
         
         if($criterias !== null){
              if(!empty($criterias['where'])){
@@ -47,7 +47,7 @@ class ArticleDataMapper implements PersistenceInterface, FinderInterface
             }
         }
         
-        $results = $this->database->executeQuery($query, array('tableName' => $this->tableName));
+        $results = $this->database->executeQuery($query, array());
         
         foreach($results as $article){
             $articles[] = new Article($article->id, $article->name, $article->description);
@@ -62,9 +62,9 @@ class ArticleDataMapper implements PersistenceInterface, FinderInterface
      * @return null|mixed
      */
     public function findOneById($id) {
-        $query = 'SELECT * FROM :tableName WHERE id = :id';
+        $query = 'SELECT * FROM '.$this->tableName.' WHERE id = :id';
         
-        $result = $this->database->executeQuery($query, array('tableName' => $this->tableName, 'id' => $id));
+        $result = $this->database->executeQuery($query, array('id' => $id));
         
         if($result === null){
             return null;
@@ -97,10 +97,9 @@ class ArticleDataMapper implements PersistenceInterface, FinderInterface
     *@return array
     */
     public function remove($article){
-        $query = 'DELETE FROM :tableName WHERE id = :id';
+        $query = 'DELETE FROM '.$this->tableName.' WHERE id = :id';
 
         return $this->database->executeQuery($query, array(
-                'tableName' => $this->tableName,
                 'id' => $article->getId()));
     }
 
@@ -111,11 +110,10 @@ class ArticleDataMapper implements PersistenceInterface, FinderInterface
     *@return
     */
     public function insert($article){
-        $query = 'INSERT INTO :tableName (id, name, description) 
-                  VALUES (null, :name, :description)';
+        $query = 'INSERT INTO '.$this->tableName.'(name, description) VALUES(:name, :description)';
+        //$query = 'INSERT INTO '.$this->tableName.'(name, description) VALUES(\''.$article->getName().'\', \''.$article->getDescription().'\')';
 
         return $this->database->executeQuery($query, array(
-                'tableName' => $this->tableName,
                 'name' => $article->getName(),
                 'description' => $article->getDescription()));
     }
@@ -127,12 +125,11 @@ class ArticleDataMapper implements PersistenceInterface, FinderInterface
     *@return array
     */
     public function update($article){
-        $query = 'UPDATE :tableName
+        $query = 'UPDATE '.$this->tableName.'
                   SET name = :name, description = :description
                   WHERE id = :id';
 
         return $this->database->executeQuery($query, array(
-                'tableName' => $this->tableName,
                 'id' => $article->getId(),
                 'name' => $article->getName(),
                 'descrption' => $article->getDescription()));

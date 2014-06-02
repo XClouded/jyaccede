@@ -30,7 +30,7 @@ class CategorieDataMapper implements PersistenceInterface, FinderInterface
      */
     public function findAll($criterias = null) {
         $categories = array();       
-        $query = 'SELECT * FROM :tableName';
+        $query = 'SELECT * FROM '.$this->tableName.'';
         
         if($criterias !== null){
              if(!empty($criterias['where'])){
@@ -46,7 +46,7 @@ class CategorieDataMapper implements PersistenceInterface, FinderInterface
             }
         }
         
-        $results = $this->database->executeQuery($query, array('tableName' => $this->tableName));
+        $results = $this->database->executeQuery($query, array());
         
         foreach($results as $categorie){
             $categories[] = new Categorie($categorie->id, $categorie->name);
@@ -61,9 +61,9 @@ class CategorieDataMapper implements PersistenceInterface, FinderInterface
      * @return null|mixed
      */
     public function findOneById($id) {
-        $query = 'SELECT * FROM :tableName WHERE id = :id';
+        $query = 'SELECT * FROM '.$this->tableName.' WHERE id = :id';
         
-        $result = $this->database->executeQuery($query, array('tableName' => $this->tableName, 'id' => $id));
+        $result = $this->database->executeQuery($query, array('id' => $id));
         
         if($result === null){
             return null;
@@ -96,10 +96,9 @@ class CategorieDataMapper implements PersistenceInterface, FinderInterface
     *@return array
     */
     public function remove($categorie){
-        $query = 'DELETE FROM :tableName WHERE id = :id';
+        $query = 'DELETE FROM '.$this->tableName.' WHERE id = :id';
 
         return $this->database->executeQuery($query, array(
-                'tableName' => $this->tableName,
                 'id' => $categorie->getId()));
     }
 
@@ -110,11 +109,10 @@ class CategorieDataMapper implements PersistenceInterface, FinderInterface
     *@return
     */
     public function insert($categorie){
-        $query = 'INSERT INTO :tableName (id, name) 
+        $query = 'INSERT INTO '.$this->tableName.' (id, name) 
                   VALUES (null, :name)';
 
         return $this->database->executeQuery($query, array(
-                'tableName' => $this->tableName,
                 'name' => $categorie->getName()));
     }
 
@@ -125,12 +123,11 @@ class CategorieDataMapper implements PersistenceInterface, FinderInterface
     *@return array
     */
     public function update($categorie){
-        $query = 'UPDATE :tableName
+        $query = 'UPDATE '.$this->tableName.'
                   SET name = :name
                   WHERE id = :id';
 
         return $this->database->executeQuery($query, array(
-                'tableName' => $this->tableName,
                 'id' => $categorie->getId(),
                 'name' => $categorie->getName()));
     }
