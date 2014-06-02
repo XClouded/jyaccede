@@ -5,6 +5,7 @@ use Http\Request;
 use Mapper\ArticleDataMapper;
 use Mapper\CategorieDataMapper;
 use Mapper\LocationDataMapper;
+use Model\Article;
 use Exception\HttpException;
 use DAL\DataBase;
 
@@ -15,7 +16,7 @@ $app = new \App(new \View\TemplateEngine(__DIR__ . '/templates/'), $urlRoot, $de
 $database = new DataBase(Conf::_DB_DSN_, Conf::_DB_USER_, Conf::_DB_PWD_, $options);
 
 //Define routes which don't require authentification
-$app->addListener('process.before', function(Request $req) use ($urlRoot) {
+$app->addListener('process.before', function(Request $req) use ($urlRoot, $apps) {
     session_start();
 
     $allowed = [
@@ -39,7 +40,7 @@ $app->addListener('process.before', function(Request $req) use ($urlRoot) {
             throw new HttpException(401);
     }
     
-    throw new HttpException(401);
+    throw new HttpException(401, 'Access denied');
 });
 
 //Index
@@ -150,7 +151,7 @@ $app->post('/admin/locations', function(Request $request) use ($app, $database){
     $locationName = $request->getParameter('name', null);
     $latitude = $request->getParameter('latitude', null);
     $longitude = $request->getParameter('longitude', null);
-    $mark = $request->getParameter('name', 0);
+    $mark = $request->getParameter('mark', 0);
     $idCategory = $request->getParameter('idCategory', null);
     $disableAccess = $request->getParameter('disableAccess', false);
 

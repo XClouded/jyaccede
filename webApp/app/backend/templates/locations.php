@@ -11,15 +11,15 @@
         <?php } ?>
     </ul>
     
-    <form method="/jyaccede/admin/locations" method="post">
+    <form action="/jyaccede/admin/locations" method="post">
         <legend>Add location</legend>
         <table>
             <tr><td><label for="name">Name :</label></td><td><input id="name" name="name" type="text" class="form-control" /></td></tr>
             <tr><td><label for="latitude" >Latitude :</label></td><td><input id="latitude" name="latitude" type="text" class="form-control" /></td></tr>
             <tr><td><label for="longitude" >Longitude :</label></td><td><input id="longitude" name="longitude" type="text" class="form-control" /></td></tr>
             <tr>
-                <td><label for="name_categorie" >Category :</label></td>
-                <td><select id="name_categorie" name="name_categorie" class="form-control" >
+                <td><label for="idCategory" >Category :</label></td>
+                <td><select id="idCategory" name="idCategory" class="form-control" >
                         <?php foreach($categories as $id => $cat){ ?>
                         <option value="<?= $cat->getId() ?>"><?= $cat->getName() ?></option>
                         <?php } ?>
