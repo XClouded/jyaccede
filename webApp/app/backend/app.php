@@ -199,6 +199,10 @@ $app->put('/admin/locations/(\d+)', function(Request $request, $id) use ($app){
     return $app->render('backend/location.php', array("id" => $id, "location" => $art));
 });
 
-/** CATEGORIE **/
+/** JACCEDE API **/
+
+$app->get('/admin/jaccedeapi', function () use ($app){
+    return $app->render('jaccedeapi.php', array(), 'layout.php');
+});
 
 return $app;

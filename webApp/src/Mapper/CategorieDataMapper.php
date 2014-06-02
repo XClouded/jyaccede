@@ -29,7 +29,7 @@ class CategorieDataMapper implements PersistenceInterface, FinderInterface
      * @return array
      */
     public function findAll($criterias = null) {
-        $categorie = array();       
+        $categories = array();       
         $query = 'SELECT * FROM :tableName';
         
         if($criterias !== null){
@@ -49,10 +49,10 @@ class CategorieDataMapper implements PersistenceInterface, FinderInterface
         $results = $this->database->executeQuery($query, array('tableName' => $this->tableName));
         
         foreach($results as $categorie){
-            $categorie[] = new Categorie($categorie->id, $categorie->name);
+            $categories[] = new Categorie($categorie->id, $categorie->name);
         }
 
-        return $categorie;
+        return $categories;
     }
 
     /** Retrieve an element by its id.

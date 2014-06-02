@@ -29,6 +29,7 @@
                         <li ><a href="/jyaccede/admin">Admin</a></li>
                         <li ><a href="/jyaccede/admin/articles">Articles</a></li>
                         <li ><a href="/jyaccede/admin/locations">Locations</a></li>
+                        <li ><a href="/jyaccede/admin/jaccedeapi">Jaccede API</a></li>
                         <li ><a href="/jyaccede">Home</a></li>
                     </ul>
                 </div><!--/.nav-collapse -->

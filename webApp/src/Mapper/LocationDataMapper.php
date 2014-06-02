@@ -16,8 +16,8 @@ class LocationDataMapper implements PersistenceInterface, FinderInterface
     }
 
     public function findAll($criterias = null) {
-        $location = array();
-        $query = 'SELECT * FROM :location';
+        $locations = array();
+        $query = 'SELECT * FROM :tableName';
 
         if($criterias !== null){
             if(!empty($criterias['where'])){
@@ -34,16 +34,16 @@ class LocationDataMapper implements PersistenceInterface, FinderInterface
         }
 
         $results = $this->database->executeQuery($query, array('tableName' => $this->tableName));
-
+        
         foreach($results as $location){
-            $location[] = new Location($location->id, $location->name, $location->latitude, $location->longitude, $location->mark, $location->idCategory, $location->disabledAccess);			
+            $locations[] = new Location($location->id, $location->name, $location->latitude, $location->longitude, $location->mark, $location->idCategory, $location->disabledAccess);			
         }
 
-        return $location;
+        return $locations;
     }
 	
     public function findOneById($id) {
-        $query = 'SELECT * FROM :location WHERE id = :id';
+        $query = 'SELECT * FROM :tableName WHERE id = :id';
 
         $result = $this->database->executeQuery($query, array('tableName' => $this->tableName, 'id' => $id));
 
@@ -65,15 +65,15 @@ class LocationDataMapper implements PersistenceInterface, FinderInterface
     }
 	
     public function remove($location){
-        $query = 'DELETE FROM :location WHERE id = :id';
+        $query = 'DELETE FROM :tableName WHERE id = :id';
 
         return $this->database->executeQuery($query, array(
                         'tableName' => $this->tableName,
-                        'id' => $article->getId()));			
+                        'id' => $location->getId()));			
     }
 	
     public function insert($location){
-        $query = 'INSERT INTO :location (id, name, latitude, longitude, mark, idCategory, disabledAccess)
+        $query = 'INSERT INTO :tableName (id, name, latitude, longitude, mark, idCategory, disabledAccess)
                   VALUES (null, :name, :latitude, :longitude, :mark, :idCategory, :disabledAccess)';
 
         return $this->database->executeQuery($query, array(
@@ -87,7 +87,7 @@ class LocationDataMapper implements PersistenceInterface, FinderInterface
     }
 	
     public function update($location){
-        $query = 'UPDATE :location
+        $query = 'UPDATE :tableName
                   SET name = :name, latitude = :latitude, longitude = :longitude, mark = :mark, idCategory = :idCategory, disabledAccess = :disabledAccess
                   WHERE id = :id';
 
