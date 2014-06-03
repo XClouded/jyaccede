@@ -2,9 +2,9 @@
     <ul>
         <?php foreach($locations as $id => $location){ ?>
             <li>
-                <a href="/jyaccede/admin/locations/<?= $location->getId() ?>"><?= $location->getName() ?></a>
                 <form action="/jyaccede/admin/locations/<?= $location->getId(); ?>" method="POST">
                     <input type="hidden" name="_method" value="DELETE" />
+                    <a href="/jyaccede/admin/locations/<?= $location->getId() ?>"><?= $location->getName() ?></a>
                     <input type="submit" value="Delete">
                 </form>
             </li><br/>

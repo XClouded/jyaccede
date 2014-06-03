@@ -37,6 +37,7 @@ public class MapsActivity extends VisitMyCityActivity {
 
         Intent intent = getIntent();
         String address = intent.getStringExtra("address");
+        String location = intent.getStringExtra("location");
         String latitude = intent.getStringExtra("latitude");
         String longitude = intent.getStringExtra("longitude");
         String currentLatitude = intent.getStringExtra("currentLatitude");
@@ -45,7 +46,7 @@ public class MapsActivity extends VisitMyCityActivity {
 
         if(fromActivity != null && fromActivity.equals(Variables.ActivityCloser)){
             JaccedeTask js = new JaccedeTask();
-            js.execute();
+            js.execute(location.split(" ")[0]);
         }
         else if(fromActivity != null && fromActivity.equals(Variables.ActivitySearch)){
             LatLng ll = new LatLng(Double.parseDouble(latitude), Double.parseDouble(longitude));

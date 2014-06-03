@@ -8,6 +8,9 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -17,9 +20,10 @@ import java.net.URI;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 
+import visitmycityandroid.configuration.Variables;
 import visitmycityandroid.tools.Hex;
 
-public class JaccedeTask extends AsyncTask<Void, Void, String> {
+public class JaccedeTask extends AsyncTask<String, Void, String> {
 
     private static final String ACCESS_KEY_ID = "test-jispapi-access-key-id";
     private static final String SECRET_ACCESS_KEY = "test-jispapi-secret-access-key";
@@ -67,11 +71,11 @@ public class JaccedeTask extends AsyncTask<Void, Void, String> {
     }
 
     @Override
-    protected String doInBackground(Void... voids) {
+    protected String doInBackground(String... where) {
         String result = "";
         try {
             HttpClient httpclient = new DefaultHttpClient();
-            HttpGet get = new HttpGet("http://dev.jaccede.com/api/v2/places/search/");
+            HttpGet get = new HttpGet(Variables.SeachLocationUrl + where[0]);
             setAuthHeaders(get);
             HttpResponse httpResponse = httpclient.execute(get);
             InputStream inputStream = httpResponse.getEntity().getContent();
@@ -85,6 +89,16 @@ public class JaccedeTask extends AsyncTask<Void, Void, String> {
         }
         catch (Exception e) {
             result = "ERROR";
+        }
+
+        try {
+            JSONObject jsonObj = new JSONObject(result);
+            JSONObject results = jsonObj.getJSONObject("results");
+            JSONObject items = results.getJSONObject("items");
+            JSONArray categories = items.getJSONArray("category");
+        }
+        catch (JSONException e) {
+            e.printStackTrace();
         }
 
         return result;

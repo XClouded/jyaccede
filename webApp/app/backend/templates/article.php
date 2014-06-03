@@ -1,10 +1,20 @@
 <body>
     <form action="/jyaccede/admin/articles/<?= $article->getId(); ?>" method="POST">
-        <input type="hidden" value="PUT" name="_method" />
-        <input type="text" value="<?= $article->getName(); ?>" name="name" /><br /><br />
-        <textarea name="description"><?= $article->getDescription(); ?></textarea><br /><br />
-        <input type="submit" value="Update">
+        <legend>Update article</legend>
+        <table>
+            <tr>
+                <td><label for="name" >Title :</label></td>
+                <td><input id="name" name="name" type="text" class="form-control" value="<?= $article->getName(); ?>"/></td>
+            </tr>
+            <tr>
+                <td><label for="description" >Content :</label></td>
+                <td><textarea cols="30" rows="5" id="description" name="description" class="form-control" ><?= $article->getDescription(); ?></textarea></td>
+            </tr>
+            <tr>
+                <td colspan="2"><input type="submit" value="Update" class="form-control" /></td>
+            </tr>
+        </table>
     </form>
 
-    <a href="/admin/articles">Back</a>
+    <a href="/jyaccede/admin/articles">Back</a>
 </body>

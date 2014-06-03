@@ -204,6 +204,22 @@ $app->put('/admin/locations/(\d+)', function(Request $request, $id) use ($app, $
 /** JACCEDE API **/
 
 $app->get('/admin/jaccedeapi', function () use ($app){
+    $url = 'http://dev.jaccede.com/api/v2/places/categories/';
+    
+    $curl = curl_init();
+    $time = time();
+    //curl_setopt($curl, CURLOPT_HTTPHEADER, array('Authorization: JISAPI test-jispapi-access-key-id:'.$signature));
+    $string_to_sign = "GET \n x-jispapi-timestamp:".$time."\n + /v2/places/categories/";
+    $signature = base64_encode(hash_hmac("sha1", "test-jispapi-secret-access-key", $string_to_sign));
+    curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+    curl_setopt($curl, CURLOPT_USERPWD, $signature);
+    curl_setopt($curl, CURLOPT_HTTPHEADER, array('x-jispapi-timestamp: '.$time));
+    curl_setopt($curl, CURLOPT_URL, $url);
+    //curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+    
+    $results = curl_exec($curl);
+    var_dump($results);exit;
+    
     return $app->render('jaccedeapi.php', array(), 'layout.php');
 });
 
