@@ -23,17 +23,21 @@ import java.util.Locale;
 import visitmycityandroid.app.R;
 import visitmycityandroid.configuration.Variables;
 import visitmycityandroid.asyncTask.JaccedeTask;
+import visitmycityandroid.interfaces.JaccedeTaskListener;
+import visitmycityandroid.model.LocationModel;
 
-public class MapsActivity extends VisitMyCityActivity {
+public class MapsActivity extends VisitMyCityActivity implements JaccedeTaskListener {
 
-    private List<LatLng> mDestination = new ArrayList<LatLng>();
+    private List<LocationModel> mDestination = new ArrayList<LocationModel>();
+
+    private GoogleMap mMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
 
-        GoogleMap map = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
+        mMap = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
 
         Intent intent = getIntent();
         String address = intent.getStringExtra("address");
@@ -45,20 +49,20 @@ public class MapsActivity extends VisitMyCityActivity {
         String fromActivity = intent.getStringExtra("fromActivity");
 
         if(fromActivity != null && fromActivity.equals(Variables.ActivityCloser)){
-            JaccedeTask js = new JaccedeTask();
+            JaccedeTask js = new JaccedeTask(this);
             js.execute(location.split(" ")[0]);
         }
         else if(fromActivity != null && fromActivity.equals(Variables.ActivitySearch)){
             LatLng ll = new LatLng(Double.parseDouble(latitude), Double.parseDouble(longitude));
-            map.moveCamera(CameraUpdateFactory.newLatLngZoom(ll, 15));
-            map.addMarker(initMarker(ll, address));
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(ll, 15));
+            mMap.addMarker(initMarker(ll, address));
 
-            mDestination.add(ll);
+            mDestination.add(new LocationModel("", address, Double.parseDouble(longitude), Double.parseDouble(latitude), ""));
         }
 
         LatLng currentll = new LatLng(Double.parseDouble(currentLatitude), Double.parseDouble(currentLongitude));
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(currentll, 15));
-        map.addMarker(initMarker(currentll, getString(R.string.here)));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentll, 15));
+        mMap.addMarker(initMarker(currentll, getString(R.string.here)));
     }
 
     @Override
@@ -102,5 +106,15 @@ public class MapsActivity extends VisitMyCityActivity {
         mo.position(ll);
 
         return mo;
+    }
+
+    @Override
+    public void OnCompleted(final ArrayList<LocationModel> locations){
+        for(int i=0; i<locations.size(); i++){
+            LocationModel l = locations.get(i);
+            LatLng ll = new LatLng(l.getLatitude(), l.getLongitude());
+            mMap.addMarker(initMarker(ll, l.getName()));
+            mDestination.add(l);
+        }
     }
 }

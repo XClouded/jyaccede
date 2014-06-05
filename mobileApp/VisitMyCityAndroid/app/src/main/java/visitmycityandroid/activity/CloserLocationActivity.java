@@ -95,6 +95,8 @@ public class CloserLocationActivity extends VisitMyCityActivity  implements View
         double longitude = 0;
 
         if(l != null) {
+            mLatitude = l.getLatitude();
+            mLongitude = l.getLongitude();
             latitude = l.getLatitude();
             longitude = l.getLongitude();
             Geocoder gc = new Geocoder(this, Locale.getDefault());
@@ -122,9 +124,6 @@ public class CloserLocationActivity extends VisitMyCityActivity  implements View
 
         TextView longitudeLabel = (TextView)findViewById(R.id.longitudeLabel);
         longitudeLabel.setText(String.valueOf(longitude));
-
-        mLatitude = l.getLatitude();
-        mLongitude = l.getLongitude();
     }
 
     @Override

@@ -16,20 +16,31 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URI;
+import java.util.ArrayList;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 
 import visitmycityandroid.configuration.Variables;
+import visitmycityandroid.interfaces.JaccedeTaskListener;
+import visitmycityandroid.model.LocationModel;
 import visitmycityandroid.tools.Hex;
 
-public class JaccedeTask extends AsyncTask<String, Void, String> {
+public class JaccedeTask extends AsyncTask<String, Void, Void> {
 
     private static final String ACCESS_KEY_ID = "test-jispapi-access-key-id";
     private static final String SECRET_ACCESS_KEY = "test-jispapi-secret-access-key";
     private static final String HEADER_NAME_TIMESTAMP = "x-jispapi-timestamp";
     private static final String HEADER_NAME_AUTH = "Authorization";
     private static final String HEADER_PART_JISPAPI = "JISPAPI";
+
+    private JaccedeTaskListener mListener;
+
+    private ArrayList<LocationModel> mLocations = new ArrayList<LocationModel>();
+
+    public JaccedeTask(JaccedeTaskListener jtl){
+        mListener = jtl;
+    }
 
     private static String computeStringToSign(HttpRequestBase request, long now) {
 
@@ -47,7 +58,7 @@ public class JaccedeTask extends AsyncTask<String, Void, String> {
         return buff.toString();
     }
 
-    public static void setAuthHeaders(HttpRequestBase request) {
+    private static void setAuthHeaders(HttpRequestBase request) {
         try {
 
             Mac mac = Mac.getInstance("HmacSHA1");
@@ -71,7 +82,7 @@ public class JaccedeTask extends AsyncTask<String, Void, String> {
     }
 
     @Override
-    protected String doInBackground(String... where) {
+    protected Void doInBackground(String... where) {
         String result = "";
         try {
             HttpClient httpclient = new DefaultHttpClient();
@@ -94,13 +105,21 @@ public class JaccedeTask extends AsyncTask<String, Void, String> {
         try {
             JSONObject jsonObj = new JSONObject(result);
             JSONObject results = jsonObj.getJSONObject("results");
-            JSONObject items = results.getJSONObject("items");
-            JSONArray categories = items.getJSONArray("category");
+            JSONArray items = results.getJSONArray("items");
+            for (int i = 0; i < items.length(); i++) {
+                JSONObject row = items.getJSONObject(i);
+                mLocations.add(new LocationModel(row.getString("name"), row.getString("address"), row.getDouble("longitude"), row.getDouble("latitude"), row.getString("description")));
+            }
         }
         catch (JSONException e) {
             e.printStackTrace();
         }
 
-        return result;
+        return null;
+    }
+
+    @Override
+    protected void onPostExecute(Void aVoid) {
+        mListener.OnCompleted(mLocations);
     }
 }
