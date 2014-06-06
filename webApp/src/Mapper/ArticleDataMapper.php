@@ -12,7 +12,7 @@ use Model\Article;
 class ArticleDataMapper implements PersistenceInterface, FinderInterface
 {
     /** Name of the table */
-    private $tableName = "article";
+    private $tableName = "jyaccede_article";
     
     /** DataBase access */
     private $database;

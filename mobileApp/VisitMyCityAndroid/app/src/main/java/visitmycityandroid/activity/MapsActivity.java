@@ -57,7 +57,7 @@ public class MapsActivity extends VisitMyCityActivity implements JaccedeTaskList
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(ll, 15));
             mMap.addMarker(initMarker(ll, address));
 
-            mDestination.add(new LocationModel("", address, Double.parseDouble(longitude), Double.parseDouble(latitude), ""));
+            mDestination.add(new LocationModel("", address, Double.parseDouble(longitude), Double.parseDouble(latitude), "", 0));
         }
 
         LatLng currentll = new LatLng(Double.parseDouble(currentLatitude), Double.parseDouble(currentLongitude));

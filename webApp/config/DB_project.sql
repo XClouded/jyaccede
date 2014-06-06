@@ -1,5 +1,5 @@
 -- Structure de la table `article`
-CREATE TABLE IF NOT EXISTS `article` (
+CREATE TABLE IF NOT EXISTS `jyaccede_article` (
 	`id` int(11) NOT NULL AUTO_INCREMENT,
 	`name` varchar(255) NOT NULL,
 	`description` text NOT NULL,
@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS `article` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- Structure de la table `categorie`
-CREATE TABLE IF NOT EXISTS `categorie` (
+CREATE TABLE IF NOT EXISTS `jyaccede_categorie` (
 	`id` int(11) NOT NULL AUTO_INCREMENT,
 	`name` varchar(255) NOT NULL,
 	PRIMARY KEY (`id`)
@@ -20,7 +20,7 @@ INSERT INTO `categorie` (`id`, `name`) VALUES
 (3, 'GIG/GIC');
 
 -- Structure de la table `location`
-CREATE TABLE IF NOT EXISTS `location` (
+CREATE TABLE IF NOT EXISTS `jyaccede_location` (
 	`id` int(11) NOT NULL AUTO_INCREMENT,
 	`name` varchar(255) NOT NULL,
 	`latitude` double NOT NULL,
