@@ -86,7 +86,8 @@ public class JaccedeTask extends AsyncTask<String, Void, Void> {
         String result = "";
         try {
             HttpClient httpclient = new DefaultHttpClient();
-            HttpGet get = new HttpGet(Variables.SeachLocationUrl + where[0]);
+            //HttpGet get = new HttpGet(Variables.SearchLocationUrl + where[0]);
+            HttpGet get = new HttpGet(Variables.SearchCategorieUrl);
             setAuthHeaders(get);
             HttpResponse httpResponse = httpclient.execute(get);
             InputStream inputStream = httpResponse.getEntity().getContent();
@@ -108,11 +109,17 @@ public class JaccedeTask extends AsyncTask<String, Void, Void> {
             JSONArray items = results.getJSONArray("items");
             for (int i = 0; i < items.length(); i++) {
                 JSONObject row = items.getJSONObject(i);
-                mLocations.add(new LocationModel(row.getString("name"), row.getString("address"), row.getDouble("longitude"), row.getDouble("latitude"), row.getString("description")));
+                try {
+                    JSONObject categorie = row.getJSONObject("category");
+                    int idCategorie = categorie.getInt("id");
+                    mLocations.add(new LocationModel(row.getString("name"), row.getString("address"), row.getDouble("longitude"),
+                                                     row.getDouble("latitude"), row.getString("description"), idCategorie));
+                }
+                catch (Exception e) {
+                }
             }
         }
         catch (JSONException e) {
-            e.printStackTrace();
         }
 
         return null;

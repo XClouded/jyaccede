@@ -12,15 +12,18 @@ public class LocationModel {
 
     public String remark;
 
+    public int idCategorie;
+
     public LocationModel() {
     }
 
-    public LocationModel(String name, String address, double latitude, double longitude, String remark) {
+    public LocationModel(String name, String address, double latitude, double longitude, String remark, int idCategorie) {
         this.name = name;
         this.address = address;
         this.latitude = latitude;
         this.longitude = longitude;
         this.remark = remark;
+        this.idCategorie = idCategorie;
     }
 
     public String getName() {
@@ -61,5 +64,13 @@ public class LocationModel {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public int getIdCategorie() {
+        return idCategorie;
+    }
+
+    public void setIdCategorie(int idCategorie) {
+        this.idCategorie = idCategorie;
     }
 }

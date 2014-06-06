@@ -4,7 +4,8 @@ public interface Variables {
 
     /** API URL **/
     public static final String PostLocationUrl = "http://www.visitmycity.com/messages";
-    public static final String SeachLocationUrl = "http://dev.jaccede.com/api/v2/places/search/?where=";
+    public static final String SearchLocationUrl = "http://dev.jaccede.com/api/v2/places/search/?where=";
+    public static final String SearchCategorieUrl = "http://dev.jaccede.com/api/v2/places/categories/";
 
     /** ACTIVITY NAME **/
     public static final String ActivitySearch = "ActivitySearch";
