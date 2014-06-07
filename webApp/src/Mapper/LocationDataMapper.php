@@ -6,7 +6,7 @@ use Model\Location;
 
 class LocationDataMapper implements PersistenceInterface, FinderInterface
 {
-    private $tableName = "location";
+    private $tableName = "jyaccede_location";
 
     private $database;
 
