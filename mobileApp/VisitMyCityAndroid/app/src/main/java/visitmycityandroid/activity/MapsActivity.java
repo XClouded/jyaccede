@@ -12,7 +12,9 @@ import android.widget.Toast;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.IOException;
@@ -26,9 +28,13 @@ import visitmycityandroid.asyncTask.JaccedeTask;
 import visitmycityandroid.interfaces.JaccedeTaskListener;
 import visitmycityandroid.model.LocationModel;
 
-public class MapsActivity extends VisitMyCityActivity implements JaccedeTaskListener {
+public class MapsActivity extends VisitMyCityActivity implements JaccedeTaskListener, GoogleMap.OnMarkerClickListener {
 
     private List<LocationModel> mDestination = new ArrayList<LocationModel>();
+
+    private LatLng mCurrentLL;
+
+    private LatLng mToGo;
 
     private GoogleMap mMap;
 
@@ -55,14 +61,16 @@ public class MapsActivity extends VisitMyCityActivity implements JaccedeTaskList
         else if(fromActivity != null && fromActivity.equals(Variables.ActivitySearch)){
             LatLng ll = new LatLng(Double.parseDouble(latitude), Double.parseDouble(longitude));
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(ll, 15));
-            mMap.addMarker(initMarker(ll, address));
+            mMap.addMarker(initMarker(ll, address, 0));
 
             mDestination.add(new LocationModel("", address, Double.parseDouble(longitude), Double.parseDouble(latitude), "", 0));
         }
 
-        LatLng currentll = new LatLng(Double.parseDouble(currentLatitude), Double.parseDouble(currentLongitude));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentll, 15));
-        mMap.addMarker(initMarker(currentll, getString(R.string.here)));
+        mCurrentLL = new LatLng(Double.parseDouble(currentLatitude), Double.parseDouble(currentLongitude));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mCurrentLL, 15));
+        mMap.addMarker(initMarker(mCurrentLL, getString(R.string.here), 0));
+
+        mMap.setOnMarkerClickListener(this);
     }
 
     @Override
@@ -76,10 +84,13 @@ public class MapsActivity extends VisitMyCityActivity implements JaccedeTaskList
         int id = item.getItemId();
         switch (id){
             case R.id.action_go :
+                if(mToGo == null){
+                    return true;
+                }
                 Geocoder geocoder = new Geocoder(this, Locale.getDefault());
                 String destinationString = null;
                 try {
-                    List<Address> addresses = geocoder.getFromLocation(mDestination.get(0).latitude, mDestination.get(0).longitude, 1);
+                    List<Address> addresses = geocoder.getFromLocation(mToGo.latitude, mToGo.longitude, 1);
                     destinationString = addresses.get(0).getAddressLine(0);
                 }
                 catch (IOException e) {
@@ -100,10 +111,15 @@ public class MapsActivity extends VisitMyCityActivity implements JaccedeTaskList
      * @param title
      * @return
      */
-    private MarkerOptions initMarker(LatLng ll, String title){
+    private MarkerOptions initMarker(LatLng ll, String title, int idCategorie){
         MarkerOptions mo = new MarkerOptions();
         mo.title(title);
         mo.position(ll);
+
+        if(idCategorie != 0){
+            String imgName = "c" + idCategorie;
+            mo.icon(BitmapDescriptorFactory.fromResource(getResources().getIdentifier(imgName, "drawable", getPackageName())));
+        }
 
         return mo;
     }
@@ -113,8 +129,15 @@ public class MapsActivity extends VisitMyCityActivity implements JaccedeTaskList
         for(int i=0; i<locations.size(); i++){
             LocationModel l = locations.get(i);
             LatLng ll = new LatLng(l.getLatitude(), l.getLongitude());
-            mMap.addMarker(initMarker(ll, l.getName()));
+            mMap.addMarker(initMarker(ll, l.getName(), l.idCategorie));
             mDestination.add(l);
         }
+    }
+
+    @Override
+    public boolean onMarkerClick(Marker marker) {
+        mToGo = marker.getPosition();
+
+        return false;
     }
 }
