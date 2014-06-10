@@ -13,12 +13,6 @@ CREATE TABLE IF NOT EXISTS `jyaccede_categorie` (
 	PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
--- Contenu de la table `categorie`
-INSERT INTO `categorie` (`id`, `name`) VALUES
-(1, 'Bar'),
-(2, 'Restaurant'),
-(3, 'GIG/GIC');
-
 -- Structure de la table `location`
 CREATE TABLE IF NOT EXISTS `jyaccede_location` (
 	`id` int(11) NOT NULL AUTO_INCREMENT,
