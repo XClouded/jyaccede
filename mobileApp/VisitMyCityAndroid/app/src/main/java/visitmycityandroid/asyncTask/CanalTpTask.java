@@ -7,6 +7,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
+import visitmycityandroid.interfaces.CanalTpTaskListener;
 import visitmycityandroid.model.LineModel;
 import visitmycityandroid.model.LocationModel;
 import visitmycityandroid.tools.JsonTools;
@@ -15,12 +18,18 @@ public class CanalTpTask extends AsyncTask<Void, Void, Void> {
 
     private String mUrl;
 
+    private CanalTpTaskListener mListener;
+
+    private ArrayList<LineModel> mLines = new ArrayList<LineModel>();
+
     /** Construct
      *
      * @param url
+     * @param listener
      */
-    public CanalTpTask(String url){
+    public CanalTpTask(String url,CanalTpTaskListener listener){
         mUrl = url;
+        mListener = listener;
     }
 
     @Override
@@ -33,7 +42,7 @@ public class CanalTpTask extends AsyncTask<Void, Void, Void> {
             for (int i = 0; i < items.length(); i++) {
                 JSONObject row = items.getJSONObject(i);
                 try {
-                    LineModel line = new LineModel(row.getString("name"));
+                    mLines.add(new LineModel(row.getString("name")));
                 }
                 catch (Exception e) {
                 }
@@ -43,5 +52,10 @@ public class CanalTpTask extends AsyncTask<Void, Void, Void> {
         }
 
         return null;
+    }
+
+    @Override
+    protected void onPostExecute(Void aVoid) {
+        mListener.OnCompleted(mLines);
     }
 }

@@ -14,14 +14,17 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
 import visitmycityandroid.app.R;
 import visitmycityandroid.asyncTask.CanalTpTask;
 import visitmycityandroid.configuration.Variables;
+import visitmycityandroid.interfaces.CanalTpTaskListener;
+import visitmycityandroid.model.LineModel;
 
-public class UpdateLineActivity extends Activity {
+public class UpdateLineActivity extends Activity implements CanalTpTaskListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +54,7 @@ public class UpdateLineActivity extends Activity {
                         String url = Variables.SeachNearbyPlaces.replace("{0}", address.getLocality());
                         url = url.replace("{1}", l.getLatitude()+"");
                         url = url.replace("{2}", l.getLongitude()+"");
-                        CanalTpTask ct = new CanalTpTask(url);
+                        CanalTpTask ct = new CanalTpTask(url, this);
                         ct.execute();
                     }
                 }
@@ -82,5 +85,9 @@ public class UpdateLineActivity extends Activity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void OnCompleted(final ArrayList<LineModel> lines){
+
     }
 }
