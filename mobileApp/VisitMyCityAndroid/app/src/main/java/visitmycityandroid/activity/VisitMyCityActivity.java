@@ -28,8 +28,11 @@ public abstract class VisitMyCityActivity extends Activity{
             case R.id.action_closerLocation :
                 Intent intentCloser = new Intent(this, CloserLocationActivity.class);
                 startActivity(intentCloser);
+            case R.id.action_updateLine :
+                Intent intentUpdate = new Intent(this, UpdateLineActivity.class);
+                startActivity(intentUpdate);
             default:
-                return super.onOptionsItemSelected(item);
+                return false;
         }
     }
 }

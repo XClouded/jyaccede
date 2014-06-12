@@ -18,6 +18,10 @@ public class JaccedeTask extends AsyncTask<String, Void, Void> {
 
     private ArrayList<LocationModel> mLocations = new ArrayList<LocationModel>();
 
+    /** Construct
+     *
+     * @param jtl
+     */
     public JaccedeTask(JaccedeTaskListener jtl){
         mListener = jtl;
     }

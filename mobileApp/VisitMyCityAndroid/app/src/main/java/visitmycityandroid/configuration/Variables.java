@@ -6,6 +6,8 @@ public interface Variables {
     public static final String PostLocationUrl = "http://www.visitmycity.com/messages";
     public static final String SearchLocationUrl = "http://dev.jaccede.com/api/v2/places/search/?where=";
     public static final String SearchCategorieUrl = "http://dev.jaccede.com/api/v2/places/categories/";
+    //public static final String SeachNearbyPlaces = "http://api.navitia.io/v1/coverage/{0}/coords/{1};{2}/places_nearby";
+    public static final String SeachNearbyPlaces = "http://api.navitia.io/v1/coverage/sf/coords/-122.402770;37.794682/places_nearby";
 
     /** ACTIVITY NAME **/
     public static final String ActivitySearch = "ActivitySearch";

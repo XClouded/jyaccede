@@ -28,6 +28,7 @@
     <string name="title_activity_search_location">Search location</string>
     <string name="search">Search</string>
     <string name="withPmr">With up disabled</string>
+
     <string-array name="category_location">
         <item>All</item>
         <item>Bar</item>
@@ -38,5 +39,8 @@
     <string name="title_activity_maps">Maps</string>
     <string name="here">I am here !</string>
     <string name="go">Go !</string>
+    <string name="title_activity_update_line">UpdateLineActivity</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
 
 </resources>

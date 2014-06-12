@@ -1,38 +1,47 @@
 package visitmycityandroid.asyncTask;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import visitmycityandroid.model.LineModel;
+import visitmycityandroid.model.LocationModel;
+import visitmycityandroid.tools.JsonTools;
 
-public class CanalTpTask extends AsyncTask<Void, Void, String> {
+public class CanalTpTask extends AsyncTask<Void, Void, Void> {
+
+    private String mUrl;
+
+    /** Construct
+     *
+     * @param url
+     */
+    public CanalTpTask(String url){
+        mUrl = url;
+    }
 
     @Override
-    protected String doInBackground(Void... voids) {
-        String result = "";
+    protected Void doInBackground(Void... voids) {
+        String result = JsonTools.getStringFromJson(mUrl);
+
         try {
-            HttpClient httpclient = new DefaultHttpClient();
-            HttpGet get = new HttpGet("http://dev.jaccede.com/api/v2/places/search/");
-            HttpResponse httpResponse = httpclient.execute(get);
-            InputStream inputStream = httpResponse.getEntity().getContent();
-            BufferedReader bufferedReader = new BufferedReader( new InputStreamReader(inputStream));
-            String line;
-            while((line = bufferedReader.readLine()) != null){
-                result += line;
+            JSONObject jsonObj = new JSONObject(result);
+            JSONArray items = jsonObj.getJSONArray("places_nearby");
+            for (int i = 0; i < items.length(); i++) {
+                JSONObject row = items.getJSONObject(i);
+                try {
+                    LineModel line = new LineModel(row.getString("name"));
+                }
+                catch (Exception e) {
+                }
             }
-
-            inputStream.close();
         }
-        catch (Exception e) {
-            result = "ERROR";
+        catch (JSONException e) {
         }
 
-        return result;
+        return null;
     }
 }
