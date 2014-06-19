@@ -2,7 +2,7 @@
     <ul>
         <?php foreach($articles as $id => $article){ ?>
             <li> 
-                <form action="/jyaccede/admin/articles/<?= $article->getId(); ?>" method="POST">
+                <form action="/_jyaccede/admin/articles/<?= $article->getId(); ?>" method="POST">
                     <input type="hidden" name="_method" value="DELETE" />
                     <a href="/jyaccede/admin/articles/<?= $article->getId() ?>"><?= $article->getName() ?></a>
                     <input type="submit" value="Delete" >
@@ -11,7 +11,7 @@
         <?php } ?>
     </ul>
     
-    <form action="/jyaccede/admin/articles" method="POST">
+    <form action="/_jyaccede/admin/articles" method="POST">
         <legend>Add article</legend>
         <table>
             <tr><td><label for="name" >Title :</label></td><td><input id="name" name="name" type="text" class="form-control" /></td></tr>

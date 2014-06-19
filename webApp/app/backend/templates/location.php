@@ -1,5 +1,5 @@
 <body>
-    <form action="/jyaccede/admin/articles/<?= $article->getId(); ?>" method="POST">
+    <form action="/_jyaccede/admin/articles/<?= $article->getId(); ?>" method="POST">
         <legend>Update location</legend>
         <table>
             <tr>

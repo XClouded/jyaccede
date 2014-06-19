@@ -1,5 +1,5 @@
 <body>
-    <form action="/jyaccede/admin/articles/<?= $article->getId(); ?>" method="POST">
+    <form action="/_jyaccede/admin/articles/<?= $article->getId(); ?>" method="POST">
         <legend>Update article</legend>
         <table>
             <tr>
@@ -16,5 +16,5 @@
         </table>
     </form>
 
-    <a href="/jyaccede/admin/articles">Back</a>
+    <a href="/_jyaccede/admin/articles">Back</a>
 </body>
