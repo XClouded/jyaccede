@@ -1,0 +1,17 @@
+parameters:
+#    jy_accede_actu.example.class: JyAccede\Bundle\ActuBundle\Example
+
+services:
+  sonata.admin.actu:
+          class: JyAccede\Bundle\ActuBundle\Admin\ActuAdmin
+          tags:
+              - { name: sonata.admin, manager_type: orm, group: "Actus", label: "Article" }
+          arguments:
+              - ~
+              - JyAccede\Bundle\ActuBundle\Entity\Actu
+              - ~
+          calls:
+              - [ setTranslationDomain, [message]]
+#    jy_accede_actu.example:
+#        class: %jy_accede_actu.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

@@ -1,0 +1,24 @@
+JyAccede\Bundle\APIBundle\Entity\StopPoint:
+    type: entity
+    table: null
+    repositoryClass: JyAccede\Bundle\APIBundle\Entity\StopPointRepository
+    fields:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+        idCanalTp:
+            type: string
+            length: 255
+            column: id_canal_tp
+        name:
+            type: string
+            length: 255
+        isPmr:
+            type: boolean
+            column: is_pmr
+        isValid:
+            type: boolean
+            column: is_valid
+    lifecycleCallbacks: {  }

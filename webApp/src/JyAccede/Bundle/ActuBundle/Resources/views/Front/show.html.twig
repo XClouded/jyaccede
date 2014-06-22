@@ -1,0 +1,15 @@
+{% extends "::base.html.twig" %}
+
+{% block market %}
+    <!-- Example row of columns -->
+    <div class="row">
+        <div class="col-lg-12">
+            <h2>{{ actu.name }}</h2>
+            {{ actu.description|raw }}
+        </div>
+    </div>
+{% endblock %}
+
+{% block actus %}
+
+{% endblock %}

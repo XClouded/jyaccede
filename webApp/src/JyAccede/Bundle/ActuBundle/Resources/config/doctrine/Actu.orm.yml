@@ -1,0 +1,19 @@
+JyAccede\Bundle\ActuBundle\Entity\Actu:
+    type: entity
+    table: article
+    repositoryClass: JyAccede\Bundle\ActuBundle\Entity\ActuRepository
+    fields:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+        name:
+            type: string
+            length: 255
+        description:
+            type: text
+        active:
+            type: boolean
+            nullable: true
+    lifecycleCallbacks: {  }

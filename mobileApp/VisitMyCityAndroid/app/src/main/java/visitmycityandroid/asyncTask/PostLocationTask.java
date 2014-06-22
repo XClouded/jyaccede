@@ -43,7 +43,7 @@ public class PostLocationTask extends AsyncTask<LocationModel, Integer, Void> {
 
             //Post WebService content
             HttpClient client = new DefaultHttpClient();
-            HttpPost httpPost = new HttpPost(Variables.PostLocationUrl);
+            HttpPost httpPost = new HttpPost(Variables.postLocationUrl);
             httpPost.setHeader("Accept", "application/json");
             httpPost.setHeader("Content-type", "application/json");
 

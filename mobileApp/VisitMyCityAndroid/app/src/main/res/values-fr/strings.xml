@@ -2,12 +2,14 @@
 <resources>
 
     <!-- App & Menu -->
-    <string name="app_name">Visit My City</string>
+    <string name="app_name">J\'y accède</string>
     <string name="addLocation">Ajouter un lieu</string>
     <string name="searchLocation">Rechercher un lieu</string>
     <string name="closerLocation">Lieu à proximiter</string>
     <string name="settings">Paramètres</string>
     <string name="cancel">Annuler</string>
+    <string name="places">Lieux</string>
+    <string name="stop">Arrêts</string>
 
     <!-- Error message -->
     <string name="error">Erreur</string>

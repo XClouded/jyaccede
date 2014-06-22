@@ -1,0 +1,38 @@
+{% extends "::base.html.twig" %}
+
+{% block content %}
+
+    <h2>Lignes Accessibles aux personnes à mobilité réduite</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            {% for result in lines %}
+                <tr>
+                    <td>
+                        {{ result.name }}
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td>Pas de résultat</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <h2>Arrêts Accessibles aux personnes à mobilité réduite</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            {% for result in stops %}
+                <tr>
+                    <td>
+                        {{ result.name }}
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td>Pas de résultat</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}

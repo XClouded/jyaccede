@@ -1,0 +1,3 @@
+jy_accede_location_homepage:
+    pattern:  /hello/{name}
+    defaults: { _controller: JyAccedeLocationBundle:Default:index }

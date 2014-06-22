@@ -1,0 +1,3 @@
+jacc_list:
+    pattern:  /arrets_lignes
+    defaults: { _controller: JyAccedeAPIBundle:Front:list }

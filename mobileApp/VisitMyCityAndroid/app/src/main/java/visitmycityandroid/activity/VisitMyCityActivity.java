@@ -12,7 +12,7 @@ public abstract class VisitMyCityActivity extends Activity{
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
-        return true;
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
@@ -22,14 +22,19 @@ public abstract class VisitMyCityActivity extends Activity{
             case R.id.action_addLocation :
                 Intent intentAdd = new Intent(this, AddLocationActivity.class);
                 startActivity(intentAdd);
+                break;
             case R.id.action_searchLocation :
                 Intent intentSearch = new Intent(this, SearchLocationActivity.class);
                 startActivity(intentSearch);
-            case R.id.action_closerLocation :
+                break;
+             case R.id.action_closerLocation :
                 Intent intentCloser = new Intent(this, CloserLocationActivity.class);
                 startActivity(intentCloser);
+                 break;
             default:
                 return super.onOptionsItemSelected(item);
         }
+
+        return super.onOptionsItemSelected(item);
     }
 }

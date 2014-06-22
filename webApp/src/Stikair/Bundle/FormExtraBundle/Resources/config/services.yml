@@ -1,0 +1,23 @@
+parameters:
+    stikair_form_extra.ckeditor.config: ~
+
+services:
+    stikair.form.type.image_file:
+        class: Stikair\Bundle\FormExtraBundle\Form\Type\ImageFileType
+        tags:
+            - { name: form.type, alias: image_file }
+    stikair.form.type.datetimepicker:
+        class: Stikair\Bundle\FormExtraBundle\Form\Type\DatetimePickerType
+        arguments: ["@doctrine.orm.entity_manager"]
+        tags:
+            - { name: form.type, alias: datetimepicker }
+    stikair.form.type.ckeditor:
+        class: Stikair\Bundle\FormExtraBundle\Form\Type\CkEditorType
+        arguments: ["@doctrine.orm.entity_manager"]
+        calls:
+            -  [setConfig,[%stikair_form_extra.ckeditor.config%]]
+        tags:
+            - { name: form.type, alias: ckeditor }
+#    stikair_form_extra.example:
+#        class: %stikair_form_extra.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

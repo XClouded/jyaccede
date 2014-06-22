@@ -13,18 +13,25 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
 import visitmycityandroid.app.R;
+import visitmycityandroid.asyncTask.JaccedeCategorieTask;
+import visitmycityandroid.asyncTask.JaccedeTask;
 import visitmycityandroid.configuration.Variables;
+import visitmycityandroid.interfaces.CategorieListener;
+import visitmycityandroid.model.CategorieModel;
+import visitmycityandroid.model.LocationModel;
 
-public class CloserLocationActivity extends VisitMyCityActivity  implements View.OnClickListener {
+public class CloserLocationActivity extends VisitMyCityActivity  implements View.OnClickListener, CategorieListener {
     private double mLatitude;
     private double mLongitude;
 
@@ -68,20 +75,12 @@ public class CloserLocationActivity extends VisitMyCityActivity  implements View
             Log.v("MainActivity-GetLocation", e.getMessage());
         }
 
-        //Spinner init and settings
-        Spinner spinner = (Spinner) findViewById(R.id.categorySpinner);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.category_location, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
+        JaccedeCategorieTask jc = new JaccedeCategorieTask(this, Variables.SearchLocationUrl);
+        jc.execute();
 
         //event handler
         Button sendMessageButton = (Button)findViewById(R.id.closerButton);
         sendMessageButton.setOnClickListener(this);
-    }
-
-    @Override
-    public void onBackPressed(){
-        finish();
     }
 
     /** Update GUI with a location
@@ -132,6 +131,7 @@ public class CloserLocationActivity extends VisitMyCityActivity  implements View
         EditText inputLocation = (EditText) findViewById(R.id.positionLabel);
         EditText inputLatitude = (EditText) findViewById(R.id.latitudeLabel);
         EditText inputLongitude = (EditText) findViewById(R.id.longitudeLabel);
+        CheckBox checkUpDisabled = (CheckBox) findViewById(R.id.upDisabled);
 
         Intent intentMaps = new Intent(this, MapsActivity.class);
         intentMaps.putExtra("address", inputAddress.getText().toString());
@@ -141,6 +141,19 @@ public class CloserLocationActivity extends VisitMyCityActivity  implements View
         intentMaps.putExtra("currentLatitude", String.valueOf(mLatitude));
         intentMaps.putExtra("currentLongitude", String.valueOf(mLongitude));
         intentMaps.putExtra("fromActivity", Variables.ActivityCloser);
+        intentMaps.putExtra("upDisabled", checkUpDisabled.isChecked());
         startActivity(intentMaps);
+    }
+
+    @Override
+    public void OnCompleted(ArrayList<CategorieModel> categories) {
+        //Spinner init and settings
+        Spinner spinner = (Spinner) findViewById(R.id.categorySpinner);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item);
+        for(CategorieModel categorie : categories){
+            adapter.add(categorie.getName());
+        }
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
     }
 }

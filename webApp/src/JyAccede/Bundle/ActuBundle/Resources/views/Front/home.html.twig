@@ -1,0 +1,14 @@
+{% extends "::base.html.twig" %}
+
+{% block actus %}
+    <!-- Example row of columns -->
+    <div class="row">
+        {% for actu in actus %}
+        <div class="col-lg-4">
+            <h2>{{ actu.name }}</h2>
+            {{ actu.description|striptags[0:200]|raw }}...
+            <p><a href="{{ path("jyacc_show_actu",{"id":actu.id}) }}" class="btn btn-primary" role="button">La suite &raquo;</a></p>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}

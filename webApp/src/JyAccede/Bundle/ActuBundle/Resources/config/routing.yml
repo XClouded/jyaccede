@@ -1,0 +1,7 @@
+jyacc_homepage:
+    pattern:  /
+    defaults: { _controller: JyAccedeActuBundle:Front:home }
+
+jyacc_show_actu:
+    pattern: /actu/{id}
+    defaults: { _controller: JyAccedeActuBundle:Front:show }
