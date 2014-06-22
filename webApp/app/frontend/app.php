@@ -8,7 +8,7 @@ use DAL\DataBase;
 
 // Config
 $debug = true;
-$urlRoot = '/jyaccede'; //Define root of THIS website
+$urlRoot = '/_jyaccede'; //Define root of THIS website
 $app = new \App(new \View\TemplateEngine(__DIR__ . '/templates/'), $urlRoot, $debug);
 $database = new DataBase(Conf::_DB_DSN_, Conf::_DB_USER_, Conf::_DB_PWD_, $options);
 

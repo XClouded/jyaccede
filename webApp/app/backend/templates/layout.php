@@ -26,11 +26,11 @@
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li ><a href="/jyaccede/admin">Admin</a></li>
-                        <li ><a href="/jyaccede/admin/articles">Articles</a></li>
-                        <li ><a href="/jyaccede/admin/locations">Locations</a></li>
-                        <li ><a href="/jyaccede/admin/jaccedeapi">Jaccede API</a></li>
-                        <li ><a href="/jyaccede">Home</a></li>
+                        <li ><a href="/_jyaccede/admin">Admin</a></li>
+                        <li ><a href="/_jyaccede/admin/articles">Articles</a></li>
+                        <li ><a href="/_jyaccede/admin/locations">Locations</a></li>
+                        <li ><a href="/_jyaccede/admin/jaccedeapi">Jaccede API</a></li>
+                        <li ><a href="/_jyaccede">Home</a></li>
                     </ul>
                 </div><!--/.nav-collapse -->
             </div>

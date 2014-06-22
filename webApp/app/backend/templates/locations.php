@@ -2,7 +2,7 @@
     <ul>
         <?php foreach($locations as $id => $location){ ?>
             <li>
-                <form action="/jyaccede/admin/locations/<?= $location->getId(); ?>" method="POST">
+                <form action="/_jyaccede/admin/locations/<?= $location->getId(); ?>" method="POST">
                     <input type="hidden" name="_method" value="DELETE" />
                     <a href="/jyaccede/admin/locations/<?= $location->getId() ?>"><?= $location->getName() ?></a>
                     <input type="submit" value="Delete">
@@ -11,7 +11,7 @@
         <?php } ?>
     </ul>
     
-    <form action="/jyaccede/admin/locations" method="post">
+    <form action="/_jyaccede/admin/locations" method="post">
         <legend>Add location</legend>
         <table>
             <tr><td><label for="name">Name :</label></td><td><input id="name" name="name" type="text" class="form-control" /></td></tr>
