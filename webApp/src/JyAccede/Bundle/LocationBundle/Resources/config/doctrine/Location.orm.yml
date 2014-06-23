@@ -1,0 +1,31 @@
+JyAccede\Bundle\LocationBundle\Entity\Location:
+    type: entity
+    table: location
+    repositoryClass: JyAccede\Bundle\LocationBundle\Entity\LocationRepository
+    manyToOne:
+        category:
+            targetEntity: Category
+            inversedBy: locations
+            joinColumn:
+                name: category_id
+                referencedColumnName: id
+    fields:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+        name:
+            type: string
+            length: 255
+        latitude:
+            type: float
+        longitude:
+            type: float
+        mark:
+            type: float
+        disabledAccess:
+            type: boolean
+        category_id:
+            type: integer
+    lifecycleCallbacks: {  }

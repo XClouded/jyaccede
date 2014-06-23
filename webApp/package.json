@@ -1,0 +1,26 @@
+{
+  "name": "Sf2Starter",
+  "version": "2.3.3",
+  "description": "Sf2StarterKit",
+  "main": "index.js",
+  "scripts": {
+    "test": "phpunit -c app/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/moustikAir/Sf2Starter.git"
+  },
+  "keywords": [
+    "StarterKit",
+    "Sf2"
+  ],
+  "author": "David Rimbault",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/moustikAir/Sf2Starter/issues"
+  },
+  "homepage": "https://github.com/moustikAir/Sf2Starter",
+  "devDependencies": {
+    "grunt": "^0.4.4"
+  }
+}

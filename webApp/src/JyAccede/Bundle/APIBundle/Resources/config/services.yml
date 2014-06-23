@@ -1,0 +1,24 @@
+parameters:
+#    jy_accede_api.example.class: JyAccede\Bundle\APIBundle\Example
+
+services:
+  sonata.admin.stoppoints:
+            class: JyAccede\Bundle\APIBundle\Admin\StopPointsAdmin
+            tags:
+                - { name: sonata.admin, manager_type: orm, group: "Emplacements", label: "Arrêts Canal TP" }
+            arguments:
+                - ~
+                - JyAccede\Bundle\APIBundle\Entity\StopPoint
+                - JyAccedeAPIBundle:CRUD
+            calls:
+                - [ setTranslationDomain, [APIBundle]]
+  sonata.admin.lines:
+              class: JyAccede\Bundle\APIBundle\Admin\LinesAdmin
+              tags:
+                  - { name: sonata.admin, manager_type: orm, group: "Emplacements", label: "Lignes Canal TP" }
+              arguments:
+                  - ~
+                  - JyAccede\Bundle\APIBundle\Entity\Line
+                  - JyAccedeAPIBundle:CRUD
+              calls:
+                  - [ setTranslationDomain, [APIBundle]]

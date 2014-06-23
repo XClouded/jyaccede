@@ -1,0 +1,61 @@
+{% block datetimepicker_widget %}
+    <div class="well span5">
+        <div id="datepicker_{{ id }}" class="input-append date">
+            <input data-format="dd/MM/yyyy hh:mm:ss" type="text" value="{{ value }}" name="{{ full_name }}" id="{{ id }}"></input>
+            <span class="add-on">
+                <i data-time-icon="icon-time" data-date-icon="icon-calendar" >
+                </i>
+            </span>
+        </div>
+    </div>
+    <link rel="stylesheet" href="{{ asset('bundles/stikairformextra/css/bootstrap-datetimepicker.min.css')}}" />
+    <script type="text/javascript" src="{{ asset('bundles/stikairformextra/js/bootstrap-datetimepicker.min.js')}}"></script>
+    <script type="text/javascript">
+        $(function() {
+            $('#datepicker_{{ id }}').datetimepicker({
+                language: 'fr-FR',
+                {{ type }}
+            });
+        });
+    </script>
+{% endblock %}
+
+{% block image_file_widget %}
+    {% spaceless %}
+        {# just let the choice widget render the select tag #}
+        {% if image_path is not null %}
+            <img src="{{ image_path }}" alt="" />
+        {% endif %}
+        
+        {{ form_widget(form) }}
+    {% endspaceless %}
+{% endblock %}
+
+{% block ckeditor_widget %}
+    {% spaceless %}
+        {# just let the choice widget render the select tag #}
+        {{ block('textarea_widget') }}
+    {% endspaceless %}
+    <script type="text/javascript" src="{{ asset('bundles/stikairformextra/js/ckeditor/ckeditor.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/stikairformextra/js/ckeditor/adapters/jquery.js')}}"></script>
+    <script type="text/javascript">
+
+        $("document").ready(function() {
+            var $classes = $("#{{ id }}").attr("class");
+            var $styles = $("#{{ id }}").attr("style");
+            $("#{{ id }}").ckeditor(
+                function() {
+                    var $ckeditor = $("#cke_{{ id }}");
+                    $ckeditor.addClass($classes);
+                    $ckeditor.attr("style", $styles);
+                },
+                {
+                    {% if custom_config_path is not null %}
+                        customConfig: '{{ custom_config_path }}'
+                    {% endif %}
+                }
+            );
+
+            });
+    </script>
+{% endblock %}

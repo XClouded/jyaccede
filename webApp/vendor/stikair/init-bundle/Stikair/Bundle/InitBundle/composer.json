@@ -1,0 +1,23 @@
+{
+    "name": "stikair/init-bundle",
+    "description": "Init bundle for stikair/sf2starter",
+    "license": "MIT",
+    "autoload": {
+        "psr-0": { "Stikair\\Bundle\\InitBundle": "" }
+    },
+    "target-dir": "Stikair/Bundle/InitBundle",
+    "authors": [
+        {
+            "name": "David Rimbault",
+            "email": "rimbault.david@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": ">=5.3.3",
+        "sonata-project/doctrine-orm-admin-bundle": "2.2.*",
+        "sonata-project/admin-bundle": "2.2.*",
+        "sonata-project/easy-extends-bundle": "2.1.*",
+        "sonata-project/user-bundle": "2.2.*"
+    }
+}

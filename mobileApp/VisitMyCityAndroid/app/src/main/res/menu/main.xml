@@ -1,26 +1,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="visitmycityandroid.activity.MainActivity" >
+    tools:context="visitmycityandroid.activity.MainActivity">
 
     <item android:id="@+id/action_searchLocation"
         android:title="@string/searchLocation"
-        android:orderInCategory="100"
-        app:showAsAction="never" />
+        android:icon="@drawable/searchplace" />
 
     <item android:id="@+id/action_closerLocation"
         android:title="@string/closerLocation"
-        android:orderInCategory="100"
-        app:showAsAction="never" />
+        android:icon="@drawable/placetogo" />
 
     <item android:id="@+id/action_addLocation"
-        android:title="@string/addLocation"
-        android:orderInCategory="100"
-        app:showAsAction="never" />
-
-    <item android:id="@+id/action_updateLine"
-        android:title="Update line"
-        android:orderInCategory="100"
-        app:showAsAction="never" />
+        android:title="@string/addLocation" />
 
 </menu>

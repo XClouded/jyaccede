@@ -1,0 +1,149 @@
+{%  extends "::base.html.twig" %}
+
+{% block content %}
+    <div class="rom">
+    <h2>Rechercher</h2>
+    <form action="" id="searchForm" method="POST">
+        <div class="input-group input-group-lg">
+            <input type="text" class="form-control" placeholder="Saisissez une ville" id="city" name="city" value="{%  if ville %}{{ ville }}{% endif %}">
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="submit">
+                    <span class="glyphicon glyphicon-search"></span>
+                </button>
+            </span>
+        </div>
+    </form>
+    </div>
+    <div class="row">
+        <br/>
+        <div id="map" class="col-lg-12" style="height:600px">
+
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block js %}
+    <script type="text/javascript"
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_xvTW9ca-IuuPy-2a4TglYtslpNpFs-c">
+    </script>
+
+    <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/hmac-sha1.js" type="text/javascript"></script>
+    <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/components/enc-base64-min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript">
+
+        // Create the XHR object.
+        function createCORSRequest(method, url) {
+            var xhr = new XMLHttpRequest();
+            if ("withCredentials" in xhr) {
+                // XHR for Chrome/Firefox/Opera/Safari.
+                xhr.open(method, url, true);
+            } else if (typeof XDomainRequest != "undefined") {
+                // XDomainRequest for IE.
+                xhr = new XDomainRequest();
+                xhr.open(method, url);
+            } else {
+                // CORS not supported.
+                xhr = null;
+            }
+            return xhr;
+        }
+
+        var userLat,userLng;
+        var userIsLocated=false;
+        var map,markers;
+        var infowindow = new google.maps.InfoWindow({
+            content: "Loading ..."
+        });
+
+        var villeSearch="{{ ville }}";
+
+        // Check for geolocation support
+        if (navigator.geolocation) {
+            // Use method getCurrentPosition to get coordinates
+            navigator.geolocation.getCurrentPosition(function (position) {
+                // Access them accordingly
+                userIsLocated=true;
+                userLat=position.coords.latitude;
+                userLng=position.coords.longitude;
+            });
+        }
+
+        function geoCode(){
+            geocoder = new google.maps.Geocoder();
+            geocoder.geocode( { 'address': villeSearch}, function(results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                    userLat=results[0].geometry.location.lat();
+                    userLng=results[0].geometry.location.lng();
+                    userIsLocated=false;
+                    if(map){
+                        map.setCenter(results[0].geometry.location);
+                        map.setZoom(15);
+                    }
+                } else {
+                    alert("Geocode was not successful for the following reason: " + status);
+                }
+            });
+        }
+
+        function loadMarkers(){
+
+            var datas = {{ json|raw }};
+            var results=datas.results.items;
+            for(result in results)
+            {
+                var place=results[result];
+                console.debug(place);
+                if(place.latitude && place.longitude){
+                    var myLatlng = new google.maps.LatLng(place.latitude,place.longitude);
+
+					var image = 'images/c'+place.categorie.id+'.png';
+                    var marker = new google.maps.Marker({
+                        position: myLatlng,
+                        map: map,
+                        title:place.name,
+						icon: image
+                    });
+
+                    var contentString=place.name+"<br/>"+place.address+"<br/>";
+                    if(place.telephone)
+                        contentString+=place.telephone+"<br/>";
+                    if(place.website)
+                        contentString+="<a href='"+place.website+"'>"+place.website+"</a>";
+
+                    contentString+="<br/>"+place.main_keyword;
+                    marker.html=contentString;
+
+                    google.maps.event.addListener(marker, 'click', function() {
+                        infowindow.setContent(this.html);
+                        infowindow.open(map,this);
+                    });
+                }
+            }
+        }
+
+        function loadMap(){
+
+            if(!userIsLocated){
+                //User didn't allow location, or it's not available. Paris is the default
+                userLat=48.8534100;
+                userLng=2.3488000;
+            }
+            var mapOptions = {
+                center: new google.maps.LatLng(userLat, userLng),
+                zoom: 8
+            };
+
+            map = new google.maps.Map(document.getElementById("map"),
+                    mapOptions);
+
+            if(villeSearch){
+                geoCode();
+                loadMarkers();
+            }
+        }
+
+        google.maps.event.addDomListener(window, 'load', loadMap);
+    </script>
+{% endblock %}

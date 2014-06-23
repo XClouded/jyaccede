@@ -55,7 +55,8 @@ public class MapsActivity extends VisitMyCityActivity implements JaccedeTaskList
         String fromActivity = intent.getStringExtra("fromActivity");
 
         if(fromActivity != null && fromActivity.equals(Variables.ActivityCloser)){
-            JaccedeTask js = new JaccedeTask(this);
+            String checkString = intent.getStringExtra("upDisabled");
+            JaccedeTask js = new JaccedeTask(this, Variables.SearchLocationUrl, true);
             js.execute(location.split(" ")[0]);
         }
         else if(fromActivity != null && fromActivity.equals(Variables.ActivitySearch)){

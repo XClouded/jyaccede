@@ -1,1 +1,13 @@
-nbproject/
+/web/bundles/
+/app/bootstrap.php.cache
+/app/cache/*
+/app/logs/*
+!app/cache/.gitkeep
+!app/logs/.gitkeep
+/build/
+/bin/
+/nbproject
+/node_modules/
+/composer.lock
+.idea/
+dploy.yaml

@@ -1,4 +1,4 @@
-MooveIntoMyCity
+J'yaccede
 ===============
 
-MooveIntoMyCity is a mobile application to Hack4France project.
+J'yaccede is a mobile application and a website to Hack4France contest.

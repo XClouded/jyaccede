@@ -1,0 +1,18 @@
+JyAccede\Bundle\LocationBundle\Entity\Category:
+    type: entity
+    table: categorie
+    repositoryClass: JyAccede\Bundle\LocationBundle\Entity\CategoryRepository
+    oneToMany:
+        locations:
+          targetEntity: Location
+          mappedBy: category
+    fields:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+        name:
+            type: string
+            length: 255
+    lifecycleCallbacks: {  }

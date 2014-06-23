@@ -1,0 +1,27 @@
+parameters:
+#    jy_accede_location.example.class: JyAccede\Bundle\LocationBundle\Example
+
+services:
+  sonata.admin.location:
+          class: JyAccede\Bundle\LocationBundle\Admin\LocationAdmin
+          tags:
+              - { name: sonata.admin, manager_type: orm, group: "Emplacements", label: "Lieux" }
+          arguments:
+              - ~
+              - JyAccede\Bundle\LocationBundle\Entity\Location
+              - ~
+          calls:
+              - [ setTranslationDomain, [LocationBundle]]
+  sonata.admin.category:
+            class: JyAccede\Bundle\LocationBundle\Admin\CategoryAdmin
+            tags:
+                - { name: sonata.admin, manager_type: orm, group: "Emplacements", label: "Catégories" }
+            arguments:
+                - ~
+                - JyAccede\Bundle\LocationBundle\Entity\Category
+                - ~
+            calls:
+                - [ setTranslationDomain, [LocationBundle]]
+#    jy_accede_location.example:
+#        class: %jy_accede_location.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

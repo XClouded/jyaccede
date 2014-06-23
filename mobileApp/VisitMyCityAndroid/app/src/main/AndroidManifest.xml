@@ -8,8 +8,10 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
+            android:screenOrientation="portrait"
             android:name="visitmycityandroid.activity.MainActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:theme="@style/Theme.AppCompat.Light">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -17,18 +19,22 @@
             </intent-filter>
         </activity>
         <activity
+            android:screenOrientation="portrait"
             android:name="visitmycityandroid.activity.AddLocationActivity"
             android:label="@string/title_activity_add_location" >
         </activity>
         <activity
+            android:screenOrientation="portrait"
             android:name="visitmycityandroid.activity.CloserLocationActivity"
-            android:label="@string/title_activity_search_location" >
+            android:label="@string/closerLocation" >
         </activity>
         <activity
+            android:screenOrientation="portrait"
             android:name="visitmycityandroid.activity.SearchLocationActivity"
             android:label="@string/title_activity_search_location" >
         </activity>
         <activity
+            android:screenOrientation="portrait"
             android:name="visitmycityandroid.activity.MapsActivity"
             android:label="@string/title_activity_maps" >
         </activity>
@@ -43,10 +49,6 @@
             android:name="com.crashlytics.ApiKey"
             android:value="6f269a93b65d5d3d899a0dc93440e0526db40937" />
 
-        <activity
-            android:name="visitmycityandroid.activity.UpdateLineActivity"
-            android:label="@string/title_activity_update_line" >
-        </activity>
     </application>
 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />

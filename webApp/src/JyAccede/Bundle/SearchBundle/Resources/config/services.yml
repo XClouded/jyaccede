@@ -1,0 +1,7 @@
+parameters:
+#    jy_accede_search.example.class: JyAccede\Bundle\SearchBundle\Example
+
+services:
+#    jy_accede_search.example:
+#        class: %jy_accede_search.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
