@@ -85,6 +85,7 @@ public class MapsActivity extends VisitMyCityActivity implements JaccedeTaskList
         switch (id){
             case R.id.action_go :
                 if(mToGo == null){
+                    Toast.makeText(getApplicationContext(), getString(R.string.noLocationError), Toast.LENGTH_LONG);
                     return true;
                 }
                 Geocoder geocoder = new Geocoder(this, Locale.getDefault());
