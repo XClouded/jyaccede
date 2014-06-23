@@ -98,10 +98,12 @@
                 if(place.latitude && place.longitude){
                     var myLatlng = new google.maps.LatLng(place.latitude,place.longitude);
 
+					var image = 'images/c'+place.categorie.id+'.png';
                     var marker = new google.maps.Marker({
                         position: myLatlng,
                         map: map,
-                        title:place.name
+                        title:place.name,
+						icon: image
                     });
 
                     var contentString=place.name+"<br/>"+place.address+"<br/>";
