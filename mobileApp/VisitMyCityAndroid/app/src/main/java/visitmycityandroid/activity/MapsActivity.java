@@ -76,7 +76,7 @@ public class MapsActivity extends VisitMyCityActivity implements JaccedeTaskList
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.top_maps_bar, menu);
+        getMenuInflater().inflate(R.menu.maps, menu);
         return true;
     }
 
