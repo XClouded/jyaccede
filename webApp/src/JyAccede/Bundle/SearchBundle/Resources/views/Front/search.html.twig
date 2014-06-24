@@ -98,12 +98,17 @@
                 if(place.latitude && place.longitude){
                     var myLatlng = new google.maps.LatLng(place.latitude,place.longitude);
 
-					var image = 'images/c'+place.categorie.id+'.png';
+                    var iconPlace = '/web/images/c'+place.category.id+'.png';
                     var marker = new google.maps.Marker({
                         position: myLatlng,
                         map: map,
                         title:place.name,
-						icon: image
+                        icon: iconPlace
+                    });
+                    
+                    google.maps.event.addListener(marker, 'click', function() {
+                        map.setZoom(16);
+                        map.setCenter(marker.getPosition());
                     });
 
                     var contentString=place.name+"<br/>"+place.address+"<br/>";

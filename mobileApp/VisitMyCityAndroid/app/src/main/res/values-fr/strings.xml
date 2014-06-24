@@ -18,7 +18,7 @@
     <string name="unknownLocationError">Lieu inconnu</string>
     <string name="noConnectionError">Une connection internet est requise !</string>
     <string name="noCityError">La ville n\'a pas été trouvée !</string>
-    <string name="noLocationError">Aucun lieu n'a été sélectionné !</string>
+    <string name="noLocationError">Aucun lieu n\'a été sélectionné !</string>
 
     <!-- Add location activity -->
     <string name="title_activity_add_location">Ajouter un lieu</string>

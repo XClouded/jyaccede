@@ -72,7 +72,6 @@ public class CloserLocationActivity extends VisitMyCityActivity  implements View
             lm.requestLocationUpdates(provider, 2000, 100, mLocationListener);
         }
         catch (Exception e){
-            Log.v("MainActivity-GetLocation", e.getMessage());
         }
 
         JaccedeCategorieTask jc = new JaccedeCategorieTask(this, Variables.SearchLocationUrl);

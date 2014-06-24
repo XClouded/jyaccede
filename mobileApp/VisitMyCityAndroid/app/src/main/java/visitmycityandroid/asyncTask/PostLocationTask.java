@@ -51,10 +51,8 @@ public class PostLocationTask extends AsyncTask<LocationModel, Integer, Void> {
             HttpResponse response = client.execute(httpPost);
         }
         catch (ProtocolException e) {
-            Log.v("PostMessageTask", e.getMessage());
         }
         catch (IOException e) {
-            Log.v("PostMessageTask", e.getMessage());
         }
 
         return null;

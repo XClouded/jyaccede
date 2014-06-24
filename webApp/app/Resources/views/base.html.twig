@@ -9,13 +9,13 @@
     <meta name="author" content="">
     <link rel="shortcut icon" href="../../assets/ico/favicon.ico">
 
-    <title>J'accède | Trouvez les endroits amménagés en quelques clics</title>
+    <title>J'y accède | Trouvez les endroits amménagés en quelques clics</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/web/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="/bootstrap/css/justified-nav.css" rel="stylesheet">
+    <link href="/web/bootstrap/css/justified-nav.css" rel="stylesheet">
 
     <!-- Just for debugging purposes. Don't actually copy this line! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -47,7 +47,17 @@
     <!-- Jumbotron -->
     <div class="jumbotron">
         <h1>Trouvez des lieux accessibles en quelques clics.</h1>
-        <p><a class="btn btn-lg btn-success" href="{{ path("jacc_search") }}" role="button">C'est par ici !</a></p>
+        <form action="{{ path("jacc_search") }}" id="searchForm" method="POST">
+            <div class="input-group input-group-lg">
+                <input type="text" class="form-control" placeholder="Saisissez une ville" id="city" name="city" >
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="submit">
+                        <span class="glyphicon glyphicon-search"></span>
+                    </button>
+                </span>
+            </div>
+        </form>
+        <!--<p><a class="btn btn-lg btn-success" href="{{ path("jacc_search") }}" role="button">C'est par ici !</a></p>-->
         <p class="lead">Vous pouvez obtenir l'application à l'adresse suivante : <a href="https://github.com/lelexxx/jyaccede" target="_blank">J'y accede</a></p>
     </div>
     {% endblock %}

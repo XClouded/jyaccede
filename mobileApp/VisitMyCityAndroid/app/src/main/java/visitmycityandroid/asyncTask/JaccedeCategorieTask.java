@@ -38,7 +38,7 @@ public class JaccedeCategorieTask extends AsyncTask<Void, Void, Void> {
         try {
             JSONObject jsonObj = new JSONObject(result);
             JSONObject results = jsonObj.getJSONObject("results");
-            JSONArray items = results.getJSONArray("items");
+            JSONArray items = results.getJSONArray("results");
             for (int i = 0; i < items.length(); i++) {
                 JSONObject row = items.getJSONObject(i);
                 try {
