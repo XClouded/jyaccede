@@ -1,19 +1,40 @@
 {%  extends "::base.html.twig" %}
 
 {% block content %}
+    <style media="screen" type="text/css">
+        .input-group-btn { vertical-align: top; }
+        select.form-control { margin-top: 10px; }
+    </style>
+
     <div class="rom">
-    <h2>Rechercher</h2>
-    <form action="" id="searchForm" method="POST">
-        <div class="input-group input-group-lg">
-            <input type="text" class="form-control" placeholder="Saisissez une ville" id="city" name="city" value="{%  if ville %}{{ ville }}{% endif %}">
-            <span class="input-group-btn">
-                <button class="btn btn-default" type="submit">
-                    <span class="glyphicon glyphicon-search"></span>
-                </button>
-            </span>
-        </div>
-    </form>
+        <h2>Rechercher</h2>
+        <form action="" id="searchForm" method="POST">
+            <div class="input-group input-group-lg">
+                <input type="text" class="form-control" placeholder="Saisissez une ville" id="city" name="city" value="{%  if ville %}{{ ville }}{% endif %}">
+                <select class="form-control" name="what" id="categories">
+                    <option value="">--Quoi ?--</option>
+                </select>
+                <div class="radio-inline">
+                    <label>
+                      <input type="radio" name="how" value="car" checked>
+                      Voiture / Piéton
+                    </label>
+                </div>
+                <div class="radio-inline">
+                    <label>
+                      <input type="radio" name="how" value="bus">
+                      Transport en commun
+                    </label>
+                </div>
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="submit">
+                        <span class="glyphicon glyphicon-search"></span>
+                    </button>
+                </span>
+            </div>
+        </form>
     </div>
+    
     <div class="row">
         <br/>
         <div id="map" class="col-lg-12" style="height:600px">
@@ -140,15 +161,35 @@
                 zoom: 8
             };
 
-            map = new google.maps.Map(document.getElementById("map"),
-                    mapOptions);
+            map = new google.maps.Map(document.getElementById("map"), mapOptions);
+            
+            var myLatlng = new google.maps.LatLng(userLat, userLng);
+            var marker = new google.maps.Marker({
+                position: myLatlng,
+                map: map,
+                title:'Je suis ici'
+            });
 
             if(villeSearch){
                 geoCode();
                 loadMarkers();
             }
         }
+        
+        function loadCategories(){
+            var datas = {{ categories|raw }};
+            
+            var results=datas.results.results;
+            for(result in results)
+            {
+                console.debug(results);
+                var category=results[result];
+                var select = document.getElementById("categories");
+                select.options[select.options.length] = new Option(category.name, category.name);
+            }
+        }
 
         google.maps.event.addDomListener(window, 'load', loadMap);
+        loadCategories();
     </script>
 {% endblock %}
