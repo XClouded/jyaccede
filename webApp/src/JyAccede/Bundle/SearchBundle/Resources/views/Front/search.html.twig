@@ -142,8 +142,22 @@
                     marker.html=contentString;
 
                     google.maps.event.addListener(marker, 'click', function() {
-                        infowindow.setContent(this.html);
-                        infowindow.open(map,this);
+                        //infowindow.setContent(this.html);
+                        //infowindow.open(map,this);
+                        
+                        var parcours = [
+                            new google.maps.LatLng(userLat, userLng),
+                            myLatlng
+                        ];
+
+                        var destination = new google.maps.Polyline({
+                            path: parcours,//chemin du tracé
+                            strokeColor: "#FF0000",//couleur du tracé
+                            strokeOpacity: 1.0,//opacité du tracé
+                            strokeWeight: 2//grosseur du tracé
+                        });
+                        
+                        destination.setMap(carte);
                     });
                 }
             }
