@@ -126,11 +126,6 @@
                         title:place.name,
                         icon: iconPlace
                     });
-                    
-                    google.maps.event.addListener(marker, 'click', function() {
-                        map.setZoom(16);
-                        map.setCenter(marker.getPosition());
-                    });
 
                     var contentString=place.name+"<br/>"+place.address+"<br/>";
                     if(place.telephone)
@@ -144,6 +139,18 @@
                     google.maps.event.addListener(marker, 'click', function() {
                         infowindow.setContent(this.html);
                         infowindow.open(map,this);
+                        
+                        var request = {
+                            origin      : new google.maps.LatLng(userLat, userLng),
+                            destination : marker.position,
+                            travelMode  : google.maps.DirectionsTravelMode.DRIVING // Type de transport
+                        }
+                        var directionsService = new google.maps.DirectionsService(); // Service de calcul d'itinéraire
+                        directionsService.route(request, function(response, status){ // Envoie de la requête pour calculer le parcours
+                            if(status == google.maps.DirectionsStatus.OK){
+                                map.setDirections(response); // Trace l'itinéraire sur la carte et les différentes étapes du parcours
+                            }
+                        });
                     });
                 }
             }
