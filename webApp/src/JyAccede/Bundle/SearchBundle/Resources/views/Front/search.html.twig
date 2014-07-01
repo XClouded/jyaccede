@@ -176,6 +176,13 @@
                 map: map,
                 title:'Je suis ici'
             });
+            
+            marker.html=marker.title;
+
+            google.maps.event.addListener(marker, 'click', function() {
+                infowindow.setContent(this.html);
+                infowindow.open(map,this);
+            });
 
             if(villeSearch){
                 geoCode();

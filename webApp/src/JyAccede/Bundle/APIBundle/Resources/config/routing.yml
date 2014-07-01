@@ -1,3 +1,7 @@
 jacc_list:
-    pattern:  /arrets_lignes
+    pattern:  /arrets_lignes/{isPmr}
     defaults: { _controller: JyAccedeAPIBundle:Front:list }
+
+update_line_stop:
+    pattern:  /arrets_lignes/{isPmr}
+    defaults: { _controller: JyAccedeAPIBundle:Front:update }
