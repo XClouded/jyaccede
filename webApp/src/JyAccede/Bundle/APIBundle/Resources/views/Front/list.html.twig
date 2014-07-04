@@ -1,8 +1,15 @@
 {% extends "::base.html.twig" %}
 
 {% block content %}
-    <input checked="checked" type="checkbox" /> Accessible aux personnes à mobilité réduite ?
-
+    <style>
+        form, form input {width: 50px; margin: 0;}
+        .displayLeft { float: left; margin-right: 10px; }
+    </style>
+    
+    <form action="" method="POST" style="width: 100%;">
+        <input checked="checked" type="checkbox" name="isPmr" value="1"/> Accessible aux personnes à mobilité réduite ?
+        <input type="submit" value="Filtrer" />
+    </form>
     <h2>Lignes</h2>
     <div class="table-responsive">
         <table class="table table-striped">
@@ -10,16 +17,19 @@
                 <tr>
                     <td>
                         {{ result.name }}
+                        {% if result.isPmr == 1 %}
+                            <span>Est accessible aux PMR</span>
+                        {% endif  %}
                     </td>
                     <td>
-                        Accessible ?
-                        <form action="{{ path("update_line_stop") }}" method="POST">
+                        <span class="displayLeft">Accessible ?</span>
+                        <form action="{{ path("update_line_stop") }}" method="POST" class="displayLeft">
                             <input type="hidden" name="id" value="{{ result.id }}"/>
                             <input type="hidden" name="type" value="line"/>
                             <input type="hidden" name="isPmr" value="1"/>
                             <input type="submit" value="Oui" />
                         </form>
-                        <form action="{{ path("update_line_stop") }}" method="POST">
+                        <form action="{{ path("update_line_stop") }}" method="POST" class="displayLeft">
                             <input type="hidden" name="id" value="{{ result.id }}"/>
                             <input type="hidden" name="type" value="line"/>
                             <input type="hidden" name="isPmr" value="0"/>
@@ -44,14 +54,14 @@
                         {{ result.name }}
                     </td>
                     <td>
-                        Accessible ?
-                        <form action="{{ path("update_line_stop") }}" method="POST">
+                        <span class="displayLeft">Accessible ?</span>
+                        <form action="{{ path("update_line_stop") }}" method="POST" class="displayLeft">
                             <input type="hidden" name="id" value="{{ result.id }}"/>
                             <input type="hidden" name="type" value="stop"/>
                             <input type="hidden" name="isPmr" value="1"/>
                             <input type="submit" value="Oui" />
                         </form>
-                        <form action="{{ path("update_line_stop") }}" method="POST">
+                        <form action="{{ path("update_line_stop") }}" method="POST" class="displayLeft">
                             <input type="hidden" name="id" value="{{ result.id }}"/>
                             <input type="hidden" name="type" value="stop"/>
                             <input type="hidden" name="isPmr" value="0"/>

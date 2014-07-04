@@ -119,6 +119,7 @@
                 if(place.latitude && place.longitude){
                     var myLatlng = new google.maps.LatLng(place.latitude,place.longitude);
 
+                    var journeysUrl = 'journeys/' + userLng + ';' + userLat + '/' + place.longitude + ';' + place.latitude;
                     var iconPlace = '/web/images/c'+place.category.id+'.png';
                     var marker = new google.maps.Marker({
                         position: myLatlng,
@@ -134,6 +135,7 @@
                         contentString+="<a href='"+place.website+"'>"+place.website+"</a>";
 
                     contentString+="<br/>"+place.main_keyword;
+                    contentString+="<br/><br/><a href='" + journeysUrl + "'>Se rendre à ce lieu en transport en commun</a>";
                     marker.html=contentString;
 
                     google.maps.event.addListener(marker, 'click', function() {
