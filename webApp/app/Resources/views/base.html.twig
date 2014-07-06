@@ -47,15 +47,15 @@
             </nav>
         </div>
     </header>
+                    
+    <div class="wrapcont">
+        <div class="cc">
+           D&eacute;couvrez notre toute nouvelle application mobile &agrave; l'occasion du concours #Hack4France
+           <a href="https://github.com/lelexxx/jyaccede/tree/master/mobileApp">Ici</a>.
+        </div>
+    </div>
 
     {% block content %}
-        <div class="wrapcont">
-            <div class="cc">
-               D&eacute;couvrez notre toute nouvelle application &agrave; l'occasion du concours #Hack4France. <a href="/search/">Ici</a>.
-               <!--/EN/Discover our brand-new app built as of the #Hack4France contest.-->
-           </div>
-        </div>
-
         <div id="wrapfeat">
             <div class="cc">
                 <div class="smphone"></div>
@@ -63,7 +63,7 @@
                     <p>Trouvez des lieux accessibles en quelques clics.</p>
                     <form action="{{ path("jacc_search") }}" id="searchForm" method="POST" >
                         <div class="input-group input-group-lg" style="width: 100%; margin-bottom: 10px;">
-                            <input type="text" class="form-control" placeholder="Saisissez une ville" id="city" name="city" 
+                            <input type="text" class="form-control" placeholder="Saisissez une ville*" id="city" name="city" required="required"
                                    style="-webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px;"/>
                         </div>
                         <div class="input-group input-group-lg">
@@ -91,7 +91,22 @@
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster-->
 {% block js %}
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        function loadCategories(){
+            var datas = {{ categories|raw }};
+            
+            var results=datas.results.results;
+            for(result in results)
+            {
+                var category=results[result];
+                var select = document.getElementById("categories");
+                select.options[select.options.length] = new Option(category.name, category.name);
+            }
+        }
 
+        loadCategories();
+    </script>
 {% endblock %}
 </body>
 </html>
