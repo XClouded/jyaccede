@@ -2,12 +2,12 @@
 
 {% block actus %}
     <!-- Example row of columns -->
-    <div class="row">
+    <div>
         {% for actu in actus %}
-        <div class="col-lg-4">
+        <div>
             <h2>{{ actu.name }}</h2>
             {{ actu.description|striptags[0:200]|raw }}...
-            <p><a href="{{ path("jyacc_show_actu",{"id":actu.id}) }}" class="btn btn-primary" role="button">La suite &raquo;</a></p>
+            <p><a href="{{ path("jyacc_show_actu",{"id":actu.id}) }}" role="button">La suite &raquo;</a></p>
         </div>
         {% endfor %}
     </div>

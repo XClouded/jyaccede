@@ -1,0 +1,272 @@
+@font-face{font-family:pclear;src:url('fonts/printclearly.woff');}
+
+html, body{
+    margin:0;
+    padding:0;
+    background:#fff;
+    font-family:verdana;
+}
+	
+section, .cc{overflow:auto;}
+section, .cc{
+    width:75%;
+    margin:0 auto;
+    padding:19px 0;
+    min-width:597px;
+}
+	
+article{text-align:justify;}
+	
+#lcont{
+
+	width:65%;
+	float:left;
+	}
+aside{width:32%;float:right;}
+
+a{
+
+	font:14px arial;
+	text-transform:uppercase;
+	}
+
+h1, h2, h3{margin:0;text-transform:uppercase;}
+
+h2{
+
+	color:#c7db73;
+	font:3em pclear, arial;
+	letter-spacing:-2px;
+	}
+
+	
+.slink{text-transform:none;}
+	
+/*background:#6cb9ce;*/
+
+.smphone{
+    position:relative;
+    top:3%;
+    left:-10px;	
+    width:300px;
+    height:558px;
+    background:url('smphone.png');
+    float: left;
+}
+	
+.l-button{
+
+	height:45px;
+	padding:1em;
+	background:#f1c661;
+	display:block;
+	}
+	
+
+	
+h3{
+	
+	color:whitesmoke;
+	font:2.5em pclear;
+	letter-spacing:-2px;
+	}
+	
+.headBox{
+	
+	top:50%;
+	width:498px;
+	margin:0 auto 0 158px;
+	position:relative;
+	
+	}
+	
+.headBox input{border:3px double #b2c467!important;}
+	
+.headText{
+
+	width:300px;
+	position:absolute;
+		
+		left:460px;
+		top:70%;
+	}
+	
+/*.floatContent{
+	
+	bottom:-50px;
+	padding:1em;
+	position:relative;
+	background:#fff;
+	display:inline;
+	}*/
+
+input, textarea{
+
+	color:#bbb;
+	outline:none;
+	padding:1.5em;
+	overflow:visible;
+	font:15px verdana;
+	background:#fff;
+	}
+	
+input{
+
+	box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	}
+	
+input[type='text'], input[type='password']{
+
+	width:100%;
+	border:1px solid #ccc;
+	}
+	
+textarea{
+    resize:none;
+    line-height:2em;
+    text-align:center;
+}
+	
+/* FRAMECODES.COM MAIN TEMPLATE, CASCADE STYLE SHEET (CSS) */
+blockquote, img, p{display:block;}
+
+.talkcontent{
+    height:245px;
+    background:whitesmoke;
+}
+
+#wrapfeat{
+    background:whitesmoke url('/web/css/draw.svg') no-repeat;
+    background-position:7px 10px;
+
+    border:3px double rgba(0,0,0,0.1);
+    border-width:0 0 3px 0;
+
+    position:relative;
+    height:495px;
+    width:100%;
+
+    overflow:visible;
+    margin-bottom:100px;
+}
+	
+#wrapdwnl{
+    background:#c7db73;
+
+    border:3px double rgba(0,0,0,0.1);
+    border-width:3px 0 3px 0;
+
+    position:relative;
+    min-height:495px;
+    width:100%;
+
+    overflow:visible;
+    margin-top:76px;
+}
+	
+	
+#wraphead{
+    background:whitesmoke url('/web/css/draw.svg') 0 -415px no-repeat;
+    border:3px double rgba(0,0,0,0.1);
+    border-width:3px 0 3px 0;
+    position:relative;
+    height:76px;
+    width:100%;
+}
+	
+.wrapcont{
+    background:whitesmoke;
+    border:1px double #dcdcdc;
+    border-width:3px 0 3px 0;
+    position:relative;
+    overflow:auto;
+}
+	
+#wrapfoot{
+    width:100%;
+    height:300px;
+    position:relative;
+    background:#b9ce6c url('/css/apple.png') no-repeat;
+    background-size:cover;
+    border-top:1px solid rgba(0,0,0,0.2);
+}
+
+	
+.sizefix{padding:0 9px;}
+
+
+
+nav{float:left;margin-top:1.5px;}
+#navuser{float:right;}
+
+li{float:left;list-style:none;text-align:center;}
+li a{display:block;padding:7px 17px 7px 0;margin-right:19px;color:#999!important;text-decoration:none;}
+li a:hover{color:#84a648;text-decoration:underline;}
+
+/*PHOLD' COLORS*/
+::-moz-placeholder{color:#bbb;}/*MOZ FADES TO #ccc*/
+::-webkit-input-placeholder{color:#ccc;}
+:-ms-input-placeholder{color:#ccc;}
+
+/*OLD*/
+#wrapfeat-old{
+    background:#eaeaea url('apple.png');
+    border-top:1px solid rgba(0,0,0,0.2);
+    border-bottom:1px solid rgba(0,0,0,0.2);
+    position:relative;
+    height:595px;
+    width:100%;
+
+    overflow:hidden;
+    margin-bottom:300px;
+}
+	
+/*OP+.3 COLOR: #bfd855*/
+.bubble{
+    float:right;
+    width:385px;
+    height:136px;
+    padding:70px 30px;
+    margin:1em auto 60px;
+    border:3px double #bbb;
+
+    /*ROUNDED CORNERS, LEFT-BTM 0*/
+    -moz-border-radius:120px / 70px;
+    -moz-border-bottom-left-radius:0;
+    border-radius:120px / 70px;
+    border-bottom-left-radius:0;
+}
+		
+/*THE As*/
+a:link, a:visited{color:#f1c661;}
+.sml{font:12px arial;}
+
+/*THE Ps*/
+p{
+    color:#777;
+    font-size:1em;
+    line-height:2em;
+}
+	
+.infop{font-size:11px;color:#9faf5c;margin-top:0;line-height:1em;}
+/*THE Hs*/
+.wrapcont, .littlText{color:#aaa;font-size:14px;}
+
+/*STATS*/
+.statBox{width:295px;text-align:center;border:1px solid #dcdcdc;display:inline-block;margin-bottom:15px;}
+
+#homeDesc{
+    color: black;
+    position: absolute;
+    z-index: 999;
+    width: 650px;
+    margin-left: 300px;
+}
+
+#logo{
+    width: 130px;
+    float: left;
+    z-index: 999;
+    position: absolute;
+}
