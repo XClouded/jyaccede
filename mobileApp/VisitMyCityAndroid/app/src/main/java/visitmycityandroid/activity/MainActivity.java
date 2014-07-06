@@ -22,8 +22,6 @@ import visitmycityandroid.app.R;
 
 public class MainActivity extends ActionBarActivity   {
 
-    private DrawerLayout mDrawerLayout;
-    private ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
 
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
@@ -69,8 +67,8 @@ public class MainActivity extends ActionBarActivity   {
                 getString(R.string.closerLocation),
                 getString(R.string.addLocation)
         };
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mDrawerList = (ListView) findViewById(R.id.left_drawer);
+        DrawerLayout mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ListView mDrawerList = (ListView) findViewById(R.id.left_drawer);
 
         // Set the googleMaps for the list view
         mDrawerList.setAdapter(new ArrayAdapter<String>(this, R.layout.drawer_listeview_item, itemName));

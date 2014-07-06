@@ -9,7 +9,6 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -25,11 +24,9 @@ import java.util.Locale;
 
 import visitmycityandroid.app.R;
 import visitmycityandroid.asyncTask.JaccedeCategorieTask;
-import visitmycityandroid.asyncTask.JaccedeTask;
 import visitmycityandroid.configuration.Variables;
 import visitmycityandroid.interfaces.CategorieListener;
 import visitmycityandroid.model.CategorieModel;
-import visitmycityandroid.model.LocationModel;
 
 public class CloserLocationActivity extends VisitMyCityActivity  implements View.OnClickListener, CategorieListener {
     private double mLatitude;
@@ -107,7 +104,6 @@ public class CloserLocationActivity extends VisitMyCityActivity  implements View
                 }
             }
             catch (IOException e) {
-                Log.v("MainActivity-UpdateLocation", e.getMessage());
             }
         }
 
