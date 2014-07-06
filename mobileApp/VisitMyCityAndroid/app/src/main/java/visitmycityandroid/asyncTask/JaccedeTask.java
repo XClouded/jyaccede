@@ -50,7 +50,7 @@ public class JaccedeTask extends AsyncTask<String, Void, Void> {
 
                     if(mCategorieFilter == null || mUpDisabled && idCategorie == 34) {
                         mLocations.add(new LocationModel(row.getString("name"), row.getString("address"), row.getDouble("latitude"),
-                                row.getDouble("longitude"), row.getString("description"), idCategorie));
+                                row.getDouble("longitude"), row.getString("description"), idCategorie, row.getInt("accessibility_points")));
                     }
                 }
                 catch (Exception e) {
