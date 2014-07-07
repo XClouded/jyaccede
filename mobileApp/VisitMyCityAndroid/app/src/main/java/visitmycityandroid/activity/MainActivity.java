@@ -18,6 +18,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.crashlytics.android.Crashlytics;
 import visitmycityandroid.app.R;
 
 public class MainActivity extends ActionBarActivity   {
@@ -36,6 +37,7 @@ public class MainActivity extends ActionBarActivity   {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Crashlytics.start(this);
         setContentView(R.layout.activity_main);
 
         //Connectivity init and settings

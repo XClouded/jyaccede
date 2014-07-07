@@ -2,22 +2,28 @@
 <pre-dex-items>
 
     <item
-        dex="D:\project\jyaccede\mobileApp\VisitMyCityAndroid\app\build\intermediates\pre-dexed\debug\support-v4-19.1.0-8217f4c6bf054f705866dfbd912b00751e855ddd.jar"
-        jar="C:\Users\ruiza_000\AppData\Local\Android\android-studio\sdk\extras\android\m2repository\com\android\support\support-v4\19.1.0\support-v4-19.1.0.jar"
+        dex="D:\project\jyaccede\mobileApp\VisitMyCityAndroid\app\build\intermediates\pre-dexed\debug\classes-714c018c012814abe3798bf1bed324069507b5d2.jar"
+        jar="D:\project\jyaccede\mobileApp\VisitMyCityAndroid\build\intermediates\exploded-aar\com.google.android.gms\play-services\4.0.30\classes.jar"
         jumboMode="false"
         revision="19.1.0"
-        sha1="85f201b380937e61a9dce6ca90ccf6872abbfb67"/>
+        sha1="cebe8e4a3a469c4623addcca1dc571407ff3a08e"/>
     <item
-        dex="D:\project\jyaccede\mobileApp\VisitMyCityAndroid\app\build\intermediates\pre-dexed\debug\classes-3506cb1823cea3579a20bc8db1d3376dc5917148.jar"
-        jar="D:\project\jyaccede\mobileApp\VisitMyCityAndroid\build\intermediates\exploded-aar\com.google.android.gms\play-services\4.4.52\classes.jar"
+        dex="D:\project\jyaccede\mobileApp\VisitMyCityAndroid\app\build\intermediates\pre-dexed\debug\crashlytics-1.1.11-425142a980c2a7d0da0a6f33c4cbb483fc92b362.jar"
+        jar="C:\Users\ruiza_000\.gradle\caches\modules-2\files-2.1\com.crashlytics.android\crashlytics\1.1.11\b8189e9eef2f07fae743e05d7fe7e69daebe98d1\crashlytics-1.1.11.jar"
         jumboMode="false"
         revision="19.1.0"
-        sha1="3dfdf1db5ce5ea2999a5dcde8c8e650b02660059"/>
+        sha1="b8189e9eef2f07fae743e05d7fe7e69daebe98d1"/>
     <item
-        dex="D:\project\jyaccede\mobileApp\VisitMyCityAndroid\app\build\intermediates\pre-dexed\debug\classes-2dc9cda9f075d6a6ce4526fe9dbeffd90872733d.jar"
-        jar="D:\project\jyaccede\mobileApp\VisitMyCityAndroid\build\intermediates\exploded-aar\com.android.support\appcompat-v7\19.1.0\classes.jar"
+        dex="D:\project\jyaccede\mobileApp\VisitMyCityAndroid\app\build\intermediates\pre-dexed\debug\support-v4-19.0.0-bbb6ff7121907728791db73e99dc1b45af0b32e7.jar"
+        jar="C:\Program Files (x86)\adt-bundle-windows-x86_64-20131030\sdk\extras\android\m2repository\com\android\support\support-v4\19.0.0\support-v4-19.0.0.jar"
         jumboMode="false"
         revision="19.1.0"
-        sha1="3499ceba05ca1f6037c6a2fad73df8f636224a28"/>
+        sha1="afee690af14bd2c32d400cdf78e746fd45c386fa"/>
+    <item
+        dex="D:\project\jyaccede\mobileApp\VisitMyCityAndroid\app\build\intermediates\pre-dexed\debug\classes-96d8b4e3655498d66de0be5345b3dcd917d6991a.jar"
+        jar="D:\project\jyaccede\mobileApp\VisitMyCityAndroid\build\intermediates\exploded-aar\com.android.support\appcompat-v7\19.0.0\classes.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="eb69b5c2e53e59d82f7439f3217f46f9d98f0c89"/>
 
 </pre-dex-items>
