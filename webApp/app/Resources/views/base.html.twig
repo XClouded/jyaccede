@@ -16,6 +16,8 @@
 
     <!-- Custom styles for this template -->
     <link href="/web/bootstrap/css/justified-nav.css" rel="stylesheet">
+    
+    <link href="/web/css/main.css" rel="stylesheet">
 
     <!-- Just for debugging purposes. Don't actually copy this line! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -30,68 +32,58 @@
 <body>
 
 <div class="container">
-    {% block menu %}
-    <div class="masthead">
-        <h3 class="text-muted">J'y Accède</h3>
-        <ul class="nav nav-justified">
-            <li><a href="{{ path("jyacc_homepage") }}">Home</a></li>
-            <li><a href="{{ path("jacc_search") }}">Lieux</a></li>
-            <li><a href="{{ path("jacc_list") }}">Arrêts/Lignes</a></li>
-            <li><a href="https://www.facebook.com/pages/Jyaccede/491581060974118" target="_blank">Facebook</a></li>
-            <li><a href="https://twitter.com/Jyaccede" target="_blank">Twitter</a></li>
-        </ul>
+    <header>
+        <img src="/web/images/logo.png" id="logo"/>
+        <div class="cc">
+            <nav>
+                <ul>
+                    <li><a href="{{ path("jyacc_homepage") }}">Home</a></li>
+                    <li><a href="#actus">Actualités</a></li>
+                    <li><a href="{{ path("jacc_search") }}">Lieux</a></li>
+                    <li><a href="{{ path("jacc_list") }}">Arrêts/Lignes</a></li>
+                    <li><a href="https://www.facebook.com/pages/Jyaccede/491581060974118" target="_blank">Facebook</a></li>
+                    <li><a href="https://twitter.com/Jyaccede" target="_blank">Twitter</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+                    
+    <div class="wrapcont">
+        <div class="cc">
+           D&eacute;couvrez notre toute nouvelle application mobile &agrave; l'occasion du concours #Hack4France
+           <a href="https://github.com/lelexxx/jyaccede/tree/master/mobileApp">Ici</a>.
+        </div>
     </div>
-    {% endblock %}
+
     {% block content %}
-    {% block market %}
-    <!-- Jumbotron -->
-    <div class="jumbotron">
-        <h1>Trouvez des lieux accessibles en quelques clics.</h1>
-        <form action="{{ path("jacc_search") }}" id="searchForm" method="POST">
-            <div class="input-group input-group-lg">
-                <input type="text" class="form-control" placeholder="Saisissez une ville" id="city" name="city" >
-                <span class="input-group-btn">
-                    <button class="btn btn-default" type="submit">
-                        <span class="glyphicon glyphicon-search"></span>
-                    </button>
-                </span>
+        <div id="wrapfeat">
+            <div class="cc">
+                <div class="smphone"></div>
+                <div id="homeDesc">
+                    <p>Trouvez des lieux accessibles en quelques clics.</p>
+                    <form action="{{ path("jacc_search") }}" id="searchForm" method="POST" >
+                        <div class="input-group input-group-lg" style="width: 100%; margin-bottom: 10px;">
+                            <input type="text" class="form-control" placeholder="Saisissez une ville*" id="city" name="city" required="required"
+                                   style="-webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px;"/>
+                        </div>
+                        <div class="input-group input-group-lg">
+                            <input type="text" class="form-control" placeholder="Saisissez votre point de départ" id="from" name="from" />
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="submit">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                </button>
+                            </span>
+                        </div>
+                    </form>
+                </div>
             </div>
-        </form>
-        <!--<p><a class="btn btn-lg btn-success" href="{{ path("jacc_search") }}" role="button">C'est par ici !</a></p>-->
-        <p class="lead">Vous pouvez obtenir l'application à l'adresse suivante : <a href="https://github.com/lelexxx/jyaccede" target="_blank">J'y accede</a></p>
-    </div>
+        </div>
     {% endblock %}
 
-    {% block actus %}
-    <!-- Example row of columns -->
-    <div class="row">
-        <div class="col-lg-4">
-            <h2>Safari bug warning!</h2>
-            <p class="text-danger">As of v7.0.1, Safari exhibits a bug in which resizing your browser horizontally causes rendering errors in the justified nav that are cleared upon refreshing.</p>
-            <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-            <p><a class="btn btn-primary" href="#" role="button">View details &raquo;</a></p>
-        </div>
-        <div class="col-lg-4">
-            <h2>Heading</h2>
-            <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-            <p><a class="btn btn-primary" href="#" role="button">View details &raquo;</a></p>
-        </div>
-        <div class="col-lg-4">
-            <h2>Heading</h2>
-            <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa.</p>
-            <p><a class="btn btn-primary" href="#" role="button">View details &raquo;</a></p>
-        </div>
-    </div>
-    {% endblock %}
-    {% endblock %}
-
-    <!-- Site footer -->
-    {% block footer %}
-    <div class="footer">
-        <p>&copy; Company 2014</p>
-    </div>
-    {% endblock %}
-
+    <section id="actus">
+        {% block actus %}
+        {% endblock %}
+    </section>
 </div> <!-- /container -->
 
 
@@ -99,7 +91,22 @@
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster-->
 {% block js %}
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        function loadCategories(){
+            var datas = {{ categories|raw }};
+            
+            var results=datas.results.results;
+            for(result in results)
+            {
+                var category=results[result];
+                var select = document.getElementById("categories");
+                select.options[select.options.length] = new Option(category.name, category.name);
+            }
+        }
 
+        loadCategories();
+    </script>
 {% endblock %}
 </body>
 </html>

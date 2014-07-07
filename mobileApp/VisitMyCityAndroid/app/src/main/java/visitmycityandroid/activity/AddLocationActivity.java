@@ -1,7 +1,6 @@
 package visitmycityandroid.activity;
 
 import android.content.Context;
-import android.content.Intent;
 import android.location.Address;
 import android.location.Criteria;
 import android.location.Geocoder;
@@ -11,7 +10,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,7 +20,6 @@ import java.util.Locale;
 
 import visitmycityandroid.app.R;
 import visitmycityandroid.asyncTask.PostLocationTask;
-import visitmycityandroid.configuration.Variables;
 import visitmycityandroid.model.LocationModel;
 
 public class AddLocationActivity extends VisitMyCityActivity {

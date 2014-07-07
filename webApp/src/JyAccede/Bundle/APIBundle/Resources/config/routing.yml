@@ -1,7 +1,13 @@
 jacc_list:
-    pattern:  /arrets_lignes/{isPmr}
+    pattern:  /arrets_lignes
     defaults: { _controller: JyAccedeAPIBundle:Front:list }
 
 update_line_stop:
-    pattern:  /arrets_lignes/{isPmr}
+    pattern:  /arrets_lignes
     defaults: { _controller: JyAccedeAPIBundle:Front:update }
+    requirements:
+        _method:  POST
+    
+journeys:
+    pattern:  /journeys/{source}/{destination}
+    defaults: { _controller: JyAccedeAPIBundle:Front:getJourneys }

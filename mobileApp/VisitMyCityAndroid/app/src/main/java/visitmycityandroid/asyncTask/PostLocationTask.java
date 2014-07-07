@@ -2,11 +2,7 @@ package visitmycityandroid.asyncTask;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.util.Log;
 import android.widget.Toast;
-
-//import com.fasterxml.jackson.databind.ObjectMapper;
-//import com.fasterxml.jackson.databind.ObjectWriter;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;

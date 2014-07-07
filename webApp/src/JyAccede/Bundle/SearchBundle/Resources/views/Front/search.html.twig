@@ -9,8 +9,19 @@
     <div class="rom">
         <h2>Rechercher</h2>
         <form action="" id="searchForm" method="POST">
-            <div class="input-group input-group-lg">
-                <input type="text" class="form-control" placeholder="Saisissez une ville" id="city" name="city" value="{%  if ville %}{{ ville }}{% endif %}">
+            <div class="input-group input-group-lg" style="width: 100%;">
+                <input type="text" class="form-control" placeholder="Saisissez une ville" id="city" name="city" value="{%  if ville %}{{ ville }}{% endif %}" 
+                       style="margin-bottom: 10px;"/>
+                
+                <div class="input-group input-group-lg">
+                    <input type="text" class="form-control" placeholder="Saisissez votre point de départ" id="from" name="from" value="{%  if from %}{{ from }}{% endif %}"/>
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="submit">
+                            <span class="glyphicon glyphicon-search"></span>
+                        </button>
+                    </span>
+                </div>
+                
                 <select class="form-control" name="what" id="categories">
                     <option value="">--Quoi ?--</option>
                 </select>
@@ -26,11 +37,6 @@
                       Transport en commun
                     </label>
                 </div>
-                <span class="input-group-btn">
-                    <button class="btn btn-default" type="submit">
-                        <span class="glyphicon glyphicon-search"></span>
-                    </button>
-                </span>
             </div>
         </form>
     </div>
@@ -112,13 +118,12 @@
 
             var datas = {{ json|raw }};
             var results=datas.results.items;
-            for(result in results)
-            {
+            for(result in results){
                 var place=results[result];
-                console.debug(place);
                 if(place.latitude && place.longitude){
                     var myLatlng = new google.maps.LatLng(place.latitude,place.longitude);
 
+                    var journeysUrl = 'journeys/' + userLng + ';' + userLat + '/' + place.longitude + ';' + place.latitude;
                     var iconPlace = '/web/images/c'+place.category.id+'.png';
                     var marker = new google.maps.Marker({
                         position: myLatlng,
@@ -134,6 +139,7 @@
                         contentString+="<a href='"+place.website+"'>"+place.website+"</a>";
 
                     contentString+="<br/>"+place.main_keyword;
+                    contentString+="<br/><br/><a href='" + journeysUrl + "'>Se rendre à ce lieu en transport en commun</a>";
                     marker.html=contentString;
 
                     google.maps.event.addListener(marker, 'click', function() {
@@ -157,12 +163,6 @@
         }
 
         function loadMap(){
-
-            if(!userIsLocated){
-                //User didn't allow location, or it's not available. Paris is the default
-                userLat=48.8534100;
-                userLng=2.3488000;
-            }
             var mapOptions = {
                 center: new google.maps.LatLng(userLat, userLng),
                 zoom: 8
@@ -170,19 +170,26 @@
 
             map = new google.maps.Map(document.getElementById("map"), mapOptions);
             
-            var myLatlng = new google.maps.LatLng(userLat, userLng);
-            var marker = new google.maps.Marker({
-                position: myLatlng,
-                map: map,
-                title:'Je suis ici'
-            });
-            
-            marker.html=marker.title;
+            var userAddress = {{ userAddress|raw }};
+            if(userAddress.results !== undefined && userAddress.results[0] !== undefined){
+                var userLatLng = userAddress.results[0].geometry.location;
+                userLat=userLatLng.lat;
+                userLng=userLatLng.lng;
+                
+                var myLatlng = new google.maps.LatLng(userLat, userLng);
+                var marker = new google.maps.Marker({
+                    position: myLatlng,
+                    map: map,
+                    title:'Je suis ici'
+                });
 
-            google.maps.event.addListener(marker, 'click', function() {
-                infowindow.setContent(this.html);
-                infowindow.open(map,this);
-            });
+                marker.html=marker.title;
+                
+                google.maps.event.addListener(marker, 'click', function() {
+                    infowindow.setContent(this.html);
+                    infowindow.open(map,this);
+                });
+            }
 
             if(villeSearch){
                 geoCode();
@@ -196,7 +203,6 @@
             var results=datas.results.results;
             for(result in results)
             {
-                console.debug(results);
                 var category=results[result];
                 var select = document.getElementById("categories");
                 select.options[select.options.length] = new Option(category.name, category.name);

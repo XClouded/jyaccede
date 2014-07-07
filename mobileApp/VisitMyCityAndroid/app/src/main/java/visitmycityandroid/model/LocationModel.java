@@ -14,16 +14,19 @@ public class LocationModel {
 
     public int idCategorie;
 
+    public int lvlAccess;
+
     public LocationModel() {
     }
 
-    public LocationModel(String name, String address, double latitude, double longitude, String remark, int idCategorie) {
+    public LocationModel(String name, String address, double latitude, double longitude, String remark, int idCategorie, int lvlAccess) {
         this.name = name;
         this.address = address;
         this.latitude = latitude;
         this.longitude = longitude;
         this.remark = remark;
         this.idCategorie = idCategorie;
+        this.lvlAccess = lvlAccess;
     }
 
     public String getName() {
@@ -72,5 +75,13 @@ public class LocationModel {
 
     public void setIdCategorie(int idCategorie) {
         this.idCategorie = idCategorie;
+    }
+
+    public int getLvlAccess() {
+        return lvlAccess;
+    }
+
+    public void setLvlAccess(int lvlAccess) {
+        this.lvlAccess = lvlAccess;
     }
 }

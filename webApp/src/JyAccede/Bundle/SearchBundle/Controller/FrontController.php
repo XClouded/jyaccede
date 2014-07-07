@@ -5,8 +5,8 @@ namespace JyAccede\Bundle\SearchBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
-class FrontController extends Controller
-{
+class FrontController extends Controller{
+    
     private function signin($time, $method){
         $toSign = "GET\nx-jispapi-timestamp:".$time."\n".$method;
         $hash=hash_hmac("sha1",$toSign,"test-jispapi-secret-access-key");
@@ -61,14 +61,29 @@ class FrontController extends Controller
     public function searchAction(Request $request){
         $city=false;
         $json="{}";
+        $userAddress="{}";
+        $from="";
+        
         if($request->isMethod("POST")){
-            $city=$request->request->get("city");
-            $what=$request->request->get("what");
-            $how=$request->request->get("how");
-            $json=$this->searchForCity($city, $what);
+            $city = $request->request->get("city");
+            $what = $request->request->get("what");
+            $how = $request->request->get("how");
+            
+            $from = $request->request->get("from");
+            $url = "https://maps.googleapis.com/maps/api/geocode/json?address=".$from."&key=AIzaSyDsGVqmUU8__aMjhHLThN8Libiy9cGGXbg";
+            $handle = curl_init(str_replace (" ", "+",$url));
+            curl_setopt($handle, CURLOPT_RETURNTRANSFER, 1);
+            $userAddress = curl_exec($handle);
+            
+            $json = $this->searchForCity($city, $what);
         }
         
         $categories=$this->getCategories();
-        return $this->render('JyAccedeSearchBundle:Front:search.html.twig',array("ville"=>$city,"json"=>$json,"categories"=>$categories));
+        return $this->render('JyAccedeSearchBundle:Front:search.html.twig',
+                             array("ville" => $city,
+                                   "from" => $from,
+                                   "json" => $json,
+                                   "userAddress" => $userAddress,
+                                   "categories" => $categories));
     }
 }
