@@ -1,17 +1,17 @@
 package visitmycityandroid.model;
 
-public class CategorieModel {
+public class CategoryModel {
 
     public String id;
 
     public String name;
 
-    public CategorieModel(String id, String name) {
+    public CategoryModel(String id, String name) {
         this.id = id;
         this.name = name;
     }
 
-    public CategorieModel() {
+    public CategoryModel() {
     }
 
     public String getId() {

@@ -23,12 +23,12 @@ import java.util.List;
 import java.util.Locale;
 
 import visitmycityandroid.app.R;
-import visitmycityandroid.asyncTask.JaccedeCategorieTask;
+import visitmycityandroid.asyncTask.JaccedeGetCategoryTask;
 import visitmycityandroid.configuration.Variables;
 import visitmycityandroid.interfaces.CategorieListener;
-import visitmycityandroid.model.CategorieModel;
+import visitmycityandroid.model.CategoryModel;
 
-public class CloserLocationActivity extends VisitMyCityActivity  implements View.OnClickListener, CategorieListener {
+public class CloserLocationActivity extends JyaccedeActivity implements View.OnClickListener, CategorieListener {
     private double mLatitude;
     private double mLongitude;
 
@@ -71,7 +71,7 @@ public class CloserLocationActivity extends VisitMyCityActivity  implements View
         catch (Exception e){
         }
 
-        JaccedeCategorieTask jc = new JaccedeCategorieTask(this, Variables.SearchLocationUrl);
+        JaccedeGetCategoryTask jc = new JaccedeGetCategoryTask(this, Variables.SearchCategorieUrl);
         jc.execute();
 
         //event handler
@@ -141,11 +141,11 @@ public class CloserLocationActivity extends VisitMyCityActivity  implements View
     }
 
     @Override
-    public void OnCompleted(ArrayList<CategorieModel> categories) {
+    public void OnCompleted(ArrayList<CategoryModel> categories) {
         //Spinner init and settings
         Spinner spinner = (Spinner) findViewById(R.id.categorySpinner);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item);
-        for(CategorieModel categorie : categories){
+        for(CategoryModel categorie : categories){
             adapter.add(categorie.getName());
         }
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

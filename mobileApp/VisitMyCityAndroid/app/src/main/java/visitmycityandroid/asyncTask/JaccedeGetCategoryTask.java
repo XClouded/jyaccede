@@ -9,16 +9,14 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import visitmycityandroid.interfaces.CategorieListener;
-import visitmycityandroid.interfaces.JaccedeTaskListener;
-import visitmycityandroid.model.CategorieModel;
-import visitmycityandroid.model.LocationModel;
+import visitmycityandroid.model.CategoryModel;
 import visitmycityandroid.tools.JsonTools;
 
-public class JaccedeCategorieTask extends AsyncTask<Void, Void, Void> {
+public class JaccedeGetCategoryTask extends AsyncTask<Void, Void, Void> {
 
     private CategorieListener mListener;
 
-    private ArrayList<CategorieModel> mCategories = new ArrayList<CategorieModel>();
+    private ArrayList<CategoryModel> mCategories = new ArrayList<CategoryModel>();
 
     private String mCurrentUrl;
 
@@ -26,7 +24,7 @@ public class JaccedeCategorieTask extends AsyncTask<Void, Void, Void> {
      *
      * @param ctl
      */
-    public JaccedeCategorieTask(CategorieListener ctl, String url){
+    public JaccedeGetCategoryTask(CategorieListener ctl, String url){
         mListener = ctl;
         mCurrentUrl = url;
     }
@@ -42,7 +40,7 @@ public class JaccedeCategorieTask extends AsyncTask<Void, Void, Void> {
             for (int i = 0; i < items.length(); i++) {
                 JSONObject row = items.getJSONObject(i);
                 try {
-                    mCategories.add(new CategorieModel(row.getString("id"), row.getString("name")));
+                    mCategories.add(new CategoryModel(row.getString("id"), row.getString("name")));
                 }
                 catch (Exception e) {
                 }

@@ -24,16 +24,16 @@ import java.util.List;
 import java.util.Locale;
 
 import visitmycityandroid.app.R;
-import visitmycityandroid.asyncTask.GoogleDirectionTask;
+import visitmycityandroid.asyncTask.GoogleGetDirectionTask;
 import visitmycityandroid.configuration.Variables;
-import visitmycityandroid.asyncTask.JaccedeTask;
+import visitmycityandroid.asyncTask.JaccedeGetLocationTask;
 import visitmycityandroid.googleMaps.MultipleLineAdapter;
 import visitmycityandroid.interfaces.GoogleDirectionListener;
 import visitmycityandroid.interfaces.JaccedeTaskListener;
 import visitmycityandroid.model.LocationModel;
 import visitmycityandroid.tools.GoogleMapsDirection;
 
-public class MapsActivity extends VisitMyCityActivity implements JaccedeTaskListener, GoogleDirectionListener, GoogleMap.OnMarkerClickListener {
+public class MapsActivity extends JyaccedeActivity implements JaccedeTaskListener, GoogleDirectionListener, GoogleMap.OnMarkerClickListener {
 
     private List<LocationModel> mDestination = new ArrayList<LocationModel>();
 
@@ -61,7 +61,7 @@ public class MapsActivity extends VisitMyCityActivity implements JaccedeTaskList
 
         if(fromActivity != null && fromActivity.equals(Variables.ActivityCloser)){
             String checkString = intent.getStringExtra("upDisabled");
-            JaccedeTask js = new JaccedeTask(this, Variables.SearchLocationUrl, true);
+            JaccedeGetLocationTask js = new JaccedeGetLocationTask(this, Variables.SearchLocationUrl, true);
             js.execute(location.split(" ")[0]);
             mMap.setInfoWindowAdapter(new MultipleLineAdapter(this));
         }
@@ -154,10 +154,10 @@ public class MapsActivity extends VisitMyCityActivity implements JaccedeTaskList
     public boolean onMarkerClick(Marker marker) {
         mToGo = marker.getPosition();
 
-        GoogleDirectionTask gdtd = new GoogleDirectionTask(mCurrentLL, mToGo, GoogleMapsDirection.MODE_DRIVING, this);
+        GoogleGetDirectionTask gdtd = new GoogleGetDirectionTask(mCurrentLL, mToGo, GoogleMapsDirection.MODE_DRIVING, this);
         gdtd.execute();
 
-        GoogleDirectionTask gdtw = new GoogleDirectionTask(mCurrentLL, mToGo, GoogleMapsDirection.MODE_WALKING, this);
+        GoogleGetDirectionTask gdtw = new GoogleGetDirectionTask(mCurrentLL, mToGo, GoogleMapsDirection.MODE_WALKING, this);
         gdtw.execute();
 
         return false;

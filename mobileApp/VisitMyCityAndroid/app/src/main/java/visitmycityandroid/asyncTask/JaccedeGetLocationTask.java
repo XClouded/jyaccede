@@ -8,11 +8,11 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import visitmycityandroid.interfaces.JaccedeTaskListener;
-import visitmycityandroid.model.CategorieModel;
+import visitmycityandroid.model.CategoryModel;
 import visitmycityandroid.model.LocationModel;
 import visitmycityandroid.tools.JsonTools;
 
-public class JaccedeTask extends AsyncTask<String, Void, Void> {
+public class JaccedeGetLocationTask extends AsyncTask<String, Void, Void> {
 
     private JaccedeTaskListener mListener;
 
@@ -22,13 +22,13 @@ public class JaccedeTask extends AsyncTask<String, Void, Void> {
 
     private boolean mUpDisabled = true;
 
-    private CategorieModel mCategorieFilter = null;
+    private CategoryModel mCategorieFilter = null;
 
     /** Construct
      *
      * @param jtl
      */
-    public JaccedeTask(JaccedeTaskListener jtl, String url, boolean upDisabled){
+    public JaccedeGetLocationTask(JaccedeTaskListener jtl, String url, boolean upDisabled){
         mListener = jtl;
         mCurrentUrl = url;
         mUpDisabled = upDisabled;

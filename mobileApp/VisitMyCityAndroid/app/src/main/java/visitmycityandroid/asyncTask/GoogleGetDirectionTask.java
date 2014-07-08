@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import visitmycityandroid.interfaces.GoogleDirectionListener;
 import visitmycityandroid.tools.GoogleMapsDirection;
 
-public class GoogleDirectionTask extends AsyncTask<Void, Void, Void> {
+public class GoogleGetDirectionTask extends AsyncTask<Void, Void, Void> {
 
     private final GoogleDirectionListener mListener;
 
@@ -25,7 +25,7 @@ public class GoogleDirectionTask extends AsyncTask<Void, Void, Void> {
 
     private PolylineOptions mDirections = new PolylineOptions().width(3);
 
-    public GoogleDirectionTask(LatLng start, LatLng finish, String way, GoogleDirectionListener listener){
+    public GoogleGetDirectionTask(LatLng start, LatLng finish, String way, GoogleDirectionListener listener){
         this.mStart = start;
         this.mFinish = finish;
         mWay = way;

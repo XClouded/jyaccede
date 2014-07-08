@@ -15,7 +15,7 @@ import android.widget.EditText;
 import visitmycityandroid.app.R;
 import visitmycityandroid.configuration.Variables;
 
-public class SearchLocationActivity extends VisitMyCityActivity implements View.OnClickListener {
+public class SearchLocationActivity extends JyaccedeActivity implements View.OnClickListener {
 
     private double mLatitude;
     private double mLongitude;

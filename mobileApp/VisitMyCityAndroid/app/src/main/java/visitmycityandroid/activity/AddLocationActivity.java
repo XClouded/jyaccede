@@ -9,20 +9,27 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
 import visitmycityandroid.app.R;
-import visitmycityandroid.asyncTask.PostLocationTask;
+import visitmycityandroid.asyncTask.JaccedeGetCategoryTask;
+import visitmycityandroid.asyncTask.JaccedePostLocationTask;
+import visitmycityandroid.configuration.Variables;
+import visitmycityandroid.interfaces.CategorieListener;
+import visitmycityandroid.model.CategoryModel;
 import visitmycityandroid.model.LocationModel;
 
-public class AddLocationActivity extends VisitMyCityActivity {
+public class AddLocationActivity extends JyaccedeActivity implements CategorieListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +51,6 @@ public class AddLocationActivity extends VisitMyCityActivity {
             updateLocation(l);
         }
         catch (Exception e){
-            Log.v("MainActivity-GetLocation", e.getMessage());
         }
 
         //event handler
@@ -61,7 +67,7 @@ public class AddLocationActivity extends VisitMyCityActivity {
                 l.setLongitude(Double.parseDouble(inputLongitude.getText().toString()));
                 l.setRemark(inputRemark.getText().toString());
 
-                PostLocationTask plt = new PostLocationTask(getApplicationContext());
+                JaccedePostLocationTask plt = new JaccedePostLocationTask(getApplicationContext());
                 plt.execute(l);
 
                 inputName.setText("");
@@ -72,6 +78,9 @@ public class AddLocationActivity extends VisitMyCityActivity {
                 Toast.makeText(getApplicationContext(), getText(R.string.locationPost), Toast.LENGTH_LONG).show();
             }
         });
+
+        JaccedeGetCategoryTask jc = new JaccedeGetCategoryTask(this, Variables.SearchCategorieUrl);
+        jc.execute();
     }
 
     /** Update GUI with a location
@@ -107,5 +116,17 @@ public class AddLocationActivity extends VisitMyCityActivity {
 
         TextView longitudeLabel = (TextView)findViewById(R.id.inputLongitude);
         longitudeLabel.setText(String.valueOf(longitude));
+    }
+
+    @Override
+    public void OnCompleted(ArrayList<CategoryModel> categories) {
+        //Spinner init and settings
+        Spinner spinner = (Spinner) findViewById(R.id.categorySpinner);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item);
+        for(CategoryModel categorie : categories){
+            adapter.add(categorie.getName());
+        }
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
     }
 }
