@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,12 +11,12 @@
     <title>J'y accède | Trouvez les endroits amménagés en quelques clics</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="/web/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="/web/bootstrap/css/justified-nav.css" rel="stylesheet">
+    <link href="/bootstrap/css/justified-nav.css" rel="stylesheet">
     
-    <link href="/web/css/main.css" rel="stylesheet">
+    <link href="/css/main.css" rel="stylesheet">
 
     <!-- Just for debugging purposes. Don't actually copy this line! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -33,7 +32,7 @@
 
 <div class="container">
     <header>
-        <img src="/web/images/logo.png" id="logo"/>
+        <img src="/images/logo.png" id="logo"/>
         <div class="cc">
             <nav>
                 <ul>
@@ -47,13 +46,13 @@
             </nav>
         </div>
     </header>
-                    
+    
     <div class="wrapcont">
-        <div class="cc">
-           D&eacute;couvrez notre toute nouvelle application mobile &agrave; l'occasion du concours #Hack4France
-           <a href="https://github.com/lelexxx/jyaccede/tree/master/mobileApp">Ici</a>.
-        </div>
-    </div>
+		<div class="cc">
+		   D&eacute;couvrez notre toute nouvelle application mobile &agrave; l'occasion du concours #Hack4France
+		   <a href="https://github.com/lelexxx/jyaccede/tree/master/mobileApp">Ici</a>.
+	   </div>
+	</div>
 
     {% block content %}
         <div id="wrapfeat">
@@ -63,16 +62,34 @@
                     <p>Trouvez des lieux accessibles en quelques clics.</p>
                     <form action="{{ path("jacc_search") }}" id="searchForm" method="POST" >
                         <div class="input-group input-group-lg" style="width: 100%; margin-bottom: 10px;">
-                            <input type="text" class="form-control" placeholder="Saisissez une ville*" id="city" name="city" required="required"
+                            <input type="text" class="form-control" placeholder="Saisissez une ville" id="city" name="city" 
                                    style="-webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px;"/>
                         </div>
-                        <div class="input-group input-group-lg">
+                        <div class="input-group input-group-lg" style="width: 100%; margin-bottom: 10px;">
                             <input type="text" class="form-control" placeholder="Saisissez votre point de départ" id="from" name="from" />
                             <span class="input-group-btn">
                                 <button class="btn btn-default" type="submit">
                                     <span class="glyphicon glyphicon-search"></span>
                                 </button>
                             </span>
+                        </div>
+                        
+                        <div class="input-group input-group-lg" style="width: 100%; margin-bottom: 10px;">                            
+                            <select class="form-control" name="what" id="categories" style="-webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px;">
+								<option value="">--Quoi ?--</option>
+							</select>
+							<div class="radio-inline">
+								<label>
+								  <input type="radio" name="how" value="car" checked>
+								  Voiture / Piéton
+								</label>
+							</div>
+							<div class="radio-inline">
+								<label>
+								  <input type="radio" name="how" value="bus">
+								  Transport en commun
+								</label>
+							</div>
                         </div>
                     </form>
                 </div>
@@ -91,8 +108,9 @@
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster-->
 {% block js %}
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script type="text/javascript">
+
         function loadCategories(){
             var datas = {{ categories|raw }};
             
