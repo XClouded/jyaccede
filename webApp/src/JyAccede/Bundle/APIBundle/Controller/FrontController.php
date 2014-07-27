@@ -49,7 +49,7 @@ class FrontController extends Controller{
         /** Init cURL */
         $handle = curl_init($url);
         /** Additional headers */
-        $headers = array("Authorization: d626ee70-52ca-4e0c-94fc-cf870bca4e07");
+        $headers = array("Authorization:d626ee70-52ca-4e0c-94fc-cf870bca4e07");
 
         curl_setopt($handle, CURLOPT_HTTPHEADER, $headers);
         curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
