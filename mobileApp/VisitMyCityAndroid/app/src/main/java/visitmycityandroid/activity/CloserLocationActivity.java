@@ -54,22 +54,18 @@ public class CloserLocationActivity extends JyaccedeActivity implements View.OnC
         setContentView(R.layout.activity_closer_location);
 
         //LocationModel init and settings
-        try {
-            LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
-            Criteria criteria = new Criteria();
-            criteria.setAccuracy(Criteria.ACCURACY_FINE);
-            criteria.setPowerRequirement(Criteria.POWER_LOW);
-            criteria.setAltitudeRequired(false);
-            criteria.setBearingRequired(false);
-            criteria.setSpeedRequired(false);
-            criteria.setCostAllowed(true);
-            String provider = lm.getBestProvider(criteria, true);
-            Location l = lm.getLastKnownLocation(provider);
-            updateLocation(l);
-            lm.requestLocationUpdates(provider, 2000, 100, mLocationListener);
-        }
-        catch (Exception e){
-        }
+        LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+        Criteria criteria = new Criteria();
+        criteria.setAccuracy(Criteria.ACCURACY_FINE);
+        criteria.setPowerRequirement(Criteria.POWER_LOW);
+        criteria.setAltitudeRequired(false);
+        criteria.setBearingRequired(false);
+        criteria.setSpeedRequired(false);
+        criteria.setCostAllowed(true);
+        String provider = lm.getBestProvider(criteria, true);
+        Location l = lm.getLastKnownLocation(provider);
+        updateLocation(l);
+        lm.requestLocationUpdates(provider, 2000, 100, mLocationListener);
 
         JaccedeGetCategoryTask jc = new JaccedeGetCategoryTask(this, Variables.SearchCategorieUrl);
         jc.execute();

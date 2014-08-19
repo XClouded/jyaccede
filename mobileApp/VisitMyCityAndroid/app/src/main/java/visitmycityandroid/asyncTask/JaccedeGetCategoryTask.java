@@ -54,6 +54,7 @@ public class JaccedeGetCategoryTask extends AsyncTask<Void, Void, Void> {
 
     @Override
     protected void onPostExecute(Void aVoid) {
+        mCategories.add(new CategoryModel("0", "Tous"));
         mListener.OnCompleted(mCategories);
     }
 }

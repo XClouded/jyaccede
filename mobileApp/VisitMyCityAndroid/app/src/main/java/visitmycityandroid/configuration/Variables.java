@@ -10,12 +10,4 @@ public interface Variables {
     /** ACTIVITY NAME **/
     public static final String ActivitySearch = "ActivitySearch";
     public static final String ActivityCloser = "ActivityCloser";
-
-    /** JSON Node names **/
-    public static final String TAG_CATEGORY = "category";
-    public static final String TAG_NAME = "name";
-    public static final String TAG_ADDRESS = "address";
-    public static final String TAG_LATITUDE = "latitude";
-    public static final String TAG_LONGITUDE = "longitude";
-    public static final String TAG_DESCRIPTION = "description";
 }

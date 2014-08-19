@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
-import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
@@ -57,7 +56,7 @@ public class JaccedePostLocationTask extends AsyncTask<LocationModel, Integer, V
             httpPost.setEntity(jsonEntity);
             httpPost.setHeader("Accept", "application/json");
             httpPost.setHeader("Content-type", "application/json");
-            HttpResponse response = client.execute(httpPost);
+            client.execute(httpPost);
             mMessage = String.valueOf(R.string.locationPost);
         }
         catch (ProtocolException e) {
