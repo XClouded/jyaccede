@@ -1,17 +1,16 @@
-package visitmycityandroid.asyncTask;
+package com.jyaccede.asyncTask;
 
 import android.graphics.Color;
 import android.os.AsyncTask;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.jyaccede.interfaces.GoogleDirectionListener;
+import com.jyaccede.tools.GoogleMapsDirection;
 
 import org.w3c.dom.Document;
 
 import java.util.ArrayList;
-
-import visitmycityandroid.interfaces.GoogleDirectionListener;
-import visitmycityandroid.tools.GoogleMapsDirection;
 
 public class GoogleGetDirectionTask extends AsyncTask<Void, Void, Void> {
 

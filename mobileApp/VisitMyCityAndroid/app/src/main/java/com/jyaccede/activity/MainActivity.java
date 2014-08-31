@@ -1,4 +1,4 @@
-package visitmycityandroid.activity;
+package com.jyaccede.activity;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -19,7 +19,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.crashlytics.android.Crashlytics;
-import visitmycityandroid.app.R;
+import com.jyaccede.activity.places.CloserPlaceActivity;
+
+import jyaccede.app.R;
 
 public class MainActivity extends ActionBarActivity   {
 
@@ -134,16 +136,8 @@ public class MainActivity extends ActionBarActivity   {
 
         int id = item.getItemId();
         switch (id){
-            case R.id.action_addLocation :
-                Intent intentAdd = new Intent(this, AddLocationActivity.class);
-                startActivity(intentAdd);
-                break;
-            case R.id.action_searchLocation :
-                Intent intentSearch = new Intent(this, SearchLocationActivity.class);
-                startActivity(intentSearch);
-                break;
             case R.id.action_closerLocation :
-                Intent intentCloser = new Intent(this, CloserLocationActivity.class);
+                Intent intentCloser = new Intent(this, CloserPlaceActivity.class);
                 startActivity(intentCloser);
                 break;
             default:
@@ -158,16 +152,8 @@ public class MainActivity extends ActionBarActivity   {
      */
     private void selectItem(int position) {
         switch (position){
-            case 2 :
-                Intent intentAdd = new Intent(this, AddLocationActivity.class);
-                startActivity(intentAdd);
-                break;
-            case 0 :
-                Intent intentSearch = new Intent(this, SearchLocationActivity.class);
-                startActivity(intentSearch);
-                break;
             case 1 :
-                Intent intentCloser = new Intent(this, CloserLocationActivity.class);
+                Intent intentCloser = new Intent(this, CloserPlaceActivity.class);
                 startActivity(intentCloser);
                 break;
         }

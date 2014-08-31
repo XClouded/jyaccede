@@ -1,4 +1,4 @@
-package visitmycityandroid.activity;
+package com.jyaccede.activity.places;
 
 import android.content.Context;
 import android.content.Intent;
@@ -17,18 +17,21 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.jyaccede.configuration.Variables;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import visitmycityandroid.app.R;
-import visitmycityandroid.asyncTask.JaccedeGetCategoryTask;
-import visitmycityandroid.configuration.Variables;
-import visitmycityandroid.interfaces.CategorieListener;
-import visitmycityandroid.model.CategoryModel;
+import com.jyaccede.activity.JyaccedeActivity;
+import com.jyaccede.activity.MapsActivity;
+import jyaccede.app.R;
+import com.jyaccede.asyncTask.JaccedeGetCategoryTask;
+import com.jyaccede.interfaces.CategorieListener;
+import com.jyaccede.model.CategoryModel;
 
-public class CloserLocationActivity extends JyaccedeActivity implements View.OnClickListener, CategorieListener {
+public class CloserPlaceActivity extends JyaccedeActivity implements View.OnClickListener, CategorieListener {
     private double mLatitude;
     private double mLongitude;
 
@@ -53,7 +56,7 @@ public class CloserLocationActivity extends JyaccedeActivity implements View.OnC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_closer_location);
 
-        //LocationModel init and settings
+        //PlaceModel init and settings
         LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
         Criteria criteria = new Criteria();
         criteria.setAccuracy(Criteria.ACCURACY_FINE);
@@ -132,7 +135,6 @@ public class CloserLocationActivity extends JyaccedeActivity implements View.OnC
         intentMaps.putExtra("currentLatitude", String.valueOf(mLatitude));
         intentMaps.putExtra("currentLongitude", String.valueOf(mLongitude));
         intentMaps.putExtra("fromActivity", Variables.ActivityCloser);
-        intentMaps.putExtra("upDisabled", checkUpDisabled.isChecked());
         startActivity(intentMaps);
     }
 

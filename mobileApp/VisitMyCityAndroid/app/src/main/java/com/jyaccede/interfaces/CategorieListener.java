@@ -1,8 +1,8 @@
-package visitmycityandroid.interfaces;
+package com.jyaccede.interfaces;
 
 import java.util.ArrayList;
 
-import visitmycityandroid.model.CategoryModel;
+import com.jyaccede.model.CategoryModel;
 
 public interface CategorieListener {
     public abstract void OnCompleted(final ArrayList<CategoryModel> categories);

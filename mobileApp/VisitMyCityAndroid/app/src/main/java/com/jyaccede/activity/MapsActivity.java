@@ -1,4 +1,4 @@
-package visitmycityandroid.activity;
+package com.jyaccede.activity;
 
 import android.content.Intent;
 import android.location.Address;
@@ -17,25 +17,25 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.jyaccede.configuration.Variables;
+import com.jyaccede.googleMaps.MultipleLineAdapter;
+import com.jyaccede.interfaces.JaccedeTaskListener;
+import com.jyaccede.model.PlaceModel;
+import com.jyaccede.tools.GoogleMapsDirection;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import visitmycityandroid.app.R;
-import visitmycityandroid.asyncTask.GoogleGetDirectionTask;
-import visitmycityandroid.configuration.Variables;
-import visitmycityandroid.asyncTask.JaccedeGetLocationTask;
-import visitmycityandroid.googleMaps.MultipleLineAdapter;
-import visitmycityandroid.interfaces.GoogleDirectionListener;
-import visitmycityandroid.interfaces.JaccedeTaskListener;
-import visitmycityandroid.model.LocationModel;
-import visitmycityandroid.tools.GoogleMapsDirection;
+import jyaccede.app.R;
+import com.jyaccede.asyncTask.GoogleGetDirectionTask;
+import com.jyaccede.asyncTask.JaccedeGetPlaceTask;
+import com.jyaccede.interfaces.GoogleDirectionListener;
 
 public class MapsActivity extends JyaccedeActivity implements JaccedeTaskListener, GoogleDirectionListener, GoogleMap.OnMarkerClickListener {
 
-    private List<LocationModel> mDestination = new ArrayList<LocationModel>();
+    private List<PlaceModel> mDestination = new ArrayList<PlaceModel>();
 
     private LatLng mCurrentLL;
 
@@ -51,26 +51,15 @@ public class MapsActivity extends JyaccedeActivity implements JaccedeTaskListene
         mMap = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
 
         Intent intent = getIntent();
-        String address = intent.getStringExtra("address");
         String location = intent.getStringExtra("location");
-        String latitude = intent.getStringExtra("latitude");
-        String longitude = intent.getStringExtra("longitude");
         String currentLatitude = intent.getStringExtra("currentLatitude");
         String currentLongitude = intent.getStringExtra("currentLongitude");
         String fromActivity = intent.getStringExtra("fromActivity");
 
         if(fromActivity != null && fromActivity.equals(Variables.ActivityCloser)){
-            String checkString = intent.getStringExtra("upDisabled");
-            JaccedeGetLocationTask js = new JaccedeGetLocationTask(this, Variables.SearchLocationUrl, true);
+            JaccedeGetPlaceTask js = new JaccedeGetPlaceTask(this, Variables.SearchLocationUrl, true);
             js.execute(location.split(" ")[0]);
             mMap.setInfoWindowAdapter(new MultipleLineAdapter(this));
-        }
-        else if(fromActivity != null && fromActivity.equals(Variables.ActivitySearch)){
-            LatLng ll = new LatLng(Double.parseDouble(latitude), Double.parseDouble(longitude));
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(ll, 15));
-            mMap.addMarker(initMarker(ll, address, "", 0));
-
-            mDestination.add(new LocationModel("", address, Double.parseDouble(longitude), Double.parseDouble(latitude), "", 0, 0));
         }
 
         mCurrentLL = new LatLng(Double.parseDouble(currentLatitude), Double.parseDouble(currentLongitude));
@@ -136,9 +125,9 @@ public class MapsActivity extends JyaccedeActivity implements JaccedeTaskListene
     }
 
     @Override
-    public void OnCompleted(final ArrayList<LocationModel> locations){
+    public void OnCompleted(final ArrayList<PlaceModel> locations){
         for(int i=0; i<locations.size(); i++){
-            LocationModel l = locations.get(i);
+            PlaceModel l = locations.get(i);
             LatLng ll = new LatLng(l.getLatitude(), l.getLongitude());
             mMap.addMarker(initMarker(ll, l.getName(), l.getRemark(), l.idCategorie));
             mDestination.add(l);

@@ -1,4 +1,4 @@
-package visitmycityandroid.tools;
+package com.jyaccede.tools;
 
 import com.google.android.gms.maps.model.LatLng;
 

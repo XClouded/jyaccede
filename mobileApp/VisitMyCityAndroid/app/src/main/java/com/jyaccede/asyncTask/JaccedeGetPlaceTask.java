@@ -1,22 +1,23 @@
-package visitmycityandroid.asyncTask;
+package com.jyaccede.asyncTask;
 
 import android.os.AsyncTask;
+
+import com.jyaccede.interfaces.JaccedeTaskListener;
+import com.jyaccede.model.PlaceModel;
+import com.jyaccede.tools.JsonTools;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.ArrayList;
 
-import visitmycityandroid.interfaces.JaccedeTaskListener;
-import visitmycityandroid.model.CategoryModel;
-import visitmycityandroid.model.LocationModel;
-import visitmycityandroid.tools.JsonTools;
+import com.jyaccede.model.CategoryModel;
 
-public class JaccedeGetLocationTask extends AsyncTask<String, Void, Void> {
+public class JaccedeGetPlaceTask extends AsyncTask<String, Void, Void> {
 
     private JaccedeTaskListener mListener;
 
-    private ArrayList<LocationModel> mLocations = new ArrayList<LocationModel>();
+    private ArrayList<PlaceModel> mLocations = new ArrayList<PlaceModel>();
 
     private String mCurrentUrl;
 
@@ -28,7 +29,7 @@ public class JaccedeGetLocationTask extends AsyncTask<String, Void, Void> {
      *
      * @param jtl
      */
-    public JaccedeGetLocationTask(JaccedeTaskListener jtl, String url, boolean upDisabled){
+    public JaccedeGetPlaceTask(JaccedeTaskListener jtl, String url, boolean upDisabled){
         mListener = jtl;
         mCurrentUrl = url;
         mUpDisabled = upDisabled;
@@ -49,7 +50,7 @@ public class JaccedeGetLocationTask extends AsyncTask<String, Void, Void> {
                     int idCategorie = categorie.getInt("id");
 
                     if(mCategorieFilter == null || mUpDisabled && idCategorie == 34) {
-                        mLocations.add(new LocationModel(row.getString("name"), row.getString("address"), row.getDouble("latitude"),
+                        mLocations.add(new PlaceModel(row.getString("name"), row.getString("address"), row.getDouble("latitude"),
                                 row.getDouble("longitude"), row.getString("description"), idCategorie, row.getInt("accessibility_points")));
                     }
                 }

@@ -1,4 +1,4 @@
-package visitmycityandroid.interfaces;
+package com.jyaccede.interfaces;
 
 import com.google.android.gms.maps.model.PolylineOptions;
 

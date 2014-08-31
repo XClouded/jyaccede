@@ -1,11 +1,13 @@
-package visitmycityandroid.activity;
+package com.jyaccede.activity;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import visitmycityandroid.app.R;
+import com.jyaccede.activity.places.CloserPlaceActivity;
+
+import jyaccede.app.R;
 
 public abstract class JyaccedeActivity extends Activity{
 
@@ -19,16 +21,8 @@ public abstract class JyaccedeActivity extends Activity{
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         switch (id){
-            case R.id.action_addLocation :
-                Intent intentAdd = new Intent(this, AddLocationActivity.class);
-                startActivity(intentAdd);
-                break;
-            case R.id.action_searchLocation :
-                Intent intentSearch = new Intent(this, SearchLocationActivity.class);
-                startActivity(intentSearch);
-                break;
              case R.id.action_closerLocation :
-                Intent intentCloser = new Intent(this, CloserLocationActivity.class);
+                Intent intentCloser = new Intent(this, CloserPlaceActivity.class);
                 startActivity(intentCloser);
                  break;
             default:

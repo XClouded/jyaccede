@@ -1,4 +1,4 @@
-package visitmycityandroid.model;
+package com.jyaccede.model;
 
 public class CategoryModel {
 

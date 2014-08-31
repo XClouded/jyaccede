@@ -1,4 +1,4 @@
-package visitmycityandroid.tools;
+package com.jyaccede.tools;
 
 import android.util.Base64;
 

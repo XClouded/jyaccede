@@ -1,4 +1,4 @@
-package visitmycityandroid.tools;
+package com.jyaccede.tools;
 
 /*
  * Copyright 2001-2004 The Apache Software Foundation.

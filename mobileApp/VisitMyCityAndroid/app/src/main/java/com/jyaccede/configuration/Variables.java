@@ -1,4 +1,4 @@
-package visitmycityandroid.configuration;
+package com.jyaccede.configuration;
 
 public interface Variables {
 

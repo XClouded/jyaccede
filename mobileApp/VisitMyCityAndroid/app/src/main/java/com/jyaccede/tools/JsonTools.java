@@ -1,4 +1,4 @@
-package visitmycityandroid.tools;
+package com.jyaccede.tools;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;

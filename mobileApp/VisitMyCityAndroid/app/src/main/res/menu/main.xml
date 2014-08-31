@@ -1,16 +1,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="visitmycityandroid.activity.MainActivity">
-
-    <item android:id="@+id/action_searchLocation"
-        android:title="@string/searchLocation"
-        android:icon="@drawable/searchplace" />
+    tools:context="com.jyaccede.activity.MainActivity">
 
     <item android:id="@+id/action_closerLocation"
         android:title="@string/closerLocation"
         android:icon="@drawable/placetogo" />
-
-    <item android:id="@+id/action_addLocation"
-        android:title="@string/addLocation" />
 
 </menu>

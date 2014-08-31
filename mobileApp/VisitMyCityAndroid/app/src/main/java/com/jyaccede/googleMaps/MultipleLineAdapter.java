@@ -1,4 +1,4 @@
-package visitmycityandroid.googleMaps;
+package com.jyaccede.googleMaps;
 
 import android.app.Activity;
 import android.view.View;
@@ -7,7 +7,7 @@ import android.widget.TextView;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.Marker;
 
-import visitmycityandroid.app.R;
+import jyaccede.app.R;
 
 public class MultipleLineAdapter implements GoogleMap.InfoWindowAdapter {
 

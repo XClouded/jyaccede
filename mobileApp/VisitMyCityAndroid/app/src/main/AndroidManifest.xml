@@ -9,7 +9,7 @@
         android:theme="@style/AppTheme" >
         <activity
             android:screenOrientation="portrait"
-            android:name="visitmycityandroid.activity.MainActivity"
+            android:name="com.jyaccede.activity.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/Theme.AppCompat.Light">
             <intent-filter>
@@ -20,22 +20,12 @@
         </activity>
         <activity
             android:screenOrientation="portrait"
-            android:name="visitmycityandroid.activity.AddLocationActivity"
-            android:label="@string/title_activity_add_location" >
-        </activity>
-        <activity
-            android:screenOrientation="portrait"
-            android:name="visitmycityandroid.activity.CloserLocationActivity"
+            android:name="com.jyaccede.activity.places.CloserPlaceActivity"
             android:label="@string/closerLocation" >
         </activity>
         <activity
             android:screenOrientation="portrait"
-            android:name="visitmycityandroid.activity.SearchLocationActivity"
-            android:label="@string/title_activity_search_location" >
-        </activity>
-        <activity
-            android:screenOrientation="portrait"
-            android:name="visitmycityandroid.activity.MapsActivity"
+            android:name="com.jyaccede.activity.MapsActivity"
             android:label="@string/title_activity_maps" >
         </activity>
 

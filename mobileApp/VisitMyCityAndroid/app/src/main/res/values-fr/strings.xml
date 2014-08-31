@@ -3,13 +3,10 @@
 
     <!-- App & Menu -->
     <string name="app_name">J\'y accède</string>
-    <string name="addLocation">Ajouter un lieu</string>
-    <string name="searchLocation">Rechercher un lieu</string>
     <string name="closerLocation">Lieu à proximité</string>
     <string name="settings">Paramètres</string>
     <string name="cancel">Annuler</string>
     <string name="places">Lieux</string>
-    <string name="stop">Arrêts</string>
     <string name="open">Ouvrir</string>
     <string name="close">Fermer</string>
 
@@ -20,14 +17,11 @@
     <string name="noCityError">La ville n\'a pas été trouvée !</string>
     <string name="noLocationError">Aucun lieu n\'a été sélectionné !</string>
 
-    <!-- Add location activity -->
-    <string name="title_activity_add_location">Ajouter un lieu</string>
+    <!-- location -->
     <string name="address">Adresse</string>
     <string name="longitude">Longitude</string>
     <string name="latitude">Latitude</string>
     <string name="remark">Remarque</string>
-    <string name="add">Ajouter</string>
-    <string name="locationPost">Lieu ajouté</string>
 
     <!-- Closer location activity -->
     <string name="title_activity_search_location">Chercher un lieu</string>

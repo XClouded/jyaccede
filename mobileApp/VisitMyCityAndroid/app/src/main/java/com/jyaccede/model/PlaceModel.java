@@ -1,6 +1,6 @@
-package visitmycityandroid.model;
+package com.jyaccede.model;
 
-public class LocationModel {
+public class PlaceModel {
 
     public String name;
 
@@ -16,10 +16,10 @@ public class LocationModel {
 
     public int lvlAccess;
 
-    public LocationModel() {
+    public PlaceModel() {
     }
 
-    public LocationModel(String name, String address, double latitude, double longitude, String remark, int idCategorie, int lvlAccess) {
+    public PlaceModel(String name, String address, double latitude, double longitude, String remark, int idCategorie, int lvlAccess) {
         this.name = name;
         this.address = address;
         this.latitude = latitude;

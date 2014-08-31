@@ -1,6 +1,9 @@
-package visitmycityandroid.asyncTask;
+package com.jyaccede.asyncTask;
 
 import android.os.AsyncTask;
+
+import com.jyaccede.interfaces.CategorieListener;
+import com.jyaccede.tools.JsonTools;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -8,9 +11,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import visitmycityandroid.interfaces.CategorieListener;
-import visitmycityandroid.model.CategoryModel;
-import visitmycityandroid.tools.JsonTools;
+import com.jyaccede.model.CategoryModel;
 
 public class JaccedeGetCategoryTask extends AsyncTask<Void, Void, Void> {
 
