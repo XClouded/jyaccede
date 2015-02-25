@@ -52,8 +52,8 @@ public class MapsActivity extends JyaccedeActivity implements JaccedeTaskListene
 
         Intent intent = getIntent();
         String location = intent.getStringExtra("location");
-        String currentLatitude = intent.getStringExtra("currentLatitude");
-        String currentLongitude = intent.getStringExtra("currentLongitude");
+        String currentLatitude = intent.getStringExtra("latitude");
+        String currentLongitude = intent.getStringExtra("longitude");
         String fromActivity = intent.getStringExtra("fromActivity");
 
         if(fromActivity != null && fromActivity.equals(Variables.ActivityCloser)){
