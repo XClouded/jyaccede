@@ -67,9 +67,9 @@ public class MainActivity extends ActionBarActivity   {
 
     private void initDrawer(){
         String[] itemName = new String[]{
-                getString(R.string.searchLocation),
+                //getString(R.string.searchLocation),
                 getString(R.string.closerLocation),
-                getString(R.string.addLocation)
+                //getString(R.string.addLocation)
         };
         DrawerLayout mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         ListView mDrawerList = (ListView) findViewById(R.id.left_drawer);

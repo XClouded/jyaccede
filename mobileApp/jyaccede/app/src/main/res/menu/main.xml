@@ -1,9 +1,7 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.jyaccede.activity.MainActivity">
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:id="@+id/action_closerLocation"
         android:title="@string/closerLocation"
-        android:icon="@drawable/placetogo" />
+        android:icon="@drawable/placetogo"/>
 
 </menu>
