@@ -16,6 +16,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import lelexxx.com.jyaccede.asyncTask.GoogleGetDirectionTask;
 import lelexxx.com.jyaccede.asyncTask.JaccedeGetPlaceTask;
@@ -43,6 +44,8 @@ public class MapsActivity extends JyaccedeActivity implements JaccedeTaskListene
 
     private GoogleMap mMap;
 
+    private List<Polyline> mCurrentDirection = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,7 +61,7 @@ public class MapsActivity extends JyaccedeActivity implements JaccedeTaskListene
 
         if(fromActivity != null && fromActivity.equals(Variables.ActivityCloser)){
             JaccedeGetPlaceTask js = new JaccedeGetPlaceTask(this, Variables.SearchLocationUrl, true);
-            js.execute(location.split(" ")[0]);
+            js.execute(location);
             mMap.setInfoWindowAdapter(new MultipleLineAdapter(this));
         }
 
@@ -140,12 +143,18 @@ public class MapsActivity extends JyaccedeActivity implements JaccedeTaskListene
 
     @Override
     public void OnCompleted(final PolylineOptions directions){
-        mMap.addPolyline(directions);
+        mCurrentDirection.add(mMap.addPolyline(directions));
     }
 
     @Override
     public boolean onMarkerClick(Marker marker) {
         mToGo = marker.getPosition();
+
+        for(int i = mCurrentDirection.size()-1; i > -1; i--){
+            Polyline p = mCurrentDirection.get(i);
+            p.remove();
+            mCurrentDirection.remove(p);
+        }
 
         GoogleGetDirectionTask gdtd = new GoogleGetDirectionTask(mCurrentLL, mToGo, GoogleMapsDirection.MODE_DRIVING, this);
         gdtd.execute();

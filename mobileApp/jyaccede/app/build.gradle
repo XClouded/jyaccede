@@ -39,4 +39,6 @@ dependencies {
     compile 'com.google.android.gms:play-services:+'
     compile 'com.crashlytics.android:crashlytics:1.+'
     compile 'com.android.support:gridlayout-v7:18.0.+'
+    compile files('libs/ormlite-android-4.48.jar')
+    compile files('libs/ormlite-core-4.48.jar')
 }
