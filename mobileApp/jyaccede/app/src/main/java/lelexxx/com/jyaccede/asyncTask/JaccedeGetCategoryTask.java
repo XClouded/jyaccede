@@ -37,8 +37,7 @@ public class JaccedeGetCategoryTask extends AsyncTask<Void, Void, Void> {
 
         try {
             JSONObject jsonObj = new JSONObject(result);
-            JSONObject results = jsonObj.getJSONObject("results");
-            JSONArray items = results.getJSONArray("results");
+            JSONArray items = jsonObj.getJSONArray("results");
             for (int i = 0; i < items.length(); i++) {
                 JSONObject row = items.getJSONObject(i);
                 mCategories.add(new CategoryModel(row.getString("id"), row.getString("name")));

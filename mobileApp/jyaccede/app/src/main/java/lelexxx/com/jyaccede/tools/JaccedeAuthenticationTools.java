@@ -14,11 +14,11 @@ import javax.crypto.spec.SecretKeySpec;
 
 public class JaccedeAuthenticationTools {
 
-    private static final String ACCESS_KEY_ID = "test-jispapi-access-key-id";
-    private static final String SECRET_ACCESS_KEY = "test-jispapi-secret-access-key";
+    private static final String ACCESS_KEY_ID = "a41ddc10-bbf0-11e4-a8cb-fefdb24f8295";
+    private static final String SECRET_ACCESS_KEY = "3d727cbf100e076ae91e8554180a8ad2cec07d84e49ecbff9c32e20f7bcdfcf8";
     private static final String HEADER_NAME_TIMESTAMP = "x-jaccedeapi-timestamp";
     private static final String HEADER_NAME_AUTH = "Authorization";
-    private static final String HEADER_PART_JISPAPI = "JISPAPI";
+    private static final String HEADER_PART_JACCEDEAPI = "JACCEDEAPI";
 
     public static String computeStringToSign(HttpRequestBase request, long now) {
 
@@ -29,7 +29,7 @@ public class JaccedeAuthenticationTools {
         StringBuilder buff = new StringBuilder();
         buff.append(method);
         buff.append("\n");
-        buff.append(HEADER_NAME_TIMESTAMP).append(now);
+        buff.append(HEADER_NAME_TIMESTAMP).append(":").append(now);
         buff.append("\n");
         buff.append(path);
 
@@ -48,7 +48,7 @@ public class JaccedeAuthenticationTools {
 
             String signature = Base64.encodeToString(new String(Hex.encodeHex(signed)).getBytes("UTF-8"), Base64.NO_WRAP);
 
-            StringBuilder buff = new StringBuilder(HEADER_PART_JISPAPI);
+            StringBuilder buff = new StringBuilder(HEADER_PART_JACCEDEAPI);
             buff.append(" ").append(ACCESS_KEY_ID).append(":").append(signature);
             String auth = buff.toString();
 
