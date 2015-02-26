@@ -7,9 +7,14 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import lelexxx.com.jyaccede.activity.places.CloserPlaceActivity;
 
 import lelexxx.com.jyaccede.R;
+import lelexxx.com.jyaccede.database.DataAccessLayer;
+import lelexxx.com.jyaccede.model.CategoryModel;
 
 public abstract class JyaccedeActivity extends ActionBarActivity {
 
@@ -29,8 +34,7 @@ public abstract class JyaccedeActivity extends ActionBarActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        switch (id){
+        switch (item.getItemId()){
              case android.R.id.home:
                  finish();
                  break;
@@ -43,5 +47,13 @@ public abstract class JyaccedeActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    protected DataAccessLayer getDal(){
+        List<Class> classes = new ArrayList<>();
+        classes.add(CategoryModel.class);
+        DataAccessLayer dal = DataAccessLayer.getInstance(this, classes);
+
+        return dal;
     }
 }

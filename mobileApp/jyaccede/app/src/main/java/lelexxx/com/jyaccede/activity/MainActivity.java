@@ -4,13 +4,13 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,13 +19,22 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.crashlytics.android.Crashlytics;
-import lelexxx.com.jyaccede.activity.places.CloserPlaceActivity;
+
+import java.util.List;
 
 import lelexxx.com.jyaccede.R;
+import lelexxx.com.jyaccede.activity.places.CloserPlaceActivity;
+import lelexxx.com.jyaccede.asyncTask.JaccedeGetCategoryTask;
+import lelexxx.com.jyaccede.configuration.Variables;
+import lelexxx.com.jyaccede.database.DataAccessLayer;
+import lelexxx.com.jyaccede.interfaces.CategorieListener;
+import lelexxx.com.jyaccede.model.CategoryModel;
 
-public class MainActivity extends ActionBarActivity   {
+public class MainActivity extends JyaccedeActivity implements CategorieListener  {
 
     private ActionBarDrawerToggle mDrawerToggle;
+
+    SharedPreferences prefs = null;
 
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
         @Override
@@ -34,11 +43,15 @@ public class MainActivity extends ActionBarActivity   {
         }
     }
 
+    //region ACTIVITY LIFE
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Crashlytics.start(this);
         setContentView(R.layout.activity_main);
+
+        prefs = getSharedPreferences("com.mycompany.myAppName", MODE_PRIVATE);
 
         //Connectivity init and settings
         ConnectivityManager cm = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -65,6 +78,72 @@ public class MainActivity extends ActionBarActivity   {
         initDrawer();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if (prefs.getBoolean("first_run", true)) {
+            prefs.edit().putBoolean("first_run", false).commit();
+            JaccedeGetCategoryTask jc = new JaccedeGetCategoryTask(this, Variables.SearchCategorieUrl);
+            jc.execute();
+        }
+    }
+
+    //endregion
+
+    //region MENU
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (mDrawerToggle != null && mDrawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+
+        switch (item.getItemId()){
+            case R.id.action_closerLocation :
+                Intent intentCloser = new Intent(this, CloserPlaceActivity.class);
+                startActivity(intentCloser);
+                return false;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    //endregion
+
+    //region DRAWER
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        // Sync the toggle state after onRestoreInstanceState has occurred.
+        if(mDrawerToggle != null) {
+            mDrawerToggle.syncState();
+        }
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        if(mDrawerToggle != null) {
+            mDrawerToggle.onConfigurationChanged(newConfig);
+        }
+    }
+
+    @Override
+    public void setTitle(CharSequence title) {
+        getSupportActionBar().setTitle(R.string.app_name);
+    }
+
+    /**
+     * Init drawer component
+     */
     private void initDrawer(){
         String[] itemName = new String[]{
                 //getString(R.string.searchLocation),
@@ -105,67 +184,25 @@ public class MainActivity extends ActionBarActivity   {
         getSupportActionBar().setHomeButtonEnabled(true);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-        // Sync the toggle state after onRestoreInstanceState has occurred.
-        if(mDrawerToggle != null) {
-            mDrawerToggle.syncState();
-        }
-    }
-
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        if(mDrawerToggle != null) {
-            mDrawerToggle.onConfigurationChanged(newConfig);
-        }
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (mDrawerToggle != null && mDrawerToggle.onOptionsItemSelected(item)) {
-            return true;
-        }
-
-        int id = item.getItemId();
-        switch (id){
-            case R.id.action_closerLocation :
-                Intent intentCloser = new Intent(this, CloserPlaceActivity.class);
-                startActivity(intentCloser);
-                break;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
     /**
      * Swaps fragments in the main content view
      */
     private void selectItem(int position) {
         switch (position){
-            case 1 :
+            case 0 :
                 Intent intentCloser = new Intent(this, CloserPlaceActivity.class);
                 startActivity(intentCloser);
                 break;
         }
-
-        // Highlight the selected item, update the title, and close the drawer
-        /*mDrawerList.setItemChecked(position, true);
-        setTitle(mPlanetTitles[position]);
-        mDrawerLayout.closeDrawer(mDrawerList);*/
     }
 
+    //endregion
+
     @Override
-    public void setTitle(CharSequence title) {
-        getSupportActionBar().setTitle(R.string.app_name);
+    public void OnCompleted(List<CategoryModel> categories) {
+        DataAccessLayer dal = getDal();
+        for(CategoryModel category : categories){
+            dal.insertData(category);
+        }
     }
 }

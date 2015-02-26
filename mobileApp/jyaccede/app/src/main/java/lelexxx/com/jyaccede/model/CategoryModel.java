@@ -1,9 +1,15 @@
 package lelexxx.com.jyaccede.model;
 
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
+
+@DatabaseTable(tableName = "category")
 public class CategoryModel {
 
+    @DatabaseField(id = true)
     public String id;
 
+    @DatabaseField
     public String name;
 
     public CategoryModel(String id, String name) {

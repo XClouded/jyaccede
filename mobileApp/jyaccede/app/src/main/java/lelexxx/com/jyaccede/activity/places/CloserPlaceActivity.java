@@ -26,10 +26,11 @@ import lelexxx.com.jyaccede.activity.JyaccedeActivity;
 import lelexxx.com.jyaccede.activity.MapsActivity;
 import lelexxx.com.jyaccede.asyncTask.JaccedeGetCategoryTask;
 import lelexxx.com.jyaccede.configuration.Variables;
+import lelexxx.com.jyaccede.database.DataAccessLayer;
 import lelexxx.com.jyaccede.interfaces.CategorieListener;
 import lelexxx.com.jyaccede.model.CategoryModel;
 
-public class CloserPlaceActivity extends JyaccedeActivity implements View.OnClickListener, CategorieListener {
+public class CloserPlaceActivity extends JyaccedeActivity implements View.OnClickListener {
 
     private double mLatitude;
     private double mLongitude;
@@ -39,8 +40,17 @@ public class CloserPlaceActivity extends JyaccedeActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_closer_location);
 
-        JaccedeGetCategoryTask jc = new JaccedeGetCategoryTask(this, Variables.SearchCategorieUrl);
-        jc.execute();
+        DataAccessLayer dal = getDal();
+        List<CategoryModel> categories = dal.selectAllData(CategoryModel.class);
+
+        //Spinner init and settings
+        Spinner spinner = (Spinner) findViewById(R.id.categorySpinner);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item);
+        for(CategoryModel categorie : categories){
+            adapter.add(categorie.getName());
+        }
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
 
         //PlaceModel init and settings
         LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
@@ -90,18 +100,6 @@ public class CloserPlaceActivity extends JyaccedeActivity implements View.OnClic
                 startActivity(intentMaps);
                 break;
         }
-    }
-
-    @Override
-    public void OnCompleted(List<CategoryModel> categories) {
-        //Spinner init and settings
-        Spinner spinner = (Spinner) findViewById(R.id.categorySpinner);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item);
-        for(CategoryModel categorie : categories){
-            adapter.add(categorie.getName());
-        }
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
     }
 
     //region PRIVATE METHODS
